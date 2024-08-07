@@ -26,11 +26,17 @@ export default function RegisterPage() {
       >
         Login
       </Link>
-      <div className="hidden h-full bg-muted lg:block" />
+      <div
+        className="h-full bg-muted lg:block"
+        style={{
+          backgroundImage: `url(/images/logo.png)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
-            <Icons.logo className="mx-auto w-16" />
             <h1 className="text-2xl font-semibold tracking-tight">
               Create an account
             </h1>

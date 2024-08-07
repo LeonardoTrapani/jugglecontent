@@ -24,7 +24,10 @@ export function PlanShowcase({ plan }: { plan: SubscriptionPlan }) {
             </p>
           )}
         </div>
-        <Link href="/login" className={cn(buttonVariants({ size: "lg" }))}>
+        <Link
+          href={plan.stripePriceId ? "/dashboard/billing" : "/signup"}
+          className={cn(buttonVariants({ size: "lg" }))}
+        >
           Get Started
         </Link>
       </div>

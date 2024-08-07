@@ -29,16 +29,19 @@ export default async function IndexPage() {
             </Balancer>
           </p>
           <div className="space-x-4">
-            <Link href="/login" className={cn(buttonVariants({ size: "lg" }))}>
+            <Link
+              href="/register"
+              className={cn(buttonVariants({ size: "lg" }))}
+            >
               Get Started
             </Link>
             <Link
-              href={siteConfig.author.github + "/jugglecontent"}
+              href={"/login"}
               target="_blank"
               rel="noreferrer"
               className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
             >
-              GitHub
+              Login
             </Link>
           </div>
         </div>

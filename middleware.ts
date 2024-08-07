@@ -7,7 +7,11 @@ export default withAuth(
     const token = await getToken({ req })
 
     const isMarketingPage =
-      req.nextUrl.pathname === "/" || req.nextUrl.pathname === "/pricing"
+      req.nextUrl.pathname === "/" ||
+      req.nextUrl.pathname === "/pricing" ||
+      req.nextUrl.pathname.startsWith("/images") ||
+      req.nextUrl.pathname.startsWith("/favicon") ||
+      req.nextUrl.pathname.startsWith("/og")
     if (isMarketingPage) {
       return null
     }
