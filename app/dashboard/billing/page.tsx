@@ -1,3 +1,4 @@
+import { env } from "process"
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
@@ -41,23 +42,25 @@ export default async function BillingPage() {
         text="Manage billing and your subscription plan."
       />
       <div className="grid gap-8">
-        <Alert className="!pl-14">
-          <Icons.warning />
-          <AlertTitle>This is a demo app.</AlertTitle>
-          <AlertDescription>
-            Taxonomy app is a demo app using a Stripe test environment. You can
-            find a list of test card numbers on the{" "}
-            <a
-              href="https://stripe.com/docs/testing#cards"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-8"
-            >
-              Stripe docs
-            </a>
-            .
-          </AlertDescription>
-        </Alert>
+        {env.NODE_ENV === "development" && (
+          <Alert className="!pl-14">
+            <Icons.warning />
+            <AlertTitle>Dev Environment</AlertTitle>
+            <AlertDescription>
+              You are in a Stripe test environment. You can find a list of test
+              card numbers on the{" "}
+              <a
+                href="https://stripe.com/docs/testing#cards"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium underline underline-offset-8"
+              >
+                Stripe docs
+              </a>
+              .
+            </AlertDescription>
+          </Alert>
+        )}
         <BillingForm
           subscriptionPlan={{
             ...subscriptionPlan,

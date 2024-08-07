@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Balancer } from "react-wrap-balancer"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -16,12 +17,16 @@ export default async function IndexPage() {
           >
             Author&apos;s Linkedin
           </Link>
-          <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
-            Turn 1 piece of content into 10
+          <h1>
+            <Balancer className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
+              Turn one piece of content into ten
+            </Balancer>
           </h1>
           <p className="max-w-2xl leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-            A content creation tool that helps you create multiple pieces of
-            content from one.
+            <Balancer>
+              Remove the pain during repetitive tasks in your content creation
+              process. Repurpose your valuable content to multiple platforms.
+            </Balancer>
           </p>
           <div className="space-x-4">
             <Link href="/login" className={cn(buttonVariants({ size: "lg" }))}>

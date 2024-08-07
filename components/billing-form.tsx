@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 
 import { UserSubscriptionPlan } from "types"
 import { cn, formatDate } from "@/lib/utils"
@@ -60,10 +61,25 @@ export function BillingForm({
           <CardTitle>Subscription Plan</CardTitle>
           <CardDescription>
             You are currently on the <strong>{subscriptionPlan.name}</strong>{" "}
-            plan.
+            plan.{" "}
           </CardDescription>
         </CardHeader>
-        <CardContent>{subscriptionPlan.description}</CardContent>
+        <CardContent>
+          {!subscriptionPlan.isPro ? (
+            <p className="mb-2">
+              {subscriptionPlan.description} See what you are missing{" "}
+              <Link
+                href={"/pricing"}
+                className="underline-offset-4 underline font-semibold"
+              >
+                here
+              </Link>
+              .
+            </p>
+          ) : (
+            <p className="mb-2">{subscriptionPlan.description}</p>
+          )}
+        </CardContent>
         <CardFooter className="flex flex-col items-start space-y-2 md:flex-row md:justify-between md:space-x-0">
           <button
             type="submit"
@@ -73,7 +89,7 @@ export function BillingForm({
             {isLoading && (
               <Icons.spinner className="mr-2 size-4 animate-spin" />
             )}
-            {subscriptionPlan.isPro ? "Manage Subscription" : "Upgrade to PRO"}
+            {subscriptionPlan.isPro ? "Manage Subscription" : "Upgrade to Pro"}
           </button>
           {subscriptionPlan.isPro ? (
             <p className="rounded-full text-xs font-medium">

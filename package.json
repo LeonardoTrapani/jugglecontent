@@ -9,7 +9,7 @@
     }
   ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev & pnpm stripe:listen",
     "build": "prisma generate && prisma migrate deploy && next build",
     "turbo": "next dev --turbo",
     "start": "next start",

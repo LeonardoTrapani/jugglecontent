@@ -64,6 +64,8 @@ export type SubscriptionPlan = {
   name: string
   description: string
   stripePriceId?: string
+  cost: number
+  features: string[]
 }
 
 export type DashboardConfig = {
