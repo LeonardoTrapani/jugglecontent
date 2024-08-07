@@ -64,5 +64,5 @@ export function UserDropdown({ user }: UserDropdownProps) {
 }
 
 UserDropdown.Skeleton = function UserDropdownSkeleton() {
-  return <Skeleton className="h-8 w-8" />
+  return <Skeleton className="size-8" />
 }

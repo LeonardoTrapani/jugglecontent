@@ -17,7 +17,7 @@ export default async function IndexPage() {
             Author&apos;s Linkedin
           </Link>
           <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
-            One piece of content to 10
+            Turn 1 piece of content into 10
           </h1>
           <p className="max-w-2xl leading-normal text-muted-foreground sm:text-xl sm:leading-8">
             A content creation tool that helps you create multiple pieces of
