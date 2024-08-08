@@ -73,22 +73,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontHeading.variable
         )}
       >
-        <Suspense fallback={<div>Loading...</div>}>
-          <CSPostHogProvider>
-            <BalancerProvider>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-              >
-                {children}
-                <Analytics />
-                <Toaster />
-                <TailwindIndicator />
-              </ThemeProvider>
-            </BalancerProvider>
-          </CSPostHogProvider>
-        </Suspense>
+        <CSPostHogProvider>
+          <BalancerProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              {children}
+              <Analytics />
+              <Toaster />
+              <TailwindIndicator />
+            </ThemeProvider>
+          </BalancerProvider>
+        </CSPostHogProvider>
       </body>
     </html>
   )
