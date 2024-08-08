@@ -9,6 +9,7 @@ import { siteConfig } from "@/config/site"
 import { absoluteUrl, cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
+import { CSPostHogProvider } from "@/components/posthog-provider"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -71,14 +72,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontHeading.variable
         )}
       >
-        <BalancerProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
-            <Analytics />
-            <Toaster />
-            <TailwindIndicator />
-          </ThemeProvider>
-        </BalancerProvider>
+        <CSPostHogProvider>
+          <BalancerProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              {children}
+              <Analytics />
+              <Toaster />
+              <TailwindIndicator />
+            </ThemeProvider>
+          </BalancerProvider>
+        </CSPostHogProvider>
       </body>
     </html>
   )
