@@ -2,6 +2,7 @@ import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 
 import "@/styles/globals.css"
+import { Suspense } from "react"
 import { Metadata } from "next"
 import { Provider as BalancerProvider } from "react-wrap-balancer"
 
@@ -72,16 +73,22 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontHeading.variable
         )}
       >
-        <CSPostHogProvider>
-          <BalancerProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              {children}
-              <Analytics />
-              <Toaster />
-              <TailwindIndicator />
-            </ThemeProvider>
-          </BalancerProvider>
-        </CSPostHogProvider>
+        <Suspense fallback={<div>Loading...</div>}>
+          <CSPostHogProvider>
+            <BalancerProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+              >
+                {children}
+                <Analytics />
+                <Toaster />
+                <TailwindIndicator />
+              </ThemeProvider>
+            </BalancerProvider>
+          </CSPostHogProvider>
+        </Suspense>
       </body>
     </html>
   )
