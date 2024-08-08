@@ -27,7 +27,6 @@ model User {
 model Example {
   id        String   @id @default(cuid())
   userId    String
-  extraInfo String?
   contentId String   @unique
 
   content Content @relation(fields: [contentId], references: [id])
@@ -43,7 +42,6 @@ model Example {
 model Original {
   id        String   @id @default(cuid())
   userId    String
-  extraInfo String?
   contentId String   @unique
 
   repurposes Repurpose[]
@@ -63,7 +61,10 @@ model Content {
   type      ContentType
 
   title   String
-  url     String
+
+  url     String?
+
+  extraInfo String?
 
   originalContent String?
   generatedContent String?

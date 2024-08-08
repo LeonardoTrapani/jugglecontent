@@ -2,8 +2,9 @@ import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
 import { authOptions } from "@/lib/auth"
+import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
-import { PostCreateButton } from "@/components/create-button"
+import { CreateOriginalButton } from "@/components/create-original-button"
 import { DashboardShell } from "@/components/dashboard-shell"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { Header } from "@/components/header"
@@ -19,28 +20,35 @@ export default async function DashboardPage() {
     redirect(authOptions?.pages?.signIn || "/login")
   }
 
-  const posts = []
+  const data = await db.user.findUnique({
+    where: {
+      id: user.id,
+    },
+    include: {
+      originals: true,
+    },
+  })
 
   return (
     <DashboardShell>
       <Header heading="Content" text="Create and manage your content.">
-        <PostCreateButton />
+        <CreateOriginalButton />
       </Header>
       <div>
-        {posts?.length ? (
+        {data?.originals?.length ? (
           <div className="divide-y divide-border rounded-md border">
-            {posts.map((_post) => (
+            {data.originals.map((original) => (
               <div>implement your component</div>
             ))}
           </div>
         ) : (
           <EmptyPlaceholder>
-            <EmptyPlaceholder.Icon name="ai" />
-            <EmptyPlaceholder.Title>No posts created</EmptyPlaceholder.Title>
+            <EmptyPlaceholder.Icon name="empty" />
+            <EmptyPlaceholder.Title>No content</EmptyPlaceholder.Title>
             <EmptyPlaceholder.Description>
-              You don&apos;t have any posts yet. Start creating content.
+              You don&apos;t have any content yet. Start creating content.
             </EmptyPlaceholder.Description>
-            <PostCreateButton variant="outline" />
+            <CreateOriginalButton variant="outline" />
           </EmptyPlaceholder>
         )}
       </div>
