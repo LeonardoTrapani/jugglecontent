@@ -1,8 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { MainNavConfig } from "@/types"
+import { SidebarNavItem } from "@/types"
 import { User } from "next-auth"
 import { signOut } from "next-auth/react"
 
@@ -17,17 +16,10 @@ import { UserAvatar } from "@/components/user-avatar"
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, "name" | "image" | "email">
-  mainNavConfig: MainNavConfig
+  sidebarNavItems: SidebarNavItem[]
 }
 
-export function UserAccountNav({ user, mainNavConfig }: UserAccountNavProps) {
-  const pathname = usePathname()
-
-  const isSettings = pathname?.includes("/settings")
-  const sidebarNavItems = !isSettings
-    ? mainNavConfig.mainNav[0].sidebarNav
-    : mainNavConfig.mainNav[1].sidebarNav
-
+export function UserAccountNav({ user, sidebarNavItems }: UserAccountNavProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

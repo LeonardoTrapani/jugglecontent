@@ -19,6 +19,7 @@ export default async function SettingsPage() {
   if (!user) {
     redirect(authOptions?.pages?.signIn || "/login")
   }
+  //todo: aggiungo back button che va a /content
 
   return (
     <DashboardShell>

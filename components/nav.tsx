@@ -14,15 +14,10 @@ interface DashboardNavProps {
 export function DashboardNav({ mainNavConfig }: DashboardNavProps) {
   const path = usePathname()
 
-  const isSettings = path?.includes("/settings")
-  const sidebarNavItems = !isSettings
-    ? mainNavConfig.mainNav[0].sidebarNav
-    : mainNavConfig.mainNav[1].sidebarNav
-
   return (
     <nav className="grid items-start gap-2">
-      {sidebarNavItems?.map((item, index) => {
-        const Icon = Icons[item.icon || "arrowRight"]
+      {mainNavConfig.mainNav?.map((item, index) => {
+        const Icon = Icons[item.icon || "check"]
         return (
           item.href && (
             <Link key={index} href={item.disabled ? "/" : item.href}>
