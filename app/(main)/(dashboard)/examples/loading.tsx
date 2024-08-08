@@ -1,6 +1,6 @@
-import { CardSkeleton } from "@/components/card-skeleton"
 import { ExampleCreateButton } from "@/components/create-examples-button"
 import { DashboardShell } from "@/components/dashboard-shell"
+import { ExampleItem } from "@/components/example-content-item"
 import { Header } from "@/components/header"
 
 export default function ExampleLoading() {
@@ -10,7 +10,10 @@ export default function ExampleLoading() {
         <ExampleCreateButton />
       </Header>
       <div className="divide-border-200 divide-y rounded-md border">
-        <CardSkeleton />
+        <ExampleItem.Skeleton />
+        <ExampleItem.Skeleton />
+        <ExampleItem.Skeleton />
+        <ExampleItem.Skeleton />
       </div>
     </DashboardShell>
   )

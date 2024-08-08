@@ -1,7 +1,7 @@
-import { CardSkeleton } from "@/components/card-skeleton"
 import { OriginalCreateButton } from "@/components/create-original-button"
 import { DashboardShell } from "@/components/dashboard-shell"
 import { Header } from "@/components/header"
+import { OriginalItem } from "@/components/original-content-item"
 
 export default function DashboardLoading() {
   return (
@@ -10,7 +10,10 @@ export default function DashboardLoading() {
         <OriginalCreateButton />
       </Header>
       <div className="divide-border-200 divide-y rounded-md border">
-        <CardSkeleton />
+        <OriginalItem.Skeleton />
+        <OriginalItem.Skeleton />
+        <OriginalItem.Skeleton />
+        <OriginalItem.Skeleton />
       </div>
     </DashboardShell>
   )

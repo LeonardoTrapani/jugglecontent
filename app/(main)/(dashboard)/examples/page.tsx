@@ -7,6 +7,7 @@ import { getCurrentUser } from "@/lib/session"
 import { ExampleCreateButton } from "@/components/create-examples-button"
 import { DashboardShell } from "@/components/dashboard-shell"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
+import { ExampleItem } from "@/components/example-content-item"
 import { Header } from "@/components/header"
 
 export const metadata: Metadata = {
@@ -25,7 +26,14 @@ export default async function ExamplePage() {
       id: user.id,
     },
     include: {
-      examples: true,
+      examples: {
+        select: {
+          id: true,
+          content: {
+            select: { updatedAt: true, id: true, title: true, type: true },
+          },
+        },
+      },
     },
   })
 
@@ -41,7 +49,7 @@ export default async function ExamplePage() {
         {data?.examples?.length ? (
           <div className="divide-y divide-border rounded-md border">
             {data.examples.map((example) => (
-              <div>implement your component</div>
+              <ExampleItem key={example.id} example={example} />
             ))}
           </div>
         ) : (
