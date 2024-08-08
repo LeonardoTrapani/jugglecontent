@@ -3,24 +3,25 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-import { SidebarNavItem } from "types"
+import { MainNavConfig } from "types"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 
 interface DashboardNavProps {
-  items: SidebarNavItem[]
+  mainNavConfig: MainNavConfig
 }
 
-export function DashboardNav({ items }: DashboardNavProps) {
+export function DashboardNav({ mainNavConfig }: DashboardNavProps) {
   const path = usePathname()
 
-  if (!items?.length) {
-    return null
-  }
+  const isDashboard = path?.includes("/dashboard")
+  const sidebarNavItems = isDashboard
+    ? mainNavConfig.mainNav[0].sidebarNav
+    : mainNavConfig.mainNav[1].sidebarNav
 
   return (
     <nav className="grid items-start gap-2">
-      {items.map((item, index) => {
+      {sidebarNavItems?.map((item, index) => {
         const Icon = Icons[item.icon || "arrowRight"]
         return (
           item.href && (

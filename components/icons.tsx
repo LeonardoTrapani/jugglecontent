@@ -1,5 +1,6 @@
 import {
   AlertTriangle,
+  BookOpenCheck,
   Box,
   Check,
   ChevronLeft,
@@ -13,6 +14,7 @@ import {
   FileText,
   Info,
   Laptop,
+  LayoutDashboard,
   Lightbulb,
   Loader2,
   LucideProps,
@@ -40,6 +42,8 @@ export const Icons = {
   laptop: Laptop,
   chevronLeft: ChevronLeft,
   upload: UploadCloud,
+  dashboard: LayoutDashboard,
+  example: BookOpenCheck,
   trash: Trash,
   user: User,
   empty: Box,

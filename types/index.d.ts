@@ -29,7 +29,9 @@ export type NavItem = {
   icon?: keyof typeof Icons
 }
 
-export type MainNavItem = NavItem
+export type MainNavItem = NavItem & {
+  sidebarNav?: SidebarNavItem[]
+}
 
 export type SidebarNavItem = {
   title: string
@@ -68,9 +70,8 @@ export type SubscriptionPlan = {
   features: string[]
 }
 
-export type DashboardConfig = {
+export type MainNavConfig = {
   mainNav: MainNavItem[]
-  sidebarNav: SidebarNavItem[]
 }
 
 export type MarketingConfig = {

@@ -9,7 +9,7 @@ import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { Header } from "@/components/header"
 
 export const metadata: Metadata = {
-  title: "Dashboard",
+  title: "Examples",
 }
 
 export default async function DashboardPage() {
@@ -23,7 +23,10 @@ export default async function DashboardPage() {
 
   return (
     <DashboardShell>
-      <Header heading="Dashboard" text="Create and manage the dashboard.">
+      <Header
+        heading="Examples"
+        text="Give examples of your content to show your style and have a personalized experience."
+      >
         <PostCreateButton />
       </Header>
       <div>

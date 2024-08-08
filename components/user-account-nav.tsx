@@ -1,6 +1,8 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { MainNavConfig } from "@/types"
 import { User } from "next-auth"
 import { signOut } from "next-auth/react"
 
@@ -15,9 +17,17 @@ import { UserAvatar } from "@/components/user-avatar"
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, "name" | "image" | "email">
+  mainNavConfig: MainNavConfig
 }
 
-export function UserAccountNav({ user }: UserAccountNavProps) {
+export function UserAccountNav({ user, mainNavConfig }: UserAccountNavProps) {
+  const pathname = usePathname()
+
+  const isDashboard = pathname?.includes("/dashboard")
+  const sidebarNavItems = isDashboard
+    ? mainNavConfig.mainNav[0].sidebarNav
+    : mainNavConfig.mainNav[1].sidebarNav
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -38,15 +48,13 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
           </div>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard">Dashboard</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard/billing">Billing</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard/settings">Settings</Link>
-        </DropdownMenuItem>
+        {sidebarNavItems?.map((item, index) => (
+          <DropdownMenuItem key={index} asChild>
+            <Link hidden={item.disabled} href={item.href ?? "/"}>
+              {item.title}
+            </Link>
+          </DropdownMenuItem>
+        ))}
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer"

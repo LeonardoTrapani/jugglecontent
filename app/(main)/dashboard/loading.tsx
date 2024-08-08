@@ -1,3 +1,4 @@
+import { CardSkeleton } from "@/components/card-skeleton"
 import { PostCreateButton } from "@/components/create-button"
 import { DashboardShell } from "@/components/dashboard-shell"
 import { Header } from "@/components/header"
@@ -9,7 +10,7 @@ export default function DashboardLoading() {
         <PostCreateButton />
       </Header>
       <div className="divide-border-200 divide-y rounded-md border">
-        {/* implement skeleton loading */}
+        <CardSkeleton />
       </div>
     </DashboardShell>
   )
