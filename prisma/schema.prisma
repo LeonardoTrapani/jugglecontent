@@ -15,10 +15,89 @@ model User {
   stripePriceId          String?   @map(name: "stripe_price_id")
   stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
 
+  examples Example[]
+  originals Original[]
+
   accounts Account[]
   sessions Session[]
 
   @@map(name: "users")
+}
+
+model Example {
+  id        String   @id @default(cuid())
+  userId    String
+  extraInfo String?
+  contentId String   @unique
+
+  content Content @relation(fields: [contentId], references: [id])
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "examples")
+}
+
+model Original {
+  id        String   @id @default(cuid())
+  userId    String
+  extraInfo String?
+  contentId String   @unique
+
+  repurposes Repurpose[]
+
+  content Content @relation(fields: [contentId], references: [id])
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "originals")
+}
+
+model Content {
+  id        String   @id @default(cuid())
+  type      ContentType
+
+  title   String
+  url     String
+
+  originalContent String?
+  generatedContent String?
+
+  example Example?
+  original Original?
+  repurpose Repurpose?
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "contents")
+}
+
+enum ContentType {
+  youtubeVideo
+  linkedinPost
+  blog
+  tweet
+}
+
+model Repurpose {
+  id       String   @id @default(cuid())
+
+  originalId String   @unique
+  original Original @relation(fields: [originalId], references: [id])
+
+  contentId String   @unique
+  content Content @relation(fields: [contentId], references: [id])
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "repurposes")
 }
 
 generator client {
