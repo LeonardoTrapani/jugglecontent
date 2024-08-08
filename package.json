@@ -51,6 +51,7 @@
     "next-themes": "^0.2.1",
     "node-fetch": "^3.3.2",
     "openai": "^4.53.2",
+    "posthog-js": "^1.154.5",
     "postmark": "^3.11.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
