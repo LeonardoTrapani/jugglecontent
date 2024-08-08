@@ -14,8 +14,8 @@ interface DashboardNavProps {
 export function DashboardNav({ mainNavConfig }: DashboardNavProps) {
   const path = usePathname()
 
-  const isDashboard = path?.includes("/dashboard")
-  const sidebarNavItems = isDashboard
+  const isSettings = path?.includes("/settings")
+  const sidebarNavItems = !isSettings
     ? mainNavConfig.mainNav[0].sidebarNav
     : mainNavConfig.mainNav[1].sidebarNav
 

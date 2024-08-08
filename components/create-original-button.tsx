@@ -1,37 +1,68 @@
 "use client"
 
-import * as React from "react"
+import React from "react"
 import { useRouter } from "next/navigation"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { User } from "@prisma/client"
+import { useForm } from "react-hook-form"
+import { Balancer } from "react-wrap-balancer"
+import { z } from "zod"
 
-import { cn } from "@/lib/utils"
-import { ButtonProps, buttonVariants } from "@/components/ui/button"
+import { originalCreateSchema } from "@/lib/validations/original"
+import { Button, ButtonProps } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import {
+  Form,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
-interface CreateOriginalButtonProps extends ButtonProps {}
+interface OriginalCreateButtonProps extends ButtonProps {
+  user?: User
+}
 
-export function CreateOriginalButton({
-  className,
-  variant,
+type FormData = z.infer<typeof originalCreateSchema>
+
+export function OriginalCreateButton({
+  user,
   ...props
-}: CreateOriginalButtonProps) {
+}: OriginalCreateButtonProps) {
   const router = useRouter()
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const [loading, setLoading] = React.useState(false)
 
-  async function onClick() {
-    setIsLoading(true)
+  const form = useForm<FormData>({
+    resolver: zodResolver(originalCreateSchema),
+    defaultValues: {
+      type: "youtubeVideo",
+    },
+  })
+
+  const onSubmit = async (data: FormData) => {
+    setLoading(true)
 
     const response = await fetch("/api/content/original", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        title: "Content Tile",
-      }),
+      body: JSON.stringify(data),
     })
 
-    setIsLoading(false)
+    setLoading(false)
 
     if (!response?.ok) {
       if (response.status === 402) {
@@ -54,28 +85,77 @@ export function CreateOriginalButton({
     // This forces a cache invalidation.
     router.refresh()
 
-    router.push(`/content/${content.id}`)
+    router.push(`/content/${content.original.id}`)
   }
 
   return (
-    <button
-      onClick={onClick}
-      className={cn(
-        buttonVariants({ variant }),
-        {
-          "cursor-not-allowed opacity-60": isLoading,
-        },
-        className
-      )}
-      disabled={isLoading}
-      {...props}
-    >
-      {isLoading ? (
-        <Icons.spinner className="mr-2 size-4 animate-spin" />
-      ) : (
-        <Icons.add className="mr-2 size-4" />
-      )}
-      New Content
-    </button>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button {...props}>
+          <Icons.add className="mr-2 size-4" />
+          New Content
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Create Content</DialogTitle>
+          <DialogDescription>
+            <Balancer>
+              Please submit the form below to start repurposing a new content.
+            </Balancer>
+          </DialogDescription>
+        </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <Input
+                    id="title"
+                    placeholder="Content Title"
+                    size={32}
+                    {...field}
+                  />
+                  <FormDescription>
+                    The title of the content you want to repurpose.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="url"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Url (optional)</FormLabel>
+                  <Input
+                    id="url"
+                    placeholder="https://youtube.com/watch?v=..."
+                    size={32}
+                    {...field}
+                  />
+                  <FormDescription>
+                    The URL of the content you want to repurpose.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <DialogFooter>
+              <Button type="submit" className="mt-2">
+                {loading && (
+                  <Icons.spinner className="mr-2 size-4 animate-spin" />
+                )}
+                Create Content
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   )
 }

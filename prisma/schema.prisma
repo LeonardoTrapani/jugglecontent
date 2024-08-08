@@ -29,7 +29,7 @@ model Example {
   userId    String
   contentId String   @unique
 
-  content Content @relation(fields: [contentId], references: [id])
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -46,7 +46,7 @@ model Original {
 
   repurposes Repurpose[]
 
-  content Content @relation(fields: [contentId], references: [id])
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -90,10 +90,10 @@ model Repurpose {
   id       String   @id @default(cuid())
 
   originalId String   @unique
-  original Original @relation(fields: [originalId], references: [id])
+  original Original @relation(fields: [originalId], references: [id], onDelete: Cascade)
 
   contentId String   @unique
-  content Content @relation(fields: [contentId], references: [id])
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")

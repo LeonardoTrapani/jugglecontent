@@ -32,7 +32,7 @@ export default withAuth(
         if (from) {
           return NextResponse.redirect(new URL(from, req.url))
         }
-        return NextResponse.redirect(new URL("/dashboard", req.url))
+        return NextResponse.redirect(new URL("/content", req.url))
       }
 
       return null

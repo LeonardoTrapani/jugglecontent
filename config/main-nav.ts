@@ -4,16 +4,16 @@ export const mainNavConfig: MainNavConfig = {
   mainNav: [
     {
       title: "Dashboard",
-      href: "/dashboard",
+      href: "/content",
       sidebarNav: [
         {
           title: "Content",
-          href: "/dashboard",
+          href: "/content",
           icon: "dashboard",
         },
         {
           title: "Examples",
-          href: "/dashboard/examples",
+          href: "/examples",
           icon: "example",
         },
       ],

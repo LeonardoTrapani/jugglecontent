@@ -44,6 +44,7 @@ export async function GET(
 
     return new Response(JSON.stringify(repurposeContent))
   } catch (error) {
+    console.error(error)
     return new Response(null, { status: 500 })
   }
 }
@@ -88,6 +89,7 @@ export async function POST(
 
     return new Response(JSON.stringify(post))
   } catch (error) {
+    console.error(error)
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }

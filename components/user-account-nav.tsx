@@ -23,8 +23,8 @@ interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
 export function UserAccountNav({ user, mainNavConfig }: UserAccountNavProps) {
   const pathname = usePathname()
 
-  const isDashboard = pathname?.includes("/dashboard")
-  const sidebarNavItems = isDashboard
+  const isSettings = pathname?.includes("/settings")
+  const sidebarNavItems = !isSettings
     ? mainNavConfig.mainNav[0].sidebarNav
     : mainNavConfig.mainNav[1].sidebarNav
 
