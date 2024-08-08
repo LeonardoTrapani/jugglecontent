@@ -21,7 +21,7 @@ export function CreateOriginalButton({
   async function onClick() {
     setIsLoading(true)
 
-    const response = await fetch("/api/content", {
+    const response = await fetch("/api/content/original", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

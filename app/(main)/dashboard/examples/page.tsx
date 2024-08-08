@@ -4,7 +4,7 @@ import { redirect } from "next/navigation"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
-import { CreateOriginalButton } from "@/components/create-original-button"
+import { ExampleCreateButton } from "@/components/create-examples-button"
 import { DashboardShell } from "@/components/dashboard-shell"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { Header } from "@/components/header"
@@ -35,7 +35,7 @@ export default async function ExamplePage() {
         heading="Examples"
         text="Provide examples of your content to show your style and improve the repurposing performance."
       >
-        <CreateOriginalButton />
+        <ExampleCreateButton />
       </Header>
       <div>
         {data?.examples?.length ? (
@@ -47,11 +47,11 @@ export default async function ExamplePage() {
         ) : (
           <EmptyPlaceholder>
             <EmptyPlaceholder.Icon name="empty" />
-            <EmptyPlaceholder.Title>No content</EmptyPlaceholder.Title>
+            <EmptyPlaceholder.Title>No examples</EmptyPlaceholder.Title>
             <EmptyPlaceholder.Description>
-              You don&apos;t have any content yet. Start creating content.
+              You don&apos;t have any examples yet. Start adding examples.
             </EmptyPlaceholder.Description>
-            <CreateOriginalButton variant="outline" />
+            <ExampleCreateButton variant="outline" />
           </EmptyPlaceholder>
         )}
       </div>
