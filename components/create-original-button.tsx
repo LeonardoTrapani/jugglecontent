@@ -131,7 +131,7 @@ export function OriginalCreateButton({
               name="url"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Url (optional)</FormLabel>
+                  <FormLabel>Youtube Url</FormLabel>
                   <Input
                     id="url"
                     placeholder="https://youtube.com/watch?v=..."
@@ -139,7 +139,7 @@ export function OriginalCreateButton({
                     {...field}
                   />
                   <FormDescription>
-                    The URL of the content you want to repurpose.
+                    The URL of the youtube video you want to repurpose.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
