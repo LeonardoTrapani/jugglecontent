@@ -21,15 +21,7 @@ export function SiteFooter({ user, className }: SiteFooterProps) {
         <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
           <Icons.logo width={30} />
           <p className="text-center text-sm leading-loose md:text-left">
-            Built by&nbsp;
-            <a
-              href={siteConfig.author.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              {siteConfig.author.name}
-            </a>
+            © 2024 Juggle Content
           </p>
         </div>
         <div className="flex flex-col items-center gap-2 md:flex-row">
