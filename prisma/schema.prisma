@@ -66,6 +66,8 @@ model Content {
 
   extraInfo String?
 
+  imageUrl String?
+
   text String
 
   example Example?

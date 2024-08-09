@@ -47,7 +47,7 @@ export function OriginalCreateButton({
   const form = useForm<FormData>({
     resolver: zodResolver(originalCreateSchema),
     defaultValues: {
-      type: "youtubeVideo",
+      url: "",
     },
   })
 
@@ -101,31 +101,12 @@ export function OriginalCreateButton({
           <DialogTitle>Create Content</DialogTitle>
           <DialogDescription>
             <Balancer>
-              Please submit the form below to start repurposing a new content.
+              Please enter the URL of the youtube video you want to repurpose.
             </Balancer>
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Title</FormLabel>
-                  <Input
-                    id="title"
-                    placeholder="Content Title"
-                    size={32}
-                    {...field}
-                  />
-                  <FormDescription>
-                    The title of the content you want to repurpose.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="url"
