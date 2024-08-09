@@ -30,8 +30,18 @@ export default async function ExamplePage() {
         select: {
           id: true,
           content: {
-            select: { updatedAt: true, id: true, title: true, type: true },
+            select: {
+              updatedAt: true,
+              id: true,
+              title: true,
+              type: true,
+              originalContent: true,
+              url: true,
+            },
           },
+        },
+        orderBy: {
+          updatedAt: "desc",
         },
       },
     },

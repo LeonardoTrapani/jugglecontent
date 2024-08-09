@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { Content, Example } from "@prisma/client"
 
 import { cn, formatDate } from "@/lib/utils"
@@ -8,7 +7,10 @@ import { ExampleOperations } from "./example-operations"
 
 interface ExampleItemProps {
   example: Pick<Example, "id"> & {
-    content: Pick<Content, "updatedAt" | "id" | "type" | "title">
+    content: Pick<
+      Content,
+      "updatedAt" | "id" | "type" | "title" | "originalContent" | "url"
+    >
   }
 }
 
@@ -16,19 +18,17 @@ export function ExampleItem({ example }: ExampleItemProps) {
   return (
     <div className="flex items-center justify-between p-4">
       <div className="grid max-w-[90%] gap-1">
-        <Link
-          href={`/examples/${example.id}`}
-          className={cn("font-semibold hover:underline")}
-        >
-          {formatDate(example.content.updatedAt.toDateString())}
-        </Link>
+        <p className={cn("font-semibold")}>{example.content.title}</p>
         <div className="flex flex-col text-sm text-muted-foreground sm:flex-row">
-          <p>{example.content.type}</p>
+          <p>
+            {example.content.type},
+            {formatDate(example.content.updatedAt.toDateString())}
+          </p>
         </div>
       </div>
       <ExampleOperations
-        exampleId={example.id}
         contentId={example.content.id}
+        content={example.content}
       />
     </div>
   )
