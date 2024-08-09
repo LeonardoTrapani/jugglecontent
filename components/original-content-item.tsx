@@ -20,10 +20,13 @@ export function OriginalItem({ original }: OriginalItemProps) {
           href={`/content/${original.id}`}
           className={cn("font-semibold hover:underline")}
         >
-          {formatDate(original.content.updatedAt.toDateString())}
+          {original.content.title}
         </Link>
         <div className="flex flex-col text-sm text-muted-foreground sm:flex-row">
-          <p>{original.content.type}</p>
+          <p>
+            {original.content.type}
+            {formatDate(original.content.updatedAt.toDateString())}
+          </p>
         </div>
       </div>
       <OriginalOperations

@@ -20,5 +20,5 @@ export const originalPatchSchema = z.object({
     .regex(/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/)
     .optional(),
   extraInfo: z.string().optional(),
-  originalContent: z.string().optional(),
+  text: z.string().optional(),
 })

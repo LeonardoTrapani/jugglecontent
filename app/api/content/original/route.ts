@@ -68,11 +68,14 @@ export async function POST(req: Request) {
     const json = await req.json()
     const body = originalCreateSchema.parse(json)
 
+    const text = "todo: transcripted from youtube right here"
+
     const post = await db.content.create({
       data: {
         title: body.title,
         url: body.url,
         type: body.type,
+        text: text,
         original: {
           create: {
             userId: user.id,
