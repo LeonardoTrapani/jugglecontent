@@ -4,6 +4,16 @@ import { cn, formatDate } from "@/lib/utils"
 import { Skeleton } from "@/components/ui/skeleton"
 
 import { ExampleOperations } from "./example-operations"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog"
 
 interface ExampleItemProps {
   example: Pick<Example, "id"> & {
@@ -18,7 +28,28 @@ export function ExampleItem({ example }: ExampleItemProps) {
   return (
     <div className="flex items-center justify-between p-4">
       <div className="grid max-w-[90%] gap-1">
-        <p className={cn("font-semibold")}>{example.content.title}</p>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <p
+              className={cn(
+                "font-semibold hover:underline hover:cursor-pointer"
+              )}
+            >
+              {example.content.title}
+            </p>
+          </AlertDialogTrigger>
+          <AlertDialogContent id={example.id}>
+            <AlertDialogHeader>
+              <AlertDialogTitle>{example.content.title}</AlertDialogTitle>
+              <AlertDialogDescription className="max-h-[70vh] overflow-y-scroll">
+                {example.content.originalContent}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogAction>Close</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
         <div className="flex flex-col text-sm text-muted-foreground sm:flex-row">
           <p>
             {example.content.type},
