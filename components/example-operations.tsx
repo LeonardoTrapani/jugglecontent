@@ -75,10 +75,7 @@ async function deleteExample(contentId: string) {
 
 interface ExampleOperationsProps {
   contentId: Example["contentId"]
-  content: Pick<
-    Content,
-    "updatedAt" | "id" | "type" | "title" | "originalContent" | "url"
-  >
+  content: Pick<Content, "updatedAt" | "id" | "type" | "title" | "text" | "url">
 }
 
 export function ExampleOperations({
@@ -97,7 +94,7 @@ export function ExampleOperations({
       url: content.url ?? "",
       type: content.type === "youtubeVideo" ? undefined : content.type,
       title: content.title,
-      originalContent: content.originalContent,
+      text: content.text,
     },
   })
 
@@ -253,7 +250,7 @@ export function ExampleOperations({
               />
               <FormField
                 control={form.control}
-                name="originalContent"
+                name="text"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Content</FormLabel>
@@ -289,6 +286,7 @@ The Goal of this tech stack is to make the entire infrastructure **type-safe**: 
                   </FormItem>
                 )}
               />
+              {/*
               <FormField
                 control={form.control}
                 name="url"
@@ -308,6 +306,7 @@ The Goal of this tech stack is to make the entire infrastructure **type-safe**: 
                   </FormItem>
                 )}
               />
+              */}
               <DialogFooter>
                 <Button type="submit" className="mt-2">
                   {isEditLoading && (

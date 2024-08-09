@@ -10,12 +10,12 @@ export const exampleCreateSchema = z.object({
     ContentType.newsletter,
   ]),
   url: z.string().url().or(z.literal("")),
-  originalContent: z.string(),
+  text: z.string(),
 })
 
 export const examplePatchSchema = z.object({
   title: z.string().min(3).max(128).optional(),
   url: z.string().url().or(z.literal("")).optional(),
   extraInfo: z.string().optional(),
-  originalContent: z.string().optional(),
+  text: z.string().optional(),
 })

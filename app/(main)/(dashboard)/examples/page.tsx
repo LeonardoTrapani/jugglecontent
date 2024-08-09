@@ -35,7 +35,7 @@ export default async function ExamplePage() {
               id: true,
               title: true,
               type: true,
-              originalContent: true,
+              text: true,
               url: true,
             },
           },

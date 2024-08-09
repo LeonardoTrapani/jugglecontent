@@ -54,7 +54,7 @@ export async function POST(req: Request) {
         title: body.title,
         url: body.url,
         type: body.type,
-        originalContent: body.originalContent,
+        text: body.text,
         example: {
           create: {
             userId: user.id,

@@ -19,7 +19,7 @@ interface ExampleItemProps {
   example: Pick<Example, "id"> & {
     content: Pick<
       Content,
-      "updatedAt" | "id" | "type" | "title" | "originalContent" | "url"
+      "updatedAt" | "id" | "type" | "title" | "text" | "url"
     >
   }
 }
@@ -42,7 +42,7 @@ export function ExampleItem({ example }: ExampleItemProps) {
             <AlertDialogHeader>
               <AlertDialogTitle>{example.content.title}</AlertDialogTitle>
               <AlertDialogDescription className="max-h-[70vh] overflow-y-scroll">
-                {example.content.originalContent}
+                {example.content.text}
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>

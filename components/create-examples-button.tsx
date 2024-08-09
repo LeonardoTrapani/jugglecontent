@@ -60,7 +60,7 @@ export function ExampleCreateButton({
     resolver: zodResolver(exampleCreateSchema),
     defaultValues: {
       url: "",
-      originalContent: "",
+      text: "",
       title: "",
     },
   })
@@ -161,7 +161,7 @@ export function ExampleCreateButton({
             />
             <FormField
               control={form.control}
-              name="originalContent"
+              name="text"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Content</FormLabel>
@@ -197,6 +197,7 @@ The Goal of this tech stack is to make the entire infrastructure **type-safe**: 
                 </FormItem>
               )}
             />
+            {/*
             <FormField
               control={form.control}
               name="url"
@@ -216,6 +217,7 @@ The Goal of this tech stack is to make the entire infrastructure **type-safe**: 
                 </FormItem>
               )}
             />
+            */}
             <DialogFooter>
               <Button type="submit" className="mt-2">
                 {loading && (
