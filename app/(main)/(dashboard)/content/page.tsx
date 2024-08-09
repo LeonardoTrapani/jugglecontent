@@ -37,7 +37,7 @@ export default async function DashboardPage() {
               updatedAt: true,
               id: true,
               title: true,
-              type: true,
+              imageUrl: true,
             },
           },
         },
