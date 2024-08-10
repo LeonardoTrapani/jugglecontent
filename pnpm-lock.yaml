@@ -7,6 +7,9 @@ settings:
 importers:
   .:
     dependencies:
+      "@anthropic-ai/sdk":
+        specifier: ^0.25.1
+        version: 0.25.1
       "@distube/ytdl-core":
         specifier: ^4.14.4
         version: 4.14.4
@@ -212,6 +215,12 @@ packages:
         integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==,
       }
     engines: { node: ">=6.0.0" }
+
+  "@anthropic-ai/sdk@0.25.1":
+    resolution:
+      {
+        integrity: sha512-+qF6hRax1XzpbZTy1YqQMTwOPY3W1B5PFS5ZXgmPl1V/lDqXm2uYFCpnSR3DREz1FRZ4lflzbK1cAhr88FvCpw==,
+      }
 
   "@babel/code-frame@7.24.7":
     resolution:
@@ -5944,6 +5953,18 @@ snapshots:
     dependencies:
       "@jridgewell/gen-mapping": 0.3.5
       "@jridgewell/trace-mapping": 0.3.25
+
+  "@anthropic-ai/sdk@0.25.1":
+    dependencies:
+      "@types/node": 18.19.42
+      "@types/node-fetch": 2.6.11
+      abort-controller: 3.0.0
+      agentkeepalive: 4.5.0
+      form-data-encoder: 1.7.2
+      formdata-node: 4.4.1
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
 
   "@babel/code-frame@7.24.7":
     dependencies:

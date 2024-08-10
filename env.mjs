@@ -20,6 +20,7 @@ export const env = createEnv({
     STRIPE_API_KEY: z.string().min(1),
     STRIPE_WEBHOOK_SECRET: z.string().min(1),
     STRIPE_PRO_MONTHLY_PLAN_ID: z.string().min(1),
+    ANTHROPIC_API_KEY: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().min(1),
@@ -49,5 +50,6 @@ export const env = createEnv({
     STRIPE_PRO_MONTHLY_PLAN_ID: process.env.STRIPE_PRO_MONTHLY_PLAN_ID,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
   },
 })
