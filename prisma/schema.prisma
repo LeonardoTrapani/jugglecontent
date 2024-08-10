@@ -19,6 +19,8 @@ model User {
   examples Example[]
   originals Original[]
 
+  originalsCreated Int @default(0)
+
   accounts Account[]
   sessions Session[]
 
