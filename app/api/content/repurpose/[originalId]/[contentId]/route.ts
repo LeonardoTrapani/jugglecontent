@@ -72,9 +72,8 @@ export async function PATCH(
       },
       data: {
         title: body.title,
-        url: body.url,
         extraInfo: body.extraInfo,
-        originalContent: body.originalContent,
+        text: body.text,
       },
     })
 

@@ -1,3 +1,4 @@
+import { ContentType } from "@prisma/client"
 import { getServerSession } from "next-auth/next"
 import * as z from "zod"
 
@@ -6,6 +7,7 @@ import { db } from "@/lib/db"
 import { RequiresProPlanError } from "@/lib/exceptions"
 import { getUserSubscriptionPlan } from "@/lib/subscription"
 import { originalCreateSchema } from "@/lib/validations/original"
+import { youtubeParser } from "@/lib/youtube-transcription"
 
 export async function GET() {
   try {
@@ -68,11 +70,15 @@ export async function POST(req: Request) {
     const json = await req.json()
     const body = originalCreateSchema.parse(json)
 
+    const { captions, thumbnail, title } = await youtubeParser(body.url)
+
     const post = await db.content.create({
       data: {
-        title: body.title,
+        title: title,
         url: body.url,
-        type: body.type,
+        type: ContentType.youtubeVideo,
+        text: captions,
+        imageUrl: thumbnail,
         original: {
           create: {
             userId: user.id,

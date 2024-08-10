@@ -71,11 +71,14 @@ export async function POST(
     const json = await req.json()
     const body = repurposeCreateSchema.parse(json)
 
+    const generatedTitle = "generated title"
+    const generatedText = ""
+
     const post = await db.content.create({
       data: {
-        title: body.title,
-        url: body.url,
         type: body.type,
+        title: generatedTitle,
+        text: generatedText,
         repurpose: {
           create: {
             originalId: params.originalId,

@@ -66,8 +66,9 @@ model Content {
 
   extraInfo String?
 
-  originalContent String?
-  generatedContent String?
+  imageUrl String?
+
+  text String
 
   example Example?
   original Original?
@@ -84,6 +85,7 @@ enum ContentType {
   linkedinPost
   blog
   tweet
+  newsletter
 }
 
 model Repurpose {

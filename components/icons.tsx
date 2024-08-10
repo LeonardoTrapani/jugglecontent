@@ -1,5 +1,6 @@
 import {
   AlertTriangle,
+  ArrowRight,
   BookOpenCheck,
   Box,
   Check,
@@ -63,6 +64,7 @@ export const Icons = {
   strength: ChevronsUp,
   hint: Lightbulb,
   eye: Eye,
+  arrowRight: ArrowRight,
   settings: Settings,
   ai: ({ ...props }: LucideProps) => (
     <svg
