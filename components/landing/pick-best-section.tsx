@@ -31,8 +31,8 @@ const feature = {
   Icon: FileTextIcon,
   name: "Always pick the best",
   description: "We automatically save your files as you type.",
-  href: "#",
-  cta: "Learn more",
+  href: "/",
+  cta: "Get started",
   className: "col-span-3 lg:col-span-1",
   box: true,
   background: (
