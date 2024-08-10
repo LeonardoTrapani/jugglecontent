@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Content, ContentType, Repurpose } from "@prisma/client"
 
 import { formatContentType } from "@/lib/prompt/repurpose"
@@ -20,7 +20,7 @@ type RepurposesProps = {
   repurposes: CustomRepurpose[]
 }
 
-type CustomRepurpose = Pick<Repurpose, "id"> & {
+export type CustomRepurpose = Pick<Repurpose, "id"> & {
   content: Pick<Content, "text" | "title" | "type" | "id" | "url" | "updatedAt">
 }
 
@@ -55,6 +55,15 @@ export const Repurposes = (props: RepurposesProps) => {
     setSelectedIndex(0)
     setIsRepurposeScreenOpen(true)
   }
+
+  useEffect(() => {
+    setRepurposes(() =>
+      props.repurposes.map((repurpose) => ({
+        ...repurpose,
+        isStreaming: false,
+      }))
+    )
+  }, [props.repurposes])
 
   return (
     <Card className="w-full">
