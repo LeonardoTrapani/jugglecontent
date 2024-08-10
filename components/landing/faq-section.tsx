@@ -116,7 +116,7 @@ export function FAQSection() {
             ))}
           </div>
           <h4 className="mb-12 text-center text-sm font-medium tracking-tight text-foreground/80">
-            Still have questions? Email us at
+            Still have questions? Email us at&nbsp;
             <a href="mailto:info@jugglecontent.com" className="underline">
               info@jugglecontent.com
             </a>
