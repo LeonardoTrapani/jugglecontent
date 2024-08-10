@@ -1,32 +1,27 @@
+import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
-
-import "@/styles/globals.css"
-import { Metadata } from "next"
 import { Provider as BalancerProvider } from "react-wrap-balancer"
 
 import { siteConfig } from "@/config/site"
 import { absoluteUrl, cn } from "@/lib/utils"
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/sonner"
 import { Analytics } from "@/components/analytics"
 import { CSPostHogProvider } from "@/components/posthog-provider"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
+
+import "styles/globals.css"
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 })
 
-// Font files can be colocated inside of `pages`
 const fontHeading = localFont({
   src: "../assets/fonts/CalSans-SemiBold.woff2",
   variable: "--font-heading",
 })
-
-interface RootLayoutProps {
-  children: React.ReactNode
-}
 
 export const metadata: Metadata = {
   title: {
@@ -59,7 +54,11 @@ export const metadata: Metadata = {
   manifest: absoluteUrl("/favicon/site.webmanifest"),
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -74,7 +73,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <CSPostHogProvider>
           <BalancerProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               {children}
               <Analytics />
               <Toaster />
