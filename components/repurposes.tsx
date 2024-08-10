@@ -57,6 +57,14 @@ export const Repurposes = (props: RepurposesProps) => {
         title={props.title}
         onRepurposeClick={handleRepurposeClick}
         setStreamedText={setStreamedText}
+        onRepurposeDone={() => {
+          setRepurposes(() =>
+            props.repurposes.map((repurpose) => ({
+              ...repurpose,
+              isStreaming: false,
+            }))
+          )
+        }}
       />
 
       {!!repurposes.length ? (
