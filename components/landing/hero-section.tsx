@@ -70,7 +70,7 @@ export function HeroSection() {
                   type: "spring",
                 }}
               >
-                Start repurposing all your videos into content for reach every
+                Start repurposing all your videos into content reach every
                 platform.
               </motion.p>
 

@@ -171,12 +171,6 @@ export function DraftContentFeature() {
           ))}
         </AnimatedList>
       </div>
-      <div className="flex flex-col items-start gap-y-1 border-t p-4 dark:border-neutral-800">
-        <h2 className="text-xl font-semibold">Notifications</h2>
-        <p className="text-base font-normal text-neutral-500 dark:text-neutral-400">
-          Get realtime notifications for events you subscribe too
-        </p>
-      </div>
     </div>
   )
 }

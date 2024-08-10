@@ -6,40 +6,40 @@ import Marquee from "@/components/magicui/marquee"
 
 const reviews = [
   {
-    name: "Jack",
-    username: "@jack",
-    body: "I've never seen anything like this before. It's amazing. I love it.",
-    img: "https://avatar.vercel.sh/jack",
+    name: "Emily",
+    username: "@emilywrites",
+    body: "I've never seen anything like Juggle Content before. It's incredible how it transforms my videos for every platform effortlessly. I love it!",
+    img: "https://avatar.vercel.sh/emily",
   },
   {
-    name: "Jill",
-    username: "@jill",
-    body: "I don't know what to say. I'm speechless. This is amazing.",
-    img: "https://avatar.vercel.sh/jill",
+    name: "Michael",
+    username: "@mike_creates",
+    body: "I don't know what to say. Juggle Content has left me speechless. This tool is amazing for expanding my content reach!",
+    img: "https://avatar.vercel.sh/michael",
   },
   {
-    name: "John",
-    username: "@john",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/john",
+    name: "Sophia",
+    username: "@sophia_sparks",
+    body: "I'm at a loss for words. Juggle Content is fantastic. It simplifies content repurposing, and I love it!",
+    img: "https://avatar.vercel.sh/sophia",
   },
   {
-    name: "Jane",
-    username: "@jane",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jane",
+    name: "David",
+    username: "@daviddesigns",
+    body: "Absolutely blown away by Juggle Content! It makes my videos suitable for every platform with ease. Highly recommend!",
+    img: "https://avatar.vercel.sh/david",
   },
   {
-    name: "Jenny",
-    username: "@jenny",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jenny",
+    name: "Olivia",
+    username: "@livycreates",
+    body: "Juggle Content is a game changer! I love how it effortlessly repurposes my videos and expands my reach.",
+    img: "https://avatar.vercel.sh/olivia",
   },
   {
-    name: "James",
-    username: "@james",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/james",
+    name: "Ethan",
+    username: "@ethanexplores",
+    body: "This tool is amazing! Juggle Content has transformed the way I share my content across platforms. I'm so impressed!",
+    img: "https://avatar.vercel.sh/ethan",
   },
 ]
 
@@ -86,7 +86,7 @@ export function CallToActionSection() {
     <section id="cta">
       <div className="py-14">
         <div className="container flex w-full flex-col items-center justify-center p-4">
-          <div className="relative flex w-full max-w-[1000px] flex-col items-center justify-center overflow-hidden rounded-[2rem] border p-10 py-14">
+          <div className="relative flex w-full max-w-6xl flex-col items-center justify-center overflow-hidden rounded-[2rem] border p-10 py-14">
             <div className="absolute rotate-[35deg]">
               <Marquee pauseOnHover className="[--duration:20s]" repeat={3}>
                 {firstRow.map((review) => (
@@ -139,10 +139,10 @@ export function CallToActionSection() {
             </div>
             <div className="z-10 mt-4 flex flex-col items-center text-center text-black dark:text-white">
               <h1 className="text-3xl font-bold lg:text-4xl">
-                Stop wasting time on design.
+                Creators should create.
               </h1>
               <p className="mt-2">
-                Start your 7-day free trial. No credit card required.
+                Start with a free trial. No credit card required.
               </p>
               <a
                 href="/"

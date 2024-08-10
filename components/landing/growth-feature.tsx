@@ -62,7 +62,7 @@ export function GrowthFeature() {
         className="flex h-full w-full cursor-pointer flex-col items-start justify-between"
       >
         <div className="relative flex h-full w-full cursor-pointer items-center justify-center overflow-hidden rounded-t-xl bg-transparent p-10">
-          <div className="relative h-[150px] w-full cursor-pointer overflow-hidden rounded-xl border border-slate-200/50 bg-white dark:border-neutral-700/50 dark:bg-neutral-900">
+          <div className="relative h-[300px] w-full cursor-pointer overflow-hidden rounded-xl border border-slate-200/50 bg-white dark:border-neutral-700/50 dark:bg-neutral-900">
             <motion.p
               variants={variant2}
               className="absolute left-5 top-5 w-fit text-[15px]"
@@ -96,12 +96,6 @@ export function GrowthFeature() {
               </defs>
             </motion.svg>
           </div>
-        </div>
-        <div className="flex w-full flex-col items-start border-t border-neutral-200 p-4 dark:border-neutral-800">
-          <h2 className="text-xl font-semibold">Growth</h2>
-          <p className="text-base font-normal text-neutral-500 dark:text-neutral-400">
-            Invest and watch your money grow
-          </p>
         </div>
       </motion.div>
     </div>

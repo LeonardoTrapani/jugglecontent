@@ -6,24 +6,24 @@ import Marquee from "@/components/magicui/marquee"
 
 const files = [
   {
-    name: "bitcoin.pdf",
-    body: "Bitcoin is a cryptocurrency invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto.",
+    name: "script.txt",
+    body: "In this video, we’ll explore effective strategies for repurposing your video content to maximize its reach and impact.",
   },
   {
-    name: "finances.xlsx",
-    body: "A spreadsheet or worksheet is a file made of rows and columns that help sort data, arrange data easily, and calculate numerical data.",
+    name: "linkedin.txt",
+    body: "Did you know that repurposing your video content can significantly boost engagement across all platforms?",
   },
   {
-    name: "logo.svg",
-    body: "Scalable Vector Graphics is an Extensible Markup Language-based vector image format for two-dimensional graphics with support for interactivity and animation.",
+    name: "X.txt",
+    body: "This visual guide illustrates the step-by-step process of repurposing video content for various social media platforms.",
   },
   {
-    name: "keys.gpg",
-    body: "GPG keys are used to encrypt and decrypt email, files, directories, and whole disk partitions and to authenticate messages.",
+    name: "podcast_script.txt",
+    body: "Welcome to today’s episode, where we discuss the incredible benefits of repurposing video content for your brand.",
   },
   {
-    name: "seed.txt",
-    body: "A seed phrase, seed recovery phrase or backup seed phrase is a list of words which store all the information needed to recover Bitcoin funds on-chain.",
+    name: "blog_seed.txt",
+    body: "Repurposing video content is not just a trend; it’s a vital strategy for maximizing your content's value and reach.",
   },
 ]
 
@@ -66,16 +66,22 @@ const feature = {
 
 export function PickBestSection() {
   return (
-    <div className="container mx-auto max-w-6xl min-h-[32rem] px-4 py-8 ">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
+    <div className="container mx-auto max-w-6xl min-h-[32rem] px-4 py-32">
+      <div className="grid grid-cols-1 md:grid-cols-2 space-y-4 md:gap-16 items-center">
         <BentoCard {...feature} />
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold">Product Feature</h2>
-          <p className="text-lg">
-            Our product offers an innovative solution that streamlines your
-            workflow. With intuitive design and powerful functionality, you'll
-            experience increased productivity and efficiency in your daily
-            tasks.
+        <div className="space-y-4 sm:pt-0 pt-16">
+          <h2 className="text-2xl font-bold">Cherry-Pick the Good Stuff ✅</h2>
+          <p className="text-lg text-gray-400">
+            Okay, <b>confession time</b>: not every idea is a winner. <br /> But
+            what if you could <b>stack the odds in your favor</b>? That's where
+            Juggle Content comes in handy. 🎭
+          </p>
+          <p className="text-lg text-gray-400">
+            Instead of wracking your brain for that <b>one perfect post</b>, we
+            serve up a <b>smorgasbord of options</b> 🙌🏻. It's like having a room
+            full of <b>creative yous</b>, each coming up with a different spin
+            on your idea. You get to play <b>content critic</b>, picking the{" "}
+            <b>absolute cream of the crop</b>.
           </p>
         </div>
       </div>

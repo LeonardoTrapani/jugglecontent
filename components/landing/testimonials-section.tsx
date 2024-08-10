@@ -78,165 +78,169 @@ export const TestimonialCard = ({
 const testimonials = [
   {
     name: "Alex Rivera",
-    role: "CTO at InnovateTech",
+    role: "Content Strategist",
     img: "https://randomuser.me/api/portraits/men/91.jpg",
     description: (
       <p>
-        The AI-driven analytics from #QuantumInsights have revolutionized our
-        product development cycle.
+        Juggle Content has completely transformed how we manage and distribute
+        our media assets.
         <Highlight>
-          Insights are now more accurate and faster than ever.
+          Our reach across platforms has expanded exponentially.
         </Highlight>{" "}
-        A game-changer for tech companies.
+        A must-have for any media professional.
       </p>
     ),
   },
   {
     name: "Samantha Lee",
-    role: "Marketing Director at NextGen Solutions",
+    role: "YouTuber with 50k Subscribers",
     img: "https://randomuser.me/api/portraits/women/12.jpg",
     description: (
       <p>
-        Implementing #AIStream's customer prediction model has drastically
-        improved our targeting strategy.
-        <Highlight>Seeing a 50% increase in conversion rates!</Highlight> Highly
-        recommend their solutions.
+        Using Juggle Content has streamlined my video repurposing process.
+        <Highlight>
+          My engagement rates have soared on every platform!
+        </Highlight>{" "}
+        Highly recommend for content creators.
       </p>
     ),
   },
   {
     name: "Raj Patel",
-    role: "Founder & CEO at StartUp Grid",
+    role: "CEO and Startup Founder",
     img: "https://randomuser.me/api/portraits/men/45.jpg",
     description: (
       <p>
-        As a startup, we need to move fast and stay ahead. #CodeAI's automated
-        coding assistant helps us do just that.
-        <Highlight>Our development speed has doubled.</Highlight> Essential tool
+        As a startup, we need tools that enhance efficiency. Juggle Content
+        delivers by repurposing our content swiftly.
+        <Highlight>Our social media presence has doubled.</Highlight> Essential
         for any startup.
       </p>
     ),
   },
   {
     name: "Emily Chen",
-    role: "Product Manager at Digital Wave",
+    role: "Social Media Manager",
     img: "https://randomuser.me/api/portraits/women/83.jpg",
     description: (
       <p>
-        #VoiceGen's AI-driven voice synthesis has made creating global products
-        a breeze.
-        <Highlight>Localization is now seamless and efficient.</Highlight> A
-        must-have for global product teams.
+        Juggle Content has made managing multiple platforms a breeze.
+        <Highlight>
+          Our content localization is now seamless and effective.
+        </Highlight>{" "}
+        Perfect for global teams.
       </p>
     ),
   },
   {
     name: "Michael Brown",
-    role: "Data Scientist at FinTech Innovations",
+    role: "Digital Marketing Specialist",
     img: "https://randomuser.me/api/portraits/men/1.jpg",
     description: (
       <p>
-        Leveraging #DataCrunch's AI for our financial models has given us an
-        edge in predictive accuracy.
+        With Juggle Content, our video content strategy is now data-driven and
+        efficient.
         <Highlight>
-          Our investment strategies are now powered by real-time data analytics.
+          We've seen a significant increase in audience engagement.
         </Highlight>{" "}
-        Transformative for the finance industry.
+        A game-changer for digital marketing.
       </p>
     ),
   },
   {
     name: "Linda Wu",
-    role: "VP of Operations at LogiChain Solutions",
+    role: "VP of Content Operations",
     img: "https://randomuser.me/api/portraits/women/5.jpg",
     description: (
       <p>
-        #LogiTech's supply chain optimization tools have drastically reduced our
-        operational costs.
+        Juggle Content's platform has optimized our content distribution
+        process.
         <Highlight>
-          Efficiency and accuracy in logistics have never been better.
+          Efficiency and accuracy in media logistics have never been better.
         </Highlight>{" "}
       </p>
     ),
   },
   {
     name: "Carlos Gomez",
-    role: "Head of R&D at EcoInnovate",
+    role: "Head of Digital Strategy",
     img: "https://randomuser.me/api/portraits/men/14.jpg",
     description: (
       <p>
-        By integrating #GreenTech's sustainable energy solutions, we've seen a
-        significant reduction in carbon footprint.
+        Integrating Juggle Content has significantly improved our eco-friendly
+        content distribution.
         <Highlight>
-          Leading the way in eco-friendly business practices.
+          Leading the way in sustainable media practices.
         </Highlight>{" "}
-        Pioneering change in the industry.
+        Pioneering change in digital media.
       </p>
     ),
   },
   {
     name: "Aisha Khan",
-    role: "Chief Marketing Officer at Fashion Forward",
+    role: "Chief Marketing Officer",
     img: "https://randomuser.me/api/portraits/women/56.jpg",
     description: (
       <p>
-        #TrendSetter's market analysis AI has transformed how we approach
-        fashion trends.
+        Juggle Content's analytics have transformed how we approach content
+        trends.
         <Highlight>
-          Our campaigns are now data-driven with higher customer engagement.
+          Our campaigns are now data-driven with higher engagement.
         </Highlight>{" "}
-        Revolutionizing fashion marketing.
+        Revolutionizing marketing strategies.
       </p>
     ),
   },
   {
     name: "Tom Chen",
-    role: "Director of IT at HealthTech Solutions",
+    role: "IT Director",
     img: "https://randomuser.me/api/portraits/men/18.jpg",
     description: (
       <p>
-        Implementing #MediCareAI in our patient care systems has improved
-        patient outcomes significantly.
+        Implementing Juggle Content in our media systems has improved content
+        delivery significantly.
         <Highlight>
-          Technology and healthcare working hand in hand for better health.
+          Technology and media working hand in hand for better outreach.
         </Highlight>{" "}
-        A milestone in medical technology.
+        A milestone in media technology.
       </p>
     ),
   },
   {
     name: "Sofia Patel",
-    role: "CEO at EduTech Innovations",
+    role: "CEO and Education Innovator",
     img: "https://randomuser.me/api/portraits/women/73.jpg",
     description: (
       <p>
-        #LearnSmart's AI-driven personalized learning plans have doubled student
-        performance metrics.
-        <Highlight>Education tailored to every learner's needs.</Highlight>{" "}
+        Juggle Content's AI-driven repurposing has doubled our educational
+        content's reach.
+        <Highlight>
+          Education tailored to every platform's needs.
+        </Highlight>{" "}
         Transforming the educational landscape.
       </p>
     ),
   },
   {
     name: "Jake Morrison",
-    role: "CTO at SecureNet Tech",
+    role: "CTO and Cybersecurity Expert",
     img: "https://randomuser.me/api/portraits/men/25.jpg",
     description: (
       <p>
-        With #CyberShield's AI-powered security systems, our data protection
-        levels are unmatched.
-        <Highlight>Ensuring safety and trust in digital spaces.</Highlight>{" "}
-        Redefining cybersecurity standards.
+        With Juggle Content's platform, our content protection levels are
+        unmatched.
+        <Highlight>Ensuring safety and trust in digital media.</Highlight>{" "}
+        Redefining security standards.
       </p>
     ),
   },
   {
     name: "Nadia Ali",
-    role: "Product Manager at Creative Solutions",
+    role: "Creative Director",
     img: "https://randomuser.me/api/portraits/women/78.jpg",
     description: (
       <p>
-        #DesignPro's AI has streamlined our creative process, enhancing
+        Juggle Content's AI has streamlined our creative process, enhancing
         productivity and innovation.
         <Highlight>Bringing creativity and technology together.</Highlight> A
         game-changer for creative industries.
@@ -245,14 +249,14 @@ const testimonials = [
   },
   {
     name: "Omar Farooq",
-    role: "Founder at Startup Hub",
+    role: "Founder and Startup Mentor",
     img: "https://randomuser.me/api/portraits/men/54.jpg",
     description: (
       <p>
-        #VentureAI's insights into startup ecosystems have been invaluable for
-        our growth and funding strategies.
+        Juggle Content's insights into media ecosystems have been invaluable for
+        our growth strategies.
         <Highlight>Empowering startups with data-driven decisions.</Highlight> A
-        catalyst for startup success.
+        catalyst for success.
       </p>
     ),
   },

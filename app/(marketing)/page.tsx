@@ -8,13 +8,15 @@ import PricingSection from "@/components/landing/pricing-section"
 import { TestimonialsSection } from "@/components/landing/testimonials-section"
 import GradualSpacing from "@/components/magicui/gradual-spacing"
 import Particles from "@/components/magicui/particles"
+import { SphereMask } from "@/components/magicui/sphere-mask"
 
 export default async function Page() {
   return (
     <>
       <HeroSection />
+      <SphereMask />
       <GradualSpacing
-        className="font-display text-center text-4xl font-bold tracking-[-0.1em] mt-24 mb-12 text-black dark:text-white md:text-5xl md:leading-[5rem]"
+        className="font-display text-center text-4xl font-bold tracking-[-0.1em] mt-24 text-black dark:text-white md:text-5xl md:leading-[5rem]"
         text="✨ What you'll get ✨"
       />
       <DraftContentSection />

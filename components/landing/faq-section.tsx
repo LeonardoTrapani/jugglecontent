@@ -9,71 +9,66 @@ import {
 
 const faqs = [
   {
-    section: "General",
     qa: [
       {
-        question: "What is Magic UI?",
+        question: "What is Juggle Content?",
         answer: (
           <span>
-            Magic UI is a React-based UI library designed to help developers
-            build beautiful and interactive user interfaces with ease. It offers
-            a wide range of customizable components.
-          </span>
-        ),
-      },
-      {
-        question: "How can I get started with Magic UI?",
-        answer: (
-          <span>
-            To get started, install the Magic UI package in your React project
-            using your package manager. Explore our documentation for guides on
-            using components and customizing your UI.
+            Juggle Content is a platform designed to help users repurpose their
+            video content for multiple platforms. It allows you to say things
+            once and reach every platform by transforming your videos into
+            content optimized for each platform.
           </span>
         ),
       },
     ],
   },
   {
-    section: "Support",
     qa: [
       {
-        question: "Does Magic UI offer technical support?",
+        question: "Who can benefit from using Juggle Content?",
         answer: (
           <span>
-            While Magic UI is primarily a self-serve library, we provide
-            extensive documentation and a community forum where you can ask
-            questions and share insights with other developers.
+            Juggle Content is ideal for content creators, social media managers,
+            marketers, and businesses looking to expand their reach across
+            multiple platforms. Whether you're a YouTuber, a digital marketer,
+            or a media company, Juggle Content can streamline your content
+            distribution process.
+          </span>
+        ),
+      },
+      {
+        question: "Is there a free trial available for Juggle Content?",
+        answer: (
+          <span>
+            Yes, Juggle Content offers a free trial period for new users to
+            explore the platform's features and see how it can benefit their
+            content strategy.
           </span>
         ),
       },
     ],
   },
   {
-    section: "Customization",
     qa: [
       {
-        question: "Can I customize Magic UI components?",
+        question: "Can Juggle Content integrate with existing video platforms?",
         answer: (
           <span>
-            Absolutely! Magic UI is built with customization in mind. You can
-            easily override styles and behaviors of components to match your
-            design requirements.
+            Absolutely! Juggle Content is designed to integrate seamlessly with
+            popular video platforms and social media channels, making it easy to
+            repurpose and distribute content without disrupting your current
+            workflow.
           </span>
         ),
       },
-    ],
-  },
-  {
-    section: "Integration",
-    qa: [
       {
-        question: "How do I integrate Magic UI with my existing project?",
+        question: "What kind of support does Juggle Content offer?",
         answer: (
           <span>
-            Magic UI can be integrated into any React project. Simply install
-            the library, import the components you need, and start using them in
-            your project. Our documentation provides detailed instructions for
-            integration.
+            Juggle Content provides comprehensive support through a dedicated
+            customer service team ready to assist with any questions or issues
+            you may encounter.
           </span>
         ),
       },
@@ -98,12 +93,9 @@ export function FAQSection() {
               questions we get.
             </p>
           </div>
-          <div className="container mx-auto my-12 max-w-[600px] space-y-12">
+          <div className="container mx-auto my-12 max-w-6xl">
             {faqs.map((faq, idx) => (
-              <section key={idx} id={"faq-" + faq.section}>
-                <h2 className="mb-4 text-left text-base font-semibold tracking-tight text-foreground/60">
-                  {faq.section}
-                </h2>
+              <section key={idx}>
                 <Accordion
                   type="single"
                   collapsible
@@ -113,7 +105,7 @@ export function FAQSection() {
                     <AccordionItem
                       key={idx}
                       value={faq.question}
-                      className="w-full max-w-[600px]"
+                      className="w-full"
                     >
                       <AccordionTrigger>{faq.question}</AccordionTrigger>
                       <AccordionContent>{faq.answer}</AccordionContent>
@@ -125,8 +117,8 @@ export function FAQSection() {
           </div>
           <h4 className="mb-12 text-center text-sm font-medium tracking-tight text-foreground/80">
             Still have questions? Email us at{" "}
-            <a href="mailto:support@example.com" className="underline">
-              support@example.com
+            <a href="mailto:redazionelofi@gmail.com" className="underline">
+              redazionelofi@gmail.com
             </a>
           </h4>
         </div>
