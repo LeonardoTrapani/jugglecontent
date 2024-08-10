@@ -88,15 +88,7 @@ export default async function ExamplePage({ params }: ExamplePageProps) {
         </Link>
       </div>
       <div className="flex flex-col lg:flex-col items-start gap-4 lg:items-center">
-        <div className="flex flex-col lg:p-4 gap-2 items-start">
-          <h1 className={cn("font-heading text-2xl xl:text-3xl")}>
-            {original.content.title}
-          </h1>
-          <p className="text-gray-500">
-            {formatDate(original.content.updatedAt.toDateString())}
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 sm:flex-row w-full ">
+        <div className="flex flex-col items-center gap-4 sm:flex-row w-full">
           <Link
             href={original.content.url || ""}
             target="_blank"
@@ -110,12 +102,20 @@ export default async function ExamplePage({ params }: ExamplePageProps) {
               className="rounded-md w-full"
             />
           </Link>
-          <CreateRepurpose
-            originalId={params.originalId}
-            text={original.content.text}
-            title={original.content.title}
-          />
+          <div className="flex sm:w-2/3 flex-col lg:p-4 gap-2 items-start">
+            <h1 className={cn("font-heading text-xl lg:text-2xl xl:text-3xl")}>
+              {original.content.title}
+            </h1>
+            <p className="text-gray-500">
+              {formatDate(original.content.updatedAt.toDateString())}
+            </p>
+          </div>
         </div>
+        <CreateRepurpose
+          originalId={params.originalId}
+          text={original.content.text}
+          title={original.content.title}
+        />
       </div>
     </DashboardShell>
   )

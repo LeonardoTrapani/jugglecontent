@@ -101,13 +101,13 @@ export function CreateRepurpose({
   }
 
   return (
-    <Card className="sm:w-1/2 md:grow p-2 sm:p-4 flex justify-center items-center">
+    <Card className="w-full p-2 sm:p-4 flex justify-center items-center">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-2 justify-between items-center w-full text-sm lg:flex-row lg:text-xl sm:gap-5 md:gap-2"
+          className="flex flex-col gap-2 justify-between items-center w-full text-sm lg:flex-row lg:text-xl sm:gap-5"
         >
-          <div className="flex md:flex-col lg:flex-row items-center gap-2">
+          <div className="flex lg:flex-row items-center gap-2">
             <p className="font-heading text-base lg:text-xl">Repurpose as</p>
 
             <FormField
@@ -155,12 +155,6 @@ export function CreateRepurpose({
           </Button>
         </form>
       </Form>
-      <div className="w-full mt-4">
-        <p className="font-bold text-base lg:text-xl">Response</p>
-        <div className="w-full p-2 bg-gray-100 rounded-lg text-sm lg:text-base">
-          {response}
-        </div>
-      </div>
     </Card>
   )
 }
