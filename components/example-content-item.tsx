@@ -4,6 +4,7 @@ import { cn, formatDate } from "@/lib/utils"
 import { Skeleton } from "@/components/ui/skeleton"
 
 import { ExampleOperations } from "./example-operations"
+import { Icons } from "./icons"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,6 +26,8 @@ interface ExampleItemProps {
 }
 
 export function ExampleItem({ example }: ExampleItemProps) {
+  const Icon = Icons[example.content.type || "check"]
+
   return (
     <div className="flex items-center justify-between p-4">
       <div className="grid max-w-[90%] gap-1">
@@ -51,10 +54,10 @@ export function ExampleItem({ example }: ExampleItemProps) {
           </AlertDialogContent>
         </AlertDialog>
         <div className="flex flex-col text-sm text-muted-foreground sm:flex-row">
-          <p>
-            {example.content.type},
+          <div className="flex items-center">
+            <Icon className="size-4 mr-1" />{" "}
             {formatDate(example.content.updatedAt.toDateString())}
-          </p>
+          </div>
         </div>
       </div>
       <ExampleOperations
