@@ -128,7 +128,7 @@ const Notification = ({ name, description, icon, color, time }: Item) => {
   return (
     <figure
       className={cn(
-        "relative mx-auto min-h-fit w-full max-w-[400px] transform cursor-pointer overflow-hidden rounded-lg p-4",
+        "relative mx-auto min-h-fit w-full sm:max-w-[400px] max-w-[300px] transform cursor-pointer overflow-hidden rounded-lg p-4",
         // animation styles
         "transition-all duration-200 ease-in-out hover:scale-[103%]",
         // light styles
@@ -163,9 +163,9 @@ const Notification = ({ name, description, icon, color, time }: Item) => {
 
 export function DraftContentFeature() {
   return (
-    <div className="relative flex h-full max-h-[500px] min-h-[500px] w-full max-w-[32rem] transform-gpu flex-col justify-between overflow-hidden rounded-lg border bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] dark:bg-black dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]">
-      <div className="flex items-center justify-center overflow-hidden">
-        <AnimatedList>
+    <div className="relative flex h-[500px] w-full max-w-[32rem] transform-gpu flex-col justify-between overflow-hidden rounded-lg border bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] dark:bg-black dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]">
+      <div className="flex h-full items-center justify-center overflow-y-auto">
+        <AnimatedList className="py-4">
           {notifications.map((item, idx) => (
             <Notification {...item} key={idx} />
           ))}
