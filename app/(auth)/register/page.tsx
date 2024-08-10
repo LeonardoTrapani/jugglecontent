@@ -4,7 +4,6 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
 import PrivacyButton from "@/components/iubenda/privacy"
 import TermsButton from "@/components/iubenda/terms"
 import { UserAuthForm } from "@/components/user/user-auth-form"
