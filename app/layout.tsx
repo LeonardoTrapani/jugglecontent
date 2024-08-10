@@ -2,16 +2,17 @@ import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 import { Provider as BalancerProvider } from "react-wrap-balancer"
+import { Toaster as SonnerToaster } from "sonner"
 
 import { siteConfig } from "@/config/site"
 import { absoluteUrl, cn } from "@/lib/utils"
-import { Toaster } from "@/components/ui/sonner"
 import { Analytics } from "@/components/analytics"
 import { CSPostHogProvider } from "@/components/posthog-provider"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
 import "styles/globals.css"
+import { Toaster } from "@/components/ui/toaster"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -77,6 +78,7 @@ export default function RootLayout({
               {children}
               <Analytics />
               <Toaster />
+              <SonnerToaster />
               <TailwindIndicator />
             </ThemeProvider>
           </BalancerProvider>
