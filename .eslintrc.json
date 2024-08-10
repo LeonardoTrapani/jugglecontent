@@ -11,12 +11,14 @@
     "@next/next/no-html-link-for-pages": "off",
     "react/jsx-key": "off",
     "tailwindcss/no-custom-classname": "off",
-    "tailwindcss/classnames-order": "off"
+    "tailwindcss/classnames-order": "off",
+    "react/no-unescaped-entities": "off",
+    "tailwindcss/no-contradicting-classname": "off"
   },
   "settings": {
     "tailwindcss": {
       "callees": ["cn"],
-      "config": "tailwind.config.js"
+      "config": "tailwind.config.ts"
     },
     "next": {
       "rootDir": true
