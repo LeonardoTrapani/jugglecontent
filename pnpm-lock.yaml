@@ -139,9 +139,6 @@ importers:
       sharp:
         specifier: ^0.33.4
         version: 0.33.4
-      sonner:
-        specifier: ^1.5.0
-        version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       stripe:
         specifier: ^16.6.0
         version: 16.6.0
@@ -150,10 +147,10 @@ importers:
         version: 1.14.0
       tailwindcss:
         specifier: ^3.4.9
-        version: 3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5))
+        version: 3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5))
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5)))
+        version: 1.0.7(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5)))
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -169,10 +166,10 @@ importers:
         version: 3.7.2(prettier@2.8.8)
       "@tailwindcss/line-clamp":
         specifier: ^0.4.4
-        version: 0.4.4(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5)))
+        version: 0.4.4(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5)))
       "@tailwindcss/typography":
         specifier: ^0.5.13
-        version: 0.5.14(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5)))
+        version: 0.5.14(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5)))
       "@types/node":
         specifier: ^18.19.42
         version: 18.19.42
@@ -199,7 +196,7 @@ importers:
         version: 7.35.0(eslint@8.57.0)
       eslint-plugin-tailwindcss:
         specifier: ^3.17.4
-        version: 3.17.4(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5)))
+        version: 3.17.4(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5)))
       husky:
         specifier: ^8.0.3
         version: 8.0.3
@@ -5639,15 +5636,6 @@ packages:
       }
     engines: { node: ">=8" }
 
-  sonner@1.5.0:
-    resolution:
-      {
-        integrity: sha512-FBjhG/gnnbN6FY0jaNnqZOMmB73R+5IiyYAw8yBj7L54ER7HB3fOSE5OFiQiE2iXWxeXKvg6fIP4LtVppHEdJA==,
-      }
-    peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
-
   source-map-js@1.2.0:
     resolution:
       {
@@ -6556,7 +6544,7 @@ snapshots:
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
       resolve-from: 5.0.0
-      ts-node: 10.9.2(@types/node@18.19.42)(typescript@4.9.5)
+      ts-node: 10.9.2(@types/node@20.5.1)(typescript@4.9.5)
       typescript: 4.9.5
     transitivePeerDependencies:
       - "@swc/core"
@@ -7659,17 +7647,17 @@ snapshots:
       "@t3-oss/env-core": 0.2.2(zod@3.23.8)
       zod: 3.23.8
 
-  "@tailwindcss/line-clamp@0.4.4(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5)))":
+  "@tailwindcss/line-clamp@0.4.4(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5)))":
     dependencies:
-      tailwindcss: 3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5))
+      tailwindcss: 3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5))
 
-  "@tailwindcss/typography@0.5.14(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5)))":
+  "@tailwindcss/typography@0.5.14(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5)))":
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5))
+      tailwindcss: 3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5))
 
   "@tsconfig/node10@1.0.11": {}
 
@@ -8114,7 +8102,7 @@ snapshots:
     dependencies:
       "@types/node": 20.5.1
       cosmiconfig: 8.3.6(typescript@4.9.5)
-      ts-node: 10.9.2(@types/node@18.19.42)(typescript@4.9.5)
+      ts-node: 10.9.2(@types/node@20.5.1)(typescript@4.9.5)
       typescript: 4.9.5
 
   cosmiconfig@8.3.6(typescript@4.9.5):
@@ -8391,8 +8379,8 @@ snapshots:
       "@typescript-eslint/parser": 5.62.0(eslint@8.57.0)(typescript@4.9.5)
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 2.7.1(eslint-plugin-import@2.29.1)(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint-import-resolver-typescript@2.7.1)(eslint@8.57.0)
+      eslint-import-resolver-typescript: 2.7.1(eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
       eslint-plugin-jsx-a11y: 6.9.0(eslint@8.57.0)
       eslint-plugin-react: 7.35.0(eslint@8.57.0)
       eslint-plugin-react-hooks: 4.6.2(eslint@8.57.0)
@@ -8414,11 +8402,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.29.1)(eslint@8.57.0):
+  eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint@8.57.0))(eslint@8.57.0):
     dependencies:
       debug: 4.3.6
       eslint: 8.57.0
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint-import-resolver-typescript@2.7.1)(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
       glob: 7.2.3
       is-glob: 4.0.3
       resolve: 1.22.8
@@ -8426,18 +8414,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.8.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0):
+  eslint-module-utils@2.8.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
       "@typescript-eslint/parser": 5.62.0(eslint@8.57.0)(typescript@4.9.5)
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 2.7.1(eslint-plugin-import@2.29.1)(eslint@8.57.0)
+      eslint-import-resolver-typescript: 2.7.1(eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint@8.57.0))(eslint@8.57.0)
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint-import-resolver-typescript@2.7.1)(eslint@8.57.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0):
     dependencies:
       array-includes: 3.1.8
       array.prototype.findlastindex: 1.2.5
@@ -8447,7 +8435,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
+      eslint-module-utils: 2.8.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.29.1(@typescript-eslint/parser@5.62.0(eslint@8.57.0)(typescript@4.9.5))(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
       hasown: 2.0.2
       is-core-module: 2.15.0
       is-glob: 4.0.3
@@ -8510,11 +8498,11 @@ snapshots:
       string.prototype.matchall: 4.0.11
       string.prototype.repeat: 1.0.0
 
-  eslint-plugin-tailwindcss@3.17.4(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5))):
+  eslint-plugin-tailwindcss@3.17.4(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5))):
     dependencies:
       fast-glob: 3.3.2
       postcss: 8.4.40
-      tailwindcss: 3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5))
+      tailwindcss: 3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5))
 
   eslint-scope@7.2.2:
     dependencies:
@@ -9490,13 +9478,13 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.4.40
 
-  postcss-load-config@4.0.2(postcss@8.4.40)(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5)):
+  postcss-load-config@4.0.2(postcss@8.4.40)(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5)):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.5.0
     optionalDependencies:
       postcss: 8.4.40
-      ts-node: 10.9.2(@types/node@18.19.42)(typescript@4.9.5)
+      ts-node: 10.9.2(@types/node@20.5.1)(typescript@4.9.5)
 
   postcss-nested@6.2.0(postcss@8.4.40):
     dependencies:
@@ -9876,11 +9864,6 @@ snapshots:
 
   slash@3.0.0: {}
 
-  sonner@1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-
   source-map-js@1.2.0: {}
 
   spdx-correct@3.2.0:
@@ -10021,11 +10004,11 @@ snapshots:
 
   tailwind-merge@1.14.0: {}
 
-  tailwindcss-animate@1.0.7(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5))):
+  tailwindcss-animate@1.0.7(tailwindcss@3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5))):
     dependencies:
-      tailwindcss: 3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5))
+      tailwindcss: 3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5))
 
-  tailwindcss@3.4.9(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5)):
+  tailwindcss@3.4.9(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5)):
     dependencies:
       "@alloc/quick-lru": 5.2.0
       arg: 5.0.2
@@ -10044,7 +10027,7 @@ snapshots:
       postcss: 8.4.40
       postcss-import: 15.1.0(postcss@8.4.40)
       postcss-js: 4.0.1(postcss@8.4.40)
-      postcss-load-config: 4.0.2(postcss@8.4.40)(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5))
+      postcss-load-config: 4.0.2(postcss@8.4.40)(ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5))
       postcss-nested: 6.2.0(postcss@8.4.40)
       postcss-selector-parser: 6.1.1
       resolve: 1.22.8
@@ -10089,14 +10072,14 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-node@10.9.2(@types/node@18.19.42)(typescript@4.9.5):
+  ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5):
     dependencies:
       "@cspotcode/source-map-support": 0.8.1
       "@tsconfig/node10": 1.0.11
       "@tsconfig/node12": 1.0.11
       "@tsconfig/node14": 1.0.3
       "@tsconfig/node16": 1.0.4
-      "@types/node": 18.19.42
+      "@types/node": 20.5.1
       acorn: 8.12.1
       acorn-walk: 8.3.3
       arg: 4.1.3
