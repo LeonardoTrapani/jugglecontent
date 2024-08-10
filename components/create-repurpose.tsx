@@ -102,9 +102,9 @@ export function CreateRepurpose({
 
     setLoading(false)
 
-    router.refresh()
-
     onRepurposeDone()
+
+    router.refresh()
   }
 
   return (

@@ -32,6 +32,7 @@ export const Repurposes = (props: RepurposesProps) => {
   const [streamedText, setStreamedText] = useState("")
 
   const handleRepurposeClick = (type: ContentType) => {
+    setSelectedIndex(0)
     setRepurposes((prev) => [
       {
         content: {
