@@ -51,18 +51,23 @@ export async function POST(req: Request) {
     const { user } = session
     const subscriptionPlan = await getUserSubscriptionPlan(user.id)
 
+    const dbUser = await db.user.findUnique({
+      where: {
+        id: user.id,
+      },
+      select: {
+        originalsCreated: true,
+      },
+    })
+
+    if (!dbUser) {
+      return new Response("Unauthorized", { status: 403 })
+    }
+
     // If user is on a free plan.
     // Check if user has reached limit of 3 posts.
     if (!subscriptionPlan?.isPro) {
-      const count = await db.content.count({
-        where: {
-          original: {
-            userId: user.id,
-          },
-        },
-      })
-
-      if (count >= 1) {
+      if (dbUser.originalsCreated >= 1) {
         throw new RequiresProPlanError()
       }
     }
@@ -91,6 +96,17 @@ export async function POST(req: Request) {
           select: {
             id: true,
           },
+        },
+      },
+    })
+
+    await db.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        originalsCreated: {
+          increment: 1,
         },
       },
     })
