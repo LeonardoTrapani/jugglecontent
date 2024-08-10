@@ -29,6 +29,7 @@ type CreateRepurposeProps = {
   text: Content["text"]
   title: Content["title"]
   setStreamedText: React.Dispatch<SetStateAction<string>>
+  onRepurposeDone: () => void
   onRepurposeClick: (type: ContentType) => void
 }
 
@@ -38,6 +39,7 @@ export function CreateRepurpose({
   title,
   setStreamedText,
   onRepurposeClick,
+  onRepurposeDone,
 }: CreateRepurposeProps) {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -99,6 +101,8 @@ export function CreateRepurpose({
     }
 
     setLoading(false)
+
+    onRepurposeDone()
 
     router.refresh()
   }
