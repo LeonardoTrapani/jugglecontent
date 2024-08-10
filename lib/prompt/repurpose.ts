@@ -1,18 +1,35 @@
 import { Content, ContentType, User } from "@prisma/client"
 import { Pick } from "@prisma/client/runtime/library"
 
-export const formatContentType = (type: ContentType) => {
+export const formatContentType = (
+  type: ContentType,
+  forRepurpose?: boolean
+) => {
+  if (forRepurpose) {
+    switch (type) {
+      case ContentType.blog:
+        return "Blog Repurpose"
+      case ContentType.tweet:
+        return "Twitter Repurpose"
+      case ContentType.newsletter:
+        return "Newsletter Repurpose"
+      case ContentType.linkedinPost:
+        return "Linkedin Repurpose"
+      default:
+        return "Generic Repurpose"
+    }
+  }
   switch (type) {
     case ContentType.blog:
-      return "blog post"
+      return "Blog Post"
     case ContentType.tweet:
-      return "twitter thread"
+      return "Twitter Thread"
     case ContentType.newsletter:
-      return "newsletter"
+      return "Newsletter"
     case ContentType.linkedinPost:
-      return "linkedin post"
+      return "Linkedin Post"
     default:
-      return "generic content"
+      return "Generic Content"
   }
 }
 export const generateRepurposePrompt = (

@@ -92,7 +92,7 @@ enum ContentType {
 model Repurpose {
   id       String   @id @default(cuid())
 
-  originalId String   @unique
+  originalId String
   original Original @relation(fields: [originalId], references: [id], onDelete: Cascade)
 
   contentId String   @unique

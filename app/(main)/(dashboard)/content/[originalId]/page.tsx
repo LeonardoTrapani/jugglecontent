@@ -8,9 +8,9 @@ import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 import { cn, formatDate } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { CreateRepurpose } from "@/components/create-repurpose"
 import { DashboardShell } from "@/components/dashboard-shell"
 import { Icons } from "@/components/icons"
+import { Repurposes } from "@/components/repurposes"
 
 export const metadata: Metadata = {
   title: "Example",
@@ -36,6 +36,9 @@ export default async function ExamplePage({ params }: ExamplePageProps) {
       id: true,
       updatedAt: true,
       repurposes: {
+        orderBy: {
+          updatedAt: "desc",
+        },
         select: {
           id: true,
           content: {
@@ -111,10 +114,11 @@ export default async function ExamplePage({ params }: ExamplePageProps) {
             </p>
           </div>
         </div>
-        <CreateRepurpose
+        <Repurposes
           originalId={params.originalId}
           text={original.content.text}
           title={original.content.title}
+          repurposes={original.repurposes}
         />
       </div>
     </DashboardShell>

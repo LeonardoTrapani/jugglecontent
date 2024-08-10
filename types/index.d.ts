@@ -29,7 +29,9 @@ export type NavItem = {
   icon?: keyof typeof Icons
 }
 
-export type MainNavItem = NavItem
+export type MainNavItem = NavItem & {
+  onClick?: () => void
+}
 
 export type SidebarNavItem = {
   title: string

@@ -1,6 +1,5 @@
-"use client"
-
-import { useState } from "react"
+import { SetStateAction, useState } from "react"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Content, ContentType } from "@prisma/client"
 import { useForm } from "react-hook-form"
@@ -8,7 +7,6 @@ import { z } from "zod"
 
 import { repurposeCreateSchema } from "@/lib/validations/repurpose"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import {
   Form,
   FormControl,
@@ -30,15 +28,19 @@ type CreateRepurposeProps = {
   originalId: string
   text: Content["text"]
   title: Content["title"]
+  setStreamedText: React.Dispatch<SetStateAction<string>>
+  onRepurposeClick: (type: ContentType) => void
 }
 
 export function CreateRepurpose({
   originalId,
   text,
   title,
+  setStreamedText,
+  onRepurposeClick,
 }: CreateRepurposeProps) {
-  const [response, setResponse] = useState("")
   const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof repurposeCreateSchema>>({
     resolver: zodResolver(repurposeCreateSchema),
@@ -50,8 +52,9 @@ export function CreateRepurpose({
   })
 
   async function onSubmit(data: z.infer<typeof repurposeCreateSchema>) {
-    console.log(data)
     setLoading(true)
+
+    onRepurposeClick(data.type)
 
     const response = await fetch(`/api/content/repurpose/${originalId}`, {
       method: "POST",
@@ -86,7 +89,7 @@ export function CreateRepurpose({
           try {
             const data = JSON.parse(line.slice(5))
             if (data.type === "content_block_delta" && "text" in data.delta) {
-              setResponse((prev) => prev + data.delta.text)
+              setStreamedText((prev) => prev + data.delta.text)
             }
           } catch (error) {
             console.error("Error parsing SSE data:", error)
@@ -97,11 +100,11 @@ export function CreateRepurpose({
 
     setLoading(false)
 
-    // This forces a cache invalidation.
+    router.refresh()
   }
 
   return (
-    <Card className="w-full p-2 sm:p-4 flex justify-center items-center">
+    <div className="w-full p-2 sm:p-4 flex justify-center items-center border-b border-secondary">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -155,6 +158,6 @@ export function CreateRepurpose({
           </Button>
         </form>
       </Form>
-    </Card>
+    </div>
   )
 }

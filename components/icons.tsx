@@ -17,18 +17,23 @@ import {
   Laptop,
   LayoutDashboard,
   Lightbulb,
+  Linkedin,
   Loader2,
   LucideProps,
+  Mail,
   Menu,
   Moon,
   MoreVertical,
+  Pencil,
   Plus,
   Settings,
   Sun,
   Trash,
+  Twitter,
   UploadCloud,
   User,
   X,
+  Youtube,
   type Icon as LucideIcon,
 } from "lucide-react"
 
@@ -66,6 +71,11 @@ export const Icons = {
   eye: Eye,
   arrowRight: ArrowRight,
   settings: Settings,
+  linkedinPost: Linkedin,
+  youtubeVideo: Youtube,
+  blog: Pencil,
+  tweet: Twitter,
+  newsletter: Mail,
   ai: ({ ...props }: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
