@@ -1,6 +1,4 @@
-"use client"
-
-import { useState } from "react"
+import { SetStateAction, useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Content, ContentType } from "@prisma/client"
@@ -9,7 +7,6 @@ import { z } from "zod"
 
 import { repurposeCreateSchema } from "@/lib/validations/repurpose"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import {
   Form,
   FormControl,
@@ -30,24 +27,34 @@ import { Icons } from "@/components/icons"
 type CreateRepurposeProps = {
   originalId: string
   text: Content["text"]
+  title: Content["title"]
+  setStreamedText: React.Dispatch<SetStateAction<string>>
+  onRepurposeClick: (type: ContentType) => void
 }
 
-export function CreateRepurpose({ originalId, text }: CreateRepurposeProps) {
+export function CreateRepurpose({
+  originalId,
+  text,
+  title,
+  setStreamedText,
+  onRepurposeClick,
+}: CreateRepurposeProps) {
   const [loading, setLoading] = useState(false)
-
   const router = useRouter()
 
   const form = useForm<z.infer<typeof repurposeCreateSchema>>({
     resolver: zodResolver(repurposeCreateSchema),
     defaultValues: {
+      title: title,
       text: text,
       type: "linkedinPost",
     },
   })
 
   async function onSubmit(data: z.infer<typeof repurposeCreateSchema>) {
-    console.log(data)
     setLoading(true)
+
+    onRepurposeClick(data.type)
 
     const response = await fetch(`/api/content/repurpose/${originalId}`, {
       method: "POST",
@@ -57,28 +64,53 @@ export function CreateRepurpose({ originalId, text }: CreateRepurposeProps) {
       body: JSON.stringify(data),
     })
 
-    setLoading(false)
+    if (!response?.ok || !response.body) {
+      setLoading(false)
 
-    if (!response?.ok) {
       return toast({
         title: "Something went wrong.",
-        description: "Your post was not created. Please try again.",
+        description: "Your content was not created. Please try again.",
         variant: "destructive",
       })
     }
 
-    // This forces a cache invalidation.
+    const reader = response.body.getReader()
+    const decoder = new TextDecoder()
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      const chunk = decoder.decode(value)
+      const lines = chunk.split("\n")
+
+      for (const line of lines) {
+        if (line.startsWith("data: ")) {
+          try {
+            const data = JSON.parse(line.slice(5))
+            if (data.type === "content_block_delta" && "text" in data.delta) {
+              setStreamedText((prev) => prev + data.delta.text)
+            }
+          } catch (error) {
+            console.error("Error parsing SSE data:", error)
+          }
+        }
+      }
+    }
+
+    setLoading(false)
+
     router.refresh()
   }
 
   return (
-    <Card className="sm:w-1/2 md:grow p-2 sm:p-4 flex justify-center items-center">
+    <div className="w-full p-2 sm:p-4 flex justify-center items-center border-b border-secondary">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-2 justify-between items-center w-full text-sm lg:flex-row lg:text-xl sm:gap-5 md:gap-2"
+          className="flex flex-col gap-2 justify-between items-center w-full text-sm lg:flex-row lg:text-xl sm:gap-5"
         >
-          <div className="flex md:flex-col lg:flex-row items-center gap-2">
+          <div className="flex lg:flex-row items-center gap-2">
             <p className="font-heading text-base lg:text-xl">Repurpose as</p>
 
             <FormField
@@ -126,6 +158,6 @@ export function CreateRepurpose({ originalId, text }: CreateRepurposeProps) {
           </Button>
         </form>
       </Form>
-    </Card>
+    </div>
   )
 }

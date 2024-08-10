@@ -1,8 +1,11 @@
+import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth/next"
 import * as z from "zod"
 
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
+import { generateRepurpose } from "@/lib/generate-repurpose"
+import { formatContentType } from "@/lib/prompt/repurpose"
 import { repurposeCreateSchema } from "@/lib/validations/repurpose"
 
 const routeContextSchema = z.object({
@@ -68,29 +71,97 @@ export async function POST(
       return new Response(null, { status: 403 })
     }
 
-    const json = await req.json()
-    const body = repurposeCreateSchema.parse(json)
-
-    const generatedTitle = "generated title"
-    const generatedText = ""
-
-    const post = await db.content.create({
-      data: {
-        type: body.type,
-        title: generatedTitle,
-        text: generatedText,
-        repurpose: {
-          create: {
-            originalId: params.originalId,
-          },
-        },
+    const dbUser = await db.user.findUnique({
+      where: {
+        id: user.id,
       },
       select: {
-        id: true,
+        extraInfo: true,
       },
     })
 
-    return new Response(JSON.stringify(post))
+    if (!dbUser) {
+      return new Response(null, { status: 404 })
+    }
+
+    const json = await req.json()
+    const body = repurposeCreateSchema.parse(json)
+
+    const examples = await db.example.findMany({
+      where: {
+        userId: user.id,
+        content: {
+          type: body.type,
+        },
+      },
+      select: {
+        content: {
+          select: {
+            title: true,
+            text: true,
+          },
+        },
+      },
+    })
+
+    const { stream, getFullResponse } = await generateRepurpose(
+      body.type,
+      { text: body.text, title: body.title },
+      examples.map((example) => example.content),
+      dbUser
+    )
+
+    let responseStream = new TransformStream()
+    let encoder = new TextEncoder()
+
+    const saveContentPromise = getFullResponse().then(async (fullResponse) => {
+      await db.content.create({
+        data: {
+          title:
+            body.title + ` (Repurposed for ${formatContentType(body.type)})`,
+          url: body.url,
+          type: body.type,
+          text: fullResponse,
+          repurpose: {
+            create: {
+              originalId: params.originalId,
+            },
+          },
+        },
+      })
+    })
+
+    // Stream the response to the client
+    const streamPromise = new Promise<void>(async (resolve) => {
+      const writer = responseStream.writable.getWriter()
+      const reader = stream.getReader()
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        await writer.write(encoder.encode(value))
+      }
+
+      writer.close()
+      resolve()
+    })
+
+    // Wait for both streaming and saving to complete
+    Promise.all([streamPromise, saveContentPromise])
+      .then(() => {
+        console.info("Streaming and saving completed successfully")
+      })
+      .catch((error) => {
+        console.error("Error occurred:", error)
+      })
+
+    return new NextResponse(responseStream.readable, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+      },
+    })
   } catch (error) {
     console.error(error)
     if (error instanceof z.ZodError) {
@@ -107,8 +178,8 @@ const verifyHasAccessToOriginal = async (
 ) => {
   const count = await db.content.count({
     where: {
-      id: originalId,
       original: {
+        id: originalId,
         userId,
       },
     },
