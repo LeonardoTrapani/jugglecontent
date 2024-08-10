@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 import { Provider as BalancerProvider } from "react-wrap-balancer"
+import { Toaster as SonnerToaster } from "sonner"
 
 import { siteConfig } from "@/config/site"
 import { absoluteUrl, cn } from "@/lib/utils"
@@ -77,6 +78,7 @@ export default function RootLayout({
               {children}
               <Analytics />
               <Toaster />
+              <SonnerToaster />
               <TailwindIndicator />
             </ThemeProvider>
           </BalancerProvider>
