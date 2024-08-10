@@ -87,7 +87,7 @@ export function HeroSection() {
                 }}
               >
                 <a
-                  href="#"
+                  href="/register"
                   className={cn(
                     // colors
                     "bg-black  text-white shadow hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90",
