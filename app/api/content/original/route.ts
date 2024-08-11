@@ -67,7 +67,7 @@ export async function POST(req: Request) {
     // If user is on a free plan.
     // Check if user has reached limit of 3 posts.
     if (!subscriptionPlan?.isPro) {
-      if (dbUser.originalsCreated >= 1) {
+      if (dbUser.originalsCreated >= 3) {
         throw new RequiresProPlanError()
       }
     }
