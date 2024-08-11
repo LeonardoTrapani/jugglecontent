@@ -14,12 +14,6 @@ export function DraftContentSection() {
             been there. Here's the deal: with our <b>magic touch</b> (and some
             AI 🪄), you create once and <b>boom</b> - you're everywhere.
           </p>
-          <p className="text-lg text-gray-400">
-            Think about it. You've got this <b>killer idea</b>, right? Now
-            imagine turning that into a <b>snappy tweet</b>, a{" "}
-            <b>LinkedIn post</b>, a <b>blog article</b>.. - all at the same
-            time!
-          </p>
         </div>
       </div>
     </div>

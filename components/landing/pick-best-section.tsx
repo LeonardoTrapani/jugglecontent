@@ -76,13 +76,6 @@ export function PickBestSection() {
             what if you could <b>stack the odds in your favor</b>? That's where
             Juggle Content comes in handy. 🎭
           </p>
-          <p className="text-lg text-gray-400">
-            Instead of wracking your brain for that <b>one perfect post</b>, we
-            serve up a <b>smorgasbord of options</b> 🙌🏻. It's like having a room
-            full of <b>creative yous</b>, each coming up with a different spin
-            on your idea. You get to play <b>content critic</b>, picking the{" "}
-            <b>absolute cream of the crop</b>.
-          </p>
         </div>
       </div>
     </div>

@@ -11,13 +11,6 @@ export function GrowthSection() {
             person?" moments. And the best part? <br /> You're{" "}
             <b>not working your butt off</b> to make it happen. 🎉
           </p>
-          <p className="text-lg text-gray-400">
-            Creators should do what they're good for: <b>creating</b>. Your
-            audience grows, your influence spreads, and your message? It's out
-            there doing its thing while you're busy being your{" "}
-            <b>creative - fabulous - self</b> ✨. <br />{" "}
-            <b>Effortless expansion</b> - yeah, we made that a thing.
-          </p>
         </div>
         <div className="order-first md:order-last">
           <GrowthFeature />

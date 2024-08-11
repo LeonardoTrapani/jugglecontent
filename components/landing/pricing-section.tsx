@@ -14,50 +14,48 @@ type Interval = "month" | "year"
 export const toHumanPrice = (price: number, decimals: number = 2) => {
   return Number(price / 100).toFixed(decimals)
 }
-const demoPrices = [
+const prices = [
   {
     id: "price_1",
-    name: "Basic",
-    description: "A basic plan for startups and individual users",
-    features: [
-      "AI-powered analytics",
-      "Basic support",
-      "5 projects limit",
-      "Access to basic AI tools",
-    ],
-    monthlyPrice: 1000,
+    name: "Free Trial",
+    description: "Get a taste of juggling",
+    features: ["3 Content Repurposing Credits"],
+    monthlyPrice: 0,
     yearlyPrice: 10000,
     isMostPopular: false,
   },
   {
     id: "price_2",
-    name: "Premium",
-    description: "A premium plan for growing businesses",
+    name: "Juggler",
+    description: "A premium plan for scaling your media presence, fast",
     features: [
-      "Advanced AI insights",
-      "Priority support",
-      "Unlimited projects",
-      "Access to all AI tools",
-      "Custom integrations",
+      "Unlimited Content Repurposing Credits",
+      "Unlimited Priority support",
+      "Join our community of content hackers",
+      "Tailored growth plan",
+      "Generate LinkedIn posts",
+      "Generate Youtube video scripts",
+      "Generate Podcast scripts",
+      "Generate Blog posts",
+      "Generate X threads",
+      "Generate Newsletter posts",
+      "Generate Discord announcements",
     ],
-    monthlyPrice: 2000,
+    monthlyPrice: 3500,
     yearlyPrice: 20000,
     isMostPopular: true,
   },
   {
-    id: "price_5",
+    id: "price_3",
     name: "Enterprise",
     description:
       "An enterprise plan with advanced features for large organizations",
     features: [
-      "Custom AI solutions",
-      "24/7 dedicated support",
-      "Unlimited projects",
-      "Access to all AI tools",
-      "Custom integrations",
-      "Data security and compliance",
+      "Everything that you get with Juggler",
+      "Custom solutions to grow your business",
+      "Access to our proprietary API",
     ],
-    monthlyPrice: 5000,
+    monthlyPrice: 99900,
     yearlyPrice: 50000,
     isMostPopular: false,
   },
@@ -95,7 +93,7 @@ export default function PricingSection() {
         </div>
 
         <div className="mx-auto grid w-full justify-center sm:grid-cols-1 lg:grid-cols-3 flex-col gap-4">
-          {demoPrices.map((price, idx) => (
+          {prices.map((price, idx) => (
             <div
               key={price.id}
               className={cn(
@@ -138,13 +136,19 @@ export default function PricingSection() {
                 }}
                 className="flex flex-row gap-1"
               >
-                <span className="text-4xl font-bold text-black dark:text-white">
-                  $
-                  {interval === "year"
-                    ? toHumanPrice(price.yearlyPrice, 0)
-                    : toHumanPrice(price.monthlyPrice, 0)}
-                  <span className="text-xs"> / {interval}</span>
-                </span>
+                {price.name === "Enterprise" ? (
+                  <span className="text-3xl font-bold text-black dark:text-white">
+                    Custom Price
+                  </span>
+                ) : (
+                  <span className="text-4xl font-bold text-black dark:text-white">
+                    $
+                    {interval === "year"
+                      ? toHumanPrice(price.yearlyPrice, 0)
+                      : toHumanPrice(price.monthlyPrice, 0)}
+                    <span className="text-xs"> / {interval}</span>
+                  </span>
+                )}
               </motion.div>
 
               <Button
