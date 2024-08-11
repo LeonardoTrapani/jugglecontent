@@ -42,7 +42,7 @@ export const generateRepurposePrompt = (
 
   return `
 You are assisting a user who wants to repurpose a YouTube video transcription into a ${formattedContentType} ${
-    user.extraInfo ? "for " + user.extraInfo : ""
+    !!user.extraInfo ? "for " + user.extraInfo : ""
   }. Your task is to help the user create the ${formattedContentType} by transforming the provided video transcription, making the content suitable for the chosen format.
 
 You will be given the following inputs:
@@ -68,7 +68,6 @@ Your task is to create a draft of the ${formattedContentType} based on these inp
 
 Maintain the style and tone of the user's existing content, referring to the examples provided.
 Reframe the video transcription to fit the structure and tone of the ${formattedContentType}.
-Incorporate information from additional sources if necessary to enhance the content's accuracy and relevance.
 Ensure the content is educational, engaging, and suitable for consumption in the chosen format.
 Use simple, clear language that can be easily understood by a general audience.
 Include relevant statistics, examples, or analogies to illustrate complex concepts if applicable.
@@ -80,5 +79,7 @@ Write your draft:
 Remember, this is a draft to speed up the ${formattedContentType} creation process.
 
 Take inspiration from the tone of voice used in the examples provided previously. If examples were not provided, maintain a personal tone of voice, as if the user were writing, including colloquial (but not incorrect) idioms and a friendly "conversation among friends" tone.
+
+As an output, you should only provide the content inside the <draft> tags. Do not include the draft tags themselves, only the content inside it. Do not include any other information or comments in your response. The user will review your draft and make any necessary adjustments before finalizing the ${formattedContentType}.
 `
 }
