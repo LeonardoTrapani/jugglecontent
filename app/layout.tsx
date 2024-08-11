@@ -74,7 +74,7 @@ export default function RootLayout({
       >
         <CSPostHogProvider>
           <BalancerProvider>
-            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
               {children}
               <Analytics />
               <Toaster />
