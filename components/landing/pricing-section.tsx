@@ -70,6 +70,7 @@ export default function PricingSection() {
     setIsLoading(true)
     setId(priceId)
     await new Promise((resolve) => setTimeout(resolve, 1000)) // Simulate a delay
+    // TODO: navigate to stripe page
     setIsLoading(false)
   }
 
