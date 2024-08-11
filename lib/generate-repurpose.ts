@@ -10,7 +10,6 @@ export const generateRepurpose = async (
   user: Pick<User, "extraInfo">
 ) => {
   const prompt = generateRepurposePrompt(type, original, examples, user)
-  console.info("Generated prompt: ", prompt)
 
   const stream = await anthropic.messages.create({
     max_tokens: 1000,
