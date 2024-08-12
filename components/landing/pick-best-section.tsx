@@ -69,8 +69,8 @@ export function PickBestSection() {
     <div className="container mx-auto max-w-6xl min-h-[32rem] px-4 py-32">
       <div className="grid grid-cols-1 md:grid-cols-2 space-y-4 md:gap-16 items-center">
         <BentoCard {...feature} />
-        <div className="space-y-4 sm:pt-0 pt-16">
-          <h2 className="text-2xl font-bold">Cherry-Pick the Good Stuff ✅</h2>
+        <div className="space-y-4 sm:pt-0 pt-16 mx-4">
+          <h2 className="text-2xl font-bold">Cherry-Pick the Good Stuff 🍒</h2>
           <p className="text-lg text-gray-400">
             Okay, <b>confession time</b>: not every idea is a winner. <br /> But
             what if you could <b>stack the odds in your favor</b>? That's where

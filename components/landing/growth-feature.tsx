@@ -5,16 +5,6 @@ import { cubicBezier, motion } from "framer-motion"
 export function GrowthFeature() {
   const variant1 = {
     initial: {
-      viewBox: "0 -950 366 1408",
-      filter: "saturate(0.3)",
-      opacity: 0.5,
-      transition: {
-        delay: 0.05,
-        duration: 0.3,
-        ease: cubicBezier(0.22, 1, 0.36, 1),
-      },
-    },
-    whileHover: {
       viewBox: "0 -60 366 310",
       filter: "saturate(1)",
       opacity: 1,
@@ -25,6 +15,7 @@ export function GrowthFeature() {
       },
     },
   }
+
   const variant2 = {
     initial: {
       y: 0,
