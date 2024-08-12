@@ -1,6 +1,11 @@
 import ytdl from "@distube/ytdl-core"
 import axios from "axios"
 
+const getVideoId = (url: string) => {
+  const videoId = ytdl.getURLVideoID(url)
+  return videoId
+}
+
 export const youtubeParser = async (videoUrl: string) => {
   // Extract video ID from the URL
   const videoId = ytdl.getURLVideoID(videoUrl)
@@ -24,12 +29,15 @@ export const youtubeParser = async (videoUrl: string) => {
   const captionUrl = tracks[0].baseUrl
 
   // Fetch the caption file content
+  /*
   const { data } = await axios.get(captionUrl, {
     responseType: "text",
   })
+  */
 
-  const captions = await extractCaptions(data)
+  //const captions = await extractCaptions(data)
 
+  const captions = "these are test captions"
   return { captions, title: title, thumbnail }
 }
 
