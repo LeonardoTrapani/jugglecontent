@@ -2,16 +2,17 @@
 
 import React, { forwardRef, useRef } from "react"
 import Image from "next/image"
-import instagramImg from "@/assets/images/instagram.png"
-import linkedinImg from "@/assets/images/linkedin.png"
-import mediumImg from "@/assets/images/medium.png"
-import tiktokImg from "@/assets/images/tiktok.png"
-import xImg from "@/assets/images/x.png"
-import youtubeImg from "@/assets/images/youtube.png"
 
 import { cn } from "@/lib/utils"
-import Logo from "@/components/logo"
 import { AnimatedBeam } from "@/components/magicui/animated-beam"
+
+import instagramImg from "/public/images/instagram.png"
+import linkedinImg from "/public/images/linkedin.png"
+import logoImg from "/public/images/logo.png"
+import mediumImg from "/public/images/medium.png"
+import tiktokImg from "/public/images/tiktok.png"
+import xImg from "/public/images/x.png"
+import youtubeImg from "/public/images/youtube.png"
 
 const Circle = forwardRef<
   HTMLDivElement,
@@ -57,7 +58,13 @@ export function RepurposeGraph({ className }: { className?: string }) {
         </div>
         <div className="flex flex-col justify-center">
           <Circle ref={div6Ref} className="size-16">
-            <Logo />
+            <Image
+              src={logoImg}
+              alt="YouTube"
+              width={96}
+              height={96}
+              className="rounded-full"
+            />
           </Circle>
         </div>
         <div className="flex flex-col justify-center gap-2">
