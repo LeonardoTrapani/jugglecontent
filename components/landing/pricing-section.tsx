@@ -98,7 +98,9 @@ export default function PricingSection() {
 
               <Link
                 href={
-                  price.type === SubscriptionPlanType.Free
+                  env.NEXT_PUBLIC_IS_WAITLIST
+                    ? "https://tally.so/r/w4LLGd"
+                    : price.type === SubscriptionPlanType.Free
                     ? "/signup"
                     : price.type === SubscriptionPlanType.Pro
                     ? "/settings/billing"
