@@ -4,7 +4,7 @@ export default async function TermsPage() {
   return (
     <>
       <a
-        href="https://www.iubenda.com/privacy-policy/[INIT-TODO: YOUR-URL]"
+        href="https://www.iubenda.com/privacy-policy/31416509"
         className="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe "
         title="Privacy Policy "
       >
