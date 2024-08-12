@@ -68,6 +68,8 @@ export type SubscriptionPlan = {
   stripePriceId?: string
   cost: number
   features: string[]
+  isMostPopular?: boolean
+  type: SubscriptionPlanType
 }
 
 export type MainNavConfig = {

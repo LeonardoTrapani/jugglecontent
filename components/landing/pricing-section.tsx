@@ -1,79 +1,26 @@
 "use client"
 
-import { useState } from "react"
+import Link from "next/link"
 import { CheckIcon } from "@radix-ui/react-icons"
 import { motion } from "framer-motion"
-import { Loader } from "lucide-react"
 
+import { env } from "@/env.mjs"
+import {
+  SubscriptionPlanType,
+  enterprisePlan,
+  freePlan,
+  proPlan,
+} from "@/config/subscriptions"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
 
-type Interval = "month" | "year"
+import { buttonVariants } from "../ui/button"
+
+const prices = [freePlan, proPlan, enterprisePlan]
 
 export const toHumanPrice = (price: number, decimals: number = 2) => {
   return Number(price / 100).toFixed(decimals)
 }
-const prices = [
-  {
-    id: "price_1",
-    name: "Free Trial",
-    description: "Get a taste of juggling",
-    features: ["3 Content Repurposing Credits"],
-    monthlyPrice: 0,
-    yearlyPrice: 10000,
-    isMostPopular: false,
-  },
-  {
-    id: "price_2",
-    name: "Juggler",
-    description: "A premium plan for scaling your media presence, fast",
-    features: [
-      "Unlimited Content Repurposing Credits",
-      "Unlimited Priority support",
-      "Join our community of content hackers",
-      "Tailored growth plan",
-      "Generate LinkedIn posts",
-      "Generate Youtube video scripts",
-      "Generate Podcast scripts",
-      "Generate Blog posts",
-      "Generate X threads",
-      "Generate Newsletter posts",
-      "Generate Discord announcements",
-    ],
-    monthlyPrice: 3500,
-    yearlyPrice: 20000,
-    isMostPopular: true,
-  },
-  {
-    id: "price_3",
-    name: "Enterprise",
-    description:
-      "An enterprise plan with advanced features for large organizations",
-    features: [
-      "Everything that you get with Juggler",
-      "Custom solutions to grow your business",
-      "Access to our proprietary API",
-    ],
-    monthlyPrice: 99900,
-    yearlyPrice: 50000,
-    isMostPopular: false,
-  },
-]
-
 export default function PricingSection() {
-  const [interval, setInterval] = useState<Interval>("month")
-  const [isLoading, setIsLoading] = useState(false)
-  const [id, setId] = useState<string | null>(null)
-
-  const onSubscribeClick = async (priceId: string) => {
-    setIsLoading(true)
-    setId(priceId)
-    await new Promise((resolve) => setTimeout(resolve, 1000)) // Simulate a delay
-    // TODO: navigate to stripe page
-    setIsLoading(false)
-  }
-
   return (
     <section id="pricing">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-14 md:px-8">
@@ -96,7 +43,7 @@ export default function PricingSection() {
         <div className="mx-auto grid w-full justify-center sm:grid-cols-1 lg:grid-cols-3 flex-col gap-4">
           {prices.map((price, idx) => (
             <div
-              key={price.id}
+              key={idx}
               className={cn(
                 "relative flex max-w-[400px] flex-col gap-8 rounded-2xl border p-4 text-black dark:text-white overflow-hidden",
                 {
@@ -117,7 +64,7 @@ export default function PricingSection() {
               </div>
 
               <motion.div
-                key={`${price.id}-${interval}`}
+                key={idx}
                 initial="initial"
                 animate="animate"
                 variants={{
@@ -143,33 +90,31 @@ export default function PricingSection() {
                   </span>
                 ) : (
                   <span className="text-4xl font-bold text-black dark:text-white">
-                    $
-                    {interval === "year"
-                      ? toHumanPrice(price.yearlyPrice, 0)
-                      : toHumanPrice(price.monthlyPrice, 0)}
-                    <span className="text-xs"> / {interval}</span>
+                    ${toHumanPrice(price.cost, 0)}
+                    <span className="text-xs"> / month</span>
                   </span>
                 )}
               </motion.div>
 
-              <Button
+              <Link
+                href={
+                  price.type === SubscriptionPlanType.Free
+                    ? "/signup"
+                    : price.type === SubscriptionPlanType.Pro
+                    ? "/settings/billing"
+                    : price.type === SubscriptionPlanType.Enterprise
+                    ? env.NEXT_PUBLIC_TALLY_ENTERPRISE_LINK
+                    : "/signup"
+                }
                 className={cn(
+                  buttonVariants(),
                   "group relative w-full gap-2 overflow-hidden text-lg font-semibold tracking-tighter",
                   "transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
                 )}
-                disabled={isLoading}
-                onClick={() => void onSubscribeClick(price.id)}
               >
                 <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 transform-gpu bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-96 dark:bg-black" />
-                {(!isLoading || (isLoading && id !== price.id)) && (
-                  <p>Subscribe</p>
-                )}
-
-                {isLoading && id === price.id && <p>Subscribing</p>}
-                {isLoading && id === price.id && (
-                  <Loader className="mr-2 h-4 w-4 animate-spin" />
-                )}
-              </Button>
+                <p>Subscribe</p>
+              </Link>
 
               <hr className="m-0 h-px w-full border-none bg-gradient-to-r from-neutral-200/0 via-neutral-500/30 to-neutral-200/0" />
               {price.features && price.features.length > 0 && (
@@ -179,7 +124,7 @@ export default function PricingSection() {
                       key={idx}
                       className="flex items-center gap-3 text-xs font-medium text-black dark:text-white"
                     >
-                      <CheckIcon className="h-5 w-5 shrink-0 rounded-full bg-green-400 p-[2px] text-black dark:text-white" />
+                      <CheckIcon className="size-5 shrink-0 rounded-full bg-green-400 p-[2px] text-black dark:text-white" />
                       <span className="flex">{feature}</span>
                     </li>
                   ))}
