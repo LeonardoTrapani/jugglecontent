@@ -50,7 +50,7 @@ You will be given the following inputs:
 The transcription of the YouTube video that needs to be repurposed:
 ${original.text}
 
-Examples of existing user-created ${formattedContentType}. Use them as a reference for style, tone and format:
+Examples of existing user-created ${formattedContentType}. Use them as a reference for style and tone:
 ${
   examples.length === 0
     ? "No examples provided."
@@ -71,15 +71,13 @@ Reframe the video transcription to fit the structure and tone of the ${formatted
 Ensure the content is educational, engaging, and suitable for consumption in the chosen format.
 Use simple, clear language that can be easily understood by a general audience.
 Include relevant statistics, examples, or analogies to illustrate complex concepts if applicable.
-Write your draft:
-
-<draft>
-</draft>
 
 Remember, this is a draft to speed up the ${formattedContentType} creation process.
 
 Take inspiration from the tone of voice used in the examples provided previously. If examples were not provided, maintain a personal tone of voice, as if the user were writing, including colloquial (but not incorrect) idioms and a friendly "conversation among friends" tone.
 
-As an output, you should only provide the content inside the <draft> tags. Do not include the draft tags themselves, only the content inside it. Do not include any other information or comments in your response. The user will review your draft and make any necessary adjustments before finalizing the ${formattedContentType}.
+Do not include any other information or comments in your response. The user will review your draft and make any necessary adjustments before finalizing the ${formattedContentType}.
+
+Write the draft in markdown format below:
 `
 }

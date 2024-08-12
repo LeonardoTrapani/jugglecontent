@@ -207,7 +207,7 @@ export const Repurposes = (props: RepurposesProps) => {
                 </Button>
               </div>
               {repurposes[selectedIndex].isStreaming ? (
-                <div className="p-4 w-full ml-8">
+                <div className={cn("p-4 mx-1 sm:ml-8 md:ml-1 lg:ml-8")}>
                   <Markdown
                     remarkPlugins={[remarkGfm]}
                     className="prose dark:prose-invert"
@@ -216,7 +216,10 @@ export const Repurposes = (props: RepurposesProps) => {
                   </Markdown>
                 </div>
               ) : (
-                <div className="p-4 w-full ml-8" ref={markdownRef}>
+                <div
+                  className={cn("p-4 sm:ml-8 md:ml-0 lg:ml-8 mr-1")}
+                  ref={markdownRef}
+                >
                   <Markdown
                     remarkPlugins={[remarkGfm]}
                     className="prose dark:prose-invert"
