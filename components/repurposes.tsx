@@ -181,6 +181,7 @@ export const Repurposes = (props: RepurposesProps) => {
                     !isRepurposeScreenOpen && "hidden"
                   )}
                   size="square"
+                  disabled={repurposes[selectedIndex].isStreaming}
                   variant="outline"
                 >
                   <Icons.close />
@@ -189,6 +190,7 @@ export const Repurposes = (props: RepurposesProps) => {
                 <Button
                   onClick={handleCopyText}
                   className={cn()}
+                  disabled={repurposes[selectedIndex].isStreaming}
                   size="square"
                   variant="outline"
                 >
@@ -198,6 +200,7 @@ export const Repurposes = (props: RepurposesProps) => {
                   onClick={() => setShowDeleteAlert(true)}
                   className={cn()}
                   size="square"
+                  disabled={repurposes[selectedIndex].isStreaming}
                   variant="destructive"
                 >
                   <Icons.trash />
