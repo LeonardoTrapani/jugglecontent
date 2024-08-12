@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react"
 import { Content, ContentType, Repurpose } from "@prisma/client"
+import Markdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 
 import { formatContentType } from "@/lib/prompt/repurpose"
 import { cn } from "@/lib/utils"
@@ -11,7 +13,6 @@ import { Icons } from "./icons"
 import { InnerNav } from "./inner-nav"
 import { Button } from "./ui/button"
 import { Card } from "./ui/card"
-import { Skeleton } from "./ui/skeleton"
 
 type RepurposesProps = {
   originalId: string
@@ -127,15 +128,21 @@ export const Repurposes = (props: RepurposesProps) => {
             </div>
             {repurposes[selectedIndex].isStreaming ? (
               <div className="p-4 w-full">
-                <Skeleton className="w-full h-8" />
-                <p>{streamedText}</p>
+                <Markdown
+                  remarkPlugins={[remarkGfm]}
+                  className="prose dark:prose-invert"
+                >
+                  {streamedText}
+                </Markdown>
               </div>
             ) : (
               <div className="p-4">
-                <h2 className="font-heading text-lg">
-                  {repurposes[selectedIndex].content.title}
-                </h2>
-                <p>{repurposes[selectedIndex].content.text}</p>
+                <Markdown
+                  remarkPlugins={[remarkGfm]}
+                  className="prose dark:prose-invert"
+                >
+                  {repurposes[selectedIndex].content.text}
+                </Markdown>
               </div>
             )}
           </div>
