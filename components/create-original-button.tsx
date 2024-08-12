@@ -65,6 +65,15 @@ export function OriginalCreateButton({
     setLoading(false)
 
     if (!response?.ok) {
+      if (response.status === 403) {
+        return toast({
+          title: "You do not have access to this youtube video.",
+          description:
+            "Make sure the video is on the same google account you logged in to Juggle Content with.",
+          variant: "destructive",
+        })
+      }
+
       if (response.status === 402) {
         return toast({
           title: "Limit of one content reached.",

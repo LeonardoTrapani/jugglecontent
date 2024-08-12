@@ -1,7 +1,7 @@
 import stream from "stream"
 import { google } from "googleapis"
 
-const youtube = google.youtube("v3")
+import { youtube } from "@/lib/google"
 
 function extractVideoId(videoUrl: string): string | null {
   const videoIdMatch = videoUrl.match(
@@ -12,7 +12,7 @@ function extractVideoId(videoUrl: string): string | null {
 }
 
 export const youtubeParser = async (videoUrl: string, accessToken: string) => {
-  console.log("videoUrl", videoUrl, "accessToken", accessToken)
+  console.log("using access token ", accessToken)
   // Extract video ID from the URL
   const videoId = extractVideoId(videoUrl)
 
@@ -20,10 +20,14 @@ export const youtubeParser = async (videoUrl: string, accessToken: string) => {
     throw new Error("Invalid YouTube video URL.")
   }
 
+  console.log("videoId", videoId)
+
   const authClient = new google.auth.OAuth2()
+
   authClient.setCredentials({ access_token: accessToken })
 
   // Fetch the video info
+  console.log("fetching video info")
 
   // List the captions for the video
   const captionListResponse = await youtube.captions.list({
