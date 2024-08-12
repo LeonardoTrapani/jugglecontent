@@ -152,7 +152,7 @@ export function CreateRepurpose({
             />
           </div>
           <Icons.arrowRight className="hidden lg:inline grow" />
-          <Button type="submit">
+          <Button type="submit" disabled={loading}>
             {loading ? (
               <Icons.spinner className="mr-2 size-4 animate-spin" />
             ) : (

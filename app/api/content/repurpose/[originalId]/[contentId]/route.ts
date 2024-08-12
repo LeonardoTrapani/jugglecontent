@@ -92,7 +92,7 @@ async function verifyCurrentUserHasAccessToRepurpose(contentId: string) {
   const session = await getServerSession(authOptions)
   const count = await db.repurpose.count({
     where: {
-      id: contentId,
+      contentId,
       original: {
         userId: session?.user.id,
       },

@@ -18,6 +18,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "underline-offset-4 hover:underline",
+        none: "",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -27,6 +28,8 @@ const buttonVariants = cva(
         link: "p-0 m-0",
         responsive:
           "h-9 rounded-md px-3 md:h-10 md:px-4 md:py-2 lg:h-11 lg:rounded-md lg:px-8",
+        square: "h-10 px-2 py-2",
+        none: "",
       },
     },
     defaultVariants: {
