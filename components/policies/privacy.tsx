@@ -1,6 +1,6 @@
 import Script from "next/script"
 
-export function PrivacyButton() {
+export default function PrivacyButton() {
   return (
     <>
       <a

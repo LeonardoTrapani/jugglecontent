@@ -4,7 +4,7 @@ import { User } from "@prisma/client"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 import { ModeToggle } from "@/components/mode-toggle"
-import { PrivacyButton } from "@/components/policies/privacy"
+import PrivacyButton from "@/components/policies/privacy"
 import TermsButton from "@/components/policies/terms"
 import { UserDropdown } from "@/components/user-dropdown"
 
