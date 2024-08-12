@@ -1,6 +1,6 @@
 export default async function TermsPage() {
   return (
-    <>
+    <div className="prose dark:prose-invert m-12">
       <h1>Terms and Conditions</h1>
       <p>
         <strong>Last Updated:</strong> 12/08/2024
@@ -139,8 +139,8 @@ export default async function TermsPage() {
       <h2>14. Contact Us</h2>
       <p>
         If you have any questions about these Terms, please contact us at:{" "}
-        <a href="mailto:redazionelofi@gmail.com">redazionelofi@gmail.com</a>
+        <a href="mailto:info@jugglecontent.com">info@jugglecontent.com</a>
       </p>
-    </>
+    </div>
   )
 }
