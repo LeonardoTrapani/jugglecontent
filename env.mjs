@@ -26,6 +26,7 @@ export const env = createEnv({
     NEXT_PUBLIC_POSTHOG_HOST: z.string().min(1),
     NEXT_PUBLIC_TALLY_ENTERPRISE_LINK: z.string().url().min(1),
     NEXT_PUBLIC_STRIPE_PRO_MONTHLY_PLAN_ID: z.string().min(1),
+    NEXT_PUBLIC_IS_WAITLIST: z.string().optional(),
   },
   runtimeEnv: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
@@ -54,5 +55,6 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_TALLY_ENTERPRISE_LINK,
     NEXT_PUBLIC_STRIPE_PRO_MONTHLY_PLAN_ID:
       process.env.NEXT_PUBLIC_STRIPE_PRO_MONTHLY_PLAN_ID,
+    NEXT_PUBLIC_IS_WAITLIST: process.env.NEXT_PUBLIC_IS_WAITLIST,
   },
 })

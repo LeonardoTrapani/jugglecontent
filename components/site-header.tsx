@@ -5,6 +5,7 @@ import Link from "next/link"
 import { AnimatePresence, motion } from "framer-motion"
 import { AlignJustify, X } from "lucide-react"
 
+import { env } from "@/env.mjs"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
@@ -112,7 +113,14 @@ export function SiteHeader() {
           </Link>
 
           <div className="ml-auto flex h-full items-center">
-            <Link className="mr-6 text-sm" href="/login">
+            <Link
+              className="mr-6 text-sm"
+              href={
+                env.NEXT_PUBLIC_IS_WAITLIST
+                  ? "https://tally.so/r/w4LLGd"
+                  : "/login"
+              }
+            >
               Log in
             </Link>
             <Link
@@ -120,7 +128,11 @@ export function SiteHeader() {
                 buttonVariants({ variant: "secondary" }),
                 "mr-6 text-sm"
               )}
-              href="/register"
+              href={
+                env.NEXT_PUBLIC_IS_WAITLIST
+                  ? "https://tally.so/r/w4LLGd"
+                  : "/register"
+              }
             >
               Sign up
             </Link>
