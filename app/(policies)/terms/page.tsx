@@ -1,3 +1,5 @@
+import { siteConfig } from "@/config/site"
+
 export default async function TermsPage() {
   return (
     <div className="prose dark:prose-invert m-12">
@@ -82,7 +84,7 @@ export default async function TermsPage() {
       <p>
         <strong>Refund Policy:</strong> Subscriptions are refundable upon
         request. Users must submit a refund request via the support email at{" "}
-        <a href="mailto:info@jugglecontent.com">info@jugglecontent.com</a>.
+        <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
       </p>
 
       <h2>8. Termination</h2>
@@ -139,7 +141,7 @@ export default async function TermsPage() {
       <h2>14. Contact Us</h2>
       <p>
         If you have any questions about these Terms, please contact us at:{" "}
-        <a href="mailto:info@jugglecontent.com">info@jugglecontent.com</a>
+        <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
       </p>
     </div>
   )
