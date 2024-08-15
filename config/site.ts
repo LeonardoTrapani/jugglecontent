@@ -6,7 +6,7 @@ export const siteConfig: SiteConfig = {
   description:
     "Go from one piece of content to 15. Juggle Content is a content creation tool that helps you create multiple pieces of content from one.",
   url: "https://jugglecontent.com",
-  ogImage: absoluteUrl("/og.jpg"),
+  ogImage: absoluteUrl("/images/opengraph-image.png"),
   email: "redazionelofi@gmail.com,",
   github: "https://github.com/leonardotrapani/jugglecontent",
   keywords: [
