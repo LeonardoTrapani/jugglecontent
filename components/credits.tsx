@@ -26,12 +26,14 @@ export async function Credits() {
   }
 
   return (
-    <div className="flex items-center space-x-2">
-      <span className="text-sm text-muted-foreground">Credits:</span>
-      <div className="flex items-center gap-[2px]">
-        <Icons.credits className="size-3" />
-        <span className="text-sm font-semibold">{user.credits}</span>
-      </div>
+    <div className="flex items-center gap-1">
+      <Icons.credits className="size-3" />
+      <p>
+        <span className="text-sm font-semibold">
+          {user.credits}
+          <span className="text-sm text-muted-foreground">&nbsp;Credits</span>
+        </span>
+      </p>
     </div>
   )
 }
