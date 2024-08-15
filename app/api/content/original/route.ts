@@ -5,7 +5,6 @@ import * as z from "zod"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { RequiresProPlanError } from "@/lib/exceptions"
-import { getUserSubscriptionPlan } from "@/lib/subscription"
 import { originalCreateSchema } from "@/lib/validations/original"
 import { youtubeParser } from "@/lib/youtube-transcription"
 
@@ -49,28 +48,6 @@ export async function POST(req: Request) {
     }
 
     const { user } = session
-    const subscriptionPlan = await getUserSubscriptionPlan(user.id)
-
-    const dbUser = await db.user.findUnique({
-      where: {
-        id: user.id,
-      },
-      select: {
-        originalsCreated: true,
-      },
-    })
-
-    if (!dbUser) {
-      return new Response("Unauthorized", { status: 403 })
-    }
-
-    // If user is on a free plan.
-    // Check if user has reached limit of 3 posts.
-    if (!subscriptionPlan?.isPro) {
-      if (dbUser.originalsCreated >= 3) {
-        throw new RequiresProPlanError()
-      }
-    }
 
     const json = await req.json()
     const body = originalCreateSchema.parse(json)
@@ -96,17 +73,6 @@ export async function POST(req: Request) {
           select: {
             id: true,
           },
-        },
-      },
-    })
-
-    await db.user.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        originalsCreated: {
-          increment: 1,
         },
       },
     })

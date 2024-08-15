@@ -69,6 +69,14 @@ export function CreateRepurpose({
     if (!response?.ok || !response.body) {
       setLoading(false)
 
+      if (response.status === 402) {
+        return toast({
+          title: "You have finished your credits.",
+          description: "Please upgrade to the Pro plan.",
+          variant: "destructive",
+        })
+      }
+
       return toast({
         title: "Something went wrong.",
         description: "Your content was not created. Please try again.",

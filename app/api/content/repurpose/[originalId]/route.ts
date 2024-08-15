@@ -4,8 +4,10 @@ import * as z from "zod"
 
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
+import { RequiresProPlanError } from "@/lib/exceptions"
 import { generateRepurpose } from "@/lib/generate-repurpose"
 import { formatContentType } from "@/lib/prompt/repurpose"
+import { getUserSubscriptionPlan } from "@/lib/subscription"
 import { repurposeCreateSchema } from "@/lib/validations/repurpose"
 
 const routeContextSchema = z.object({
@@ -77,11 +79,21 @@ export async function POST(
       },
       select: {
         extraInfo: true,
+        credits: true,
       },
     })
 
     if (!dbUser) {
       return new Response(null, { status: 404 })
+    }
+
+    const subscriptionPlan = await getUserSubscriptionPlan(user.id)
+
+    // If user is on a free plan.
+    if (!subscriptionPlan?.isPro) {
+      if (dbUser.credits <= 0) {
+        throw new RequiresProPlanError()
+      }
     }
 
     const json = await req.json()
@@ -131,6 +143,17 @@ export async function POST(
       })
     })
 
+    if (dbUser.credits > 0) {
+      await db.user.update({
+        where: { id: user.id },
+        data: {
+          credits: {
+            decrement: 1,
+          },
+        },
+      })
+    }
+
     // Stream the response to the client
     const streamPromise = new Promise<void>(async (resolve) => {
       const writer = responseStream.writable.getWriter()
@@ -164,6 +187,11 @@ export async function POST(
     })
   } catch (error) {
     console.error(error)
+
+    if (error instanceof RequiresProPlanError) {
+      return new Response(null, { status: 402 })
+    }
+
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }

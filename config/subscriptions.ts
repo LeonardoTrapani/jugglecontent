@@ -13,7 +13,7 @@ export const freePlan: SubscriptionPlan = {
   description: "Get a taste of juggling",
   stripePriceId: "",
   cost: 0,
-  features: ["3 Content Repurposing Credits"],
+  features: ["5 Content Repurposing Credits"],
 }
 
 export const proPlan: SubscriptionPlan = {
