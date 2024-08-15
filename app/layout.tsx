@@ -17,11 +17,13 @@ import { Toaster } from "@/components/ui/toaster"
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
 })
 
 const fontHeading = localFont({
   src: "../assets/fonts/CalSans-SemiBold.woff2",
   variable: "--font-heading",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
