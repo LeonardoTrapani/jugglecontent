@@ -90,12 +90,17 @@ export default function PricingSection() {
                   </span>
                 ) : (
                   <span className="text-4xl font-bold text-black dark:text-white">
-                    {/*${toHumanPrice(price.cost, 0)} 
-                    <span className="text-xs"> / month</span> */}
-                    <span className="text-3xl font-bold text-black dark:text-white">
-                      {" "}
-                      Request free demo
-                    </span>
+                    {!env.NEXT_PUBLIC_IS_WAITLIST ? (
+                      <>
+                        {toHumanPrice(price.cost, 0)}
+                        <span className="text-xs"> / month</span>
+                      </>
+                    ) : (
+                      <span className="text-3xl font-bold text-black dark:text-white">
+                        {" "}
+                        Request free demo
+                      </span>
+                    )}
                   </span>
                 )}
               </motion.div>
