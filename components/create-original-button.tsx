@@ -142,10 +142,10 @@ export function OriginalCreateButton({
                           Youtube Video
                         </SelectItem>
                         <SelectItem value={ContentType.blog}>Blog</SelectItem>
-                        <SelectItem value={ContentType.tweet} disabled>
+                        <SelectItem value={ContentType.tweet}>
                           Twitter Thread
                         </SelectItem>
-                        <SelectItem value={ContentType.linkedinPost} disabled>
+                        <SelectItem value={ContentType.linkedinPost}>
                           LinkedIn Post
                         </SelectItem>
                         <SelectItem value={ContentType.newsletter}>
@@ -158,9 +158,7 @@ export function OriginalCreateButton({
                 </FormItem>
               )}
             />
-            {selectValue === ContentType.linkedinPost ||
-            selectValue === ContentType.youtubeVideo ||
-            selectValue === ContentType.tweet ? (
+            {selectValue === ContentType.youtubeVideo ? (
               <FormField
                 control={form.control}
                 name="url"

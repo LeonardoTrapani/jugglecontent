@@ -5,8 +5,6 @@ import * as z from "zod"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { RequiresProPlanError } from "@/lib/exceptions"
-import { getLinkedinPost } from "@/lib/linkedin-post"
-import { getTwitterPost } from "@/lib/twitter-post"
 import { originalCreateSchema } from "@/lib/validations/original"
 import { youtubeParser } from "@/lib/youtube-transcription"
 
@@ -65,10 +63,6 @@ export async function POST(req: Request) {
     } =
       body.type === ContentType.youtubeVideo
         ? await youtubeParser(body.url as string)
-        : body.type === ContentType.linkedinPost
-        ? await getLinkedinPost()
-        : body.type === ContentType.tweet
-        ? await getTwitterPost()
         : {
             text: body.text as string,
             image: undefined,

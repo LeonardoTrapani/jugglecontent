@@ -9,11 +9,7 @@ export const originalCreateSchema = z
     title: z.string().optional(),
   })
   .superRefine((data, ctx) => {
-    if (
-      data.type === ContentType.youtubeVideo ||
-      data.type === ContentType.tweet ||
-      data.type === ContentType.linkedinPost
-    ) {
+    if (data.type === ContentType.youtubeVideo) {
       // For youtubeVideo type, url must be present and not empty
       const urlValidation =
         data.type === ContentType.youtubeVideo
@@ -30,13 +26,15 @@ export const originalCreateSchema = z
       if (!urlValidation.success) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Invalid YouTube URL",
+          message: "Invalid URL",
           path: ["url"],
         })
       }
     } else if (
       data.type === ContentType.blog ||
-      data.type === ContentType.newsletter
+      data.type === ContentType.newsletter ||
+      data.type === ContentType.tweet ||
+      data.type === ContentType.linkedinPost
     ) {
       const textValidation = z
         .string()
