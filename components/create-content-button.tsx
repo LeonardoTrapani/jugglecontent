@@ -9,7 +9,7 @@ import { Balancer } from "react-wrap-balancer"
 import { z } from "zod"
 
 import { formatContentType } from "@/lib/prompt/repurpose"
-import { originalCreateSchema } from "@/lib/validations/original"
+import { contentSchema } from "@/lib/validations/content"
 import { Button, ButtonProps } from "@/components/ui/button"
 import {
   Dialog,
@@ -43,39 +43,46 @@ import { Icons } from "@/components/icons"
 
 import { Textarea } from "./ui/textarea"
 
-interface OriginalCreateButtonProps extends ButtonProps {
+interface CreateContentButtonProps extends ButtonProps {
   user?: User
+  isExample?: boolean
 }
 
-type FormData = z.infer<typeof originalCreateSchema>
+type FormData = z.infer<typeof contentSchema>
 
-export function OriginalCreateButton({
+export function CreateContentButton({
   user,
+  isExample,
   ...props
-}: OriginalCreateButtonProps) {
+}: CreateContentButtonProps) {
   const router = useRouter()
   const [loading, setLoading] = React.useState(false)
+  const [open, setOpen] = React.useState(false)
 
   const form = useForm<FormData>({
-    resolver: zodResolver(originalCreateSchema),
+    resolver: zodResolver(contentSchema),
     defaultValues: {
       url: "",
       text: "",
       title: "",
-      type: "youtubeVideo",
+      type: isExample ? "blog" : "youtubeVideo",
+      isExample,
     },
   })
 
   const onSubmit = async (data: FormData) => {
     setLoading(true)
 
-    const response = await fetch("/api/content/original", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    const response = await fetch(
+      isExample ? "/api/content/example" : "/api/content/original",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
 
     setLoading(false)
 
@@ -90,14 +97,19 @@ export function OriginalCreateButton({
 
       return toast({
         title: "Something went wrong.",
-        description: "Your post was not created. Please try again.",
+        description: "Your content was not created. Please try again.",
         variant: "destructive",
       })
     }
 
     const content = await response.json()
 
-    // This forces a cache invalidation.
+    if (isExample) {
+      // This forces a cache invalidation.
+      setOpen(false)
+      return router.refresh()
+    }
+
     router.refresh()
 
     router.push(`/content/${content.original.id}`)
@@ -106,20 +118,20 @@ export function OriginalCreateButton({
   const selectValue = form.watch("type")
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button {...props}>
           <Icons.add className="mr-2 size-4" />
-          New Content
+          New {isExample ? "Example" : "Content"}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Create Content</DialogTitle>
+          <DialogTitle>Create {isExample ? "Example" : "Content"}</DialogTitle>
           <DialogDescription>
             <Balancer>
               Please fill out the form below to create a new piece of content to
-              repurpose.
+              {isExample ? " use as an example" : " repurpose"}.
             </Balancer>
           </DialogDescription>
         </DialogHeader>
@@ -138,9 +150,11 @@ export function OriginalCreateButton({
                     <SelectContent>
                       <SelectGroup>
                         <SelectLabel>Type</SelectLabel>
-                        <SelectItem value={ContentType.youtubeVideo}>
-                          Youtube Video
-                        </SelectItem>
+                        {!isExample && (
+                          <SelectItem value={ContentType.youtubeVideo}>
+                            Youtube Video
+                          </SelectItem>
+                        )}
                         <SelectItem value={ContentType.blog}>Blog</SelectItem>
                         <SelectItem value={ContentType.tweet}>
                           Twitter Thread
@@ -219,7 +233,8 @@ export function OriginalCreateButton({
                       <FormMessage />
                       <FormDescription>
                         Paste here the content of the{" "}
-                        {formatContentType(selectValue)} you want to repurpose
+                        {formatContentType(selectValue)} you want to{" "}
+                        {isExample ? "use as an example" : "repurpose"}
                       </FormDescription>
                     </FormItem>
                   )}

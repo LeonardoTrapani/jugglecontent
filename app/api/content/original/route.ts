@@ -5,7 +5,7 @@ import * as z from "zod"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { RequiresProPlanError } from "@/lib/exceptions"
-import { originalCreateSchema } from "@/lib/validations/original"
+import { contentSchema } from "@/lib/validations/content"
 import { youtubeParser } from "@/lib/youtube-transcription"
 
 export async function GET() {
@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     const { user } = session
 
     const json = await req.json()
-    const body = originalCreateSchema.parse(json)
+    const body = contentSchema.parse(json)
 
     const {
       text,
