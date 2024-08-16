@@ -3,10 +3,13 @@ import { Pick } from "@prisma/client/runtime/library"
 
 export const formatContentType = (
   type: ContentType,
-  forRepurpose?: boolean
+  forRepurpose?: boolean,
+  forFormattedText?: boolean
 ) => {
   if (forRepurpose) {
     switch (type) {
+      case ContentType.youtubeVideo:
+        return "Youtube Video Repurpose"
       case ContentType.blog:
         return "Blog Repurpose"
       case ContentType.tweet:
@@ -19,7 +22,25 @@ export const formatContentType = (
         return "Generic Repurpose"
     }
   }
+  if (forFormattedText) {
+    switch (type) {
+      case ContentType.youtubeVideo:
+        return "Youtube Video transcription"
+      case ContentType.blog:
+        return "blog post"
+      case ContentType.tweet:
+        return "twitter thread"
+      case ContentType.newsletter:
+        return "newsletter email"
+      case ContentType.linkedinPost:
+        return "Linkedin post"
+      default:
+        return "generic content"
+    }
+  }
   switch (type) {
+    case ContentType.youtubeVideo:
+      return "Youtube Video"
     case ContentType.blog:
       return "Blog Post"
     case ContentType.tweet:
@@ -34,20 +55,25 @@ export const formatContentType = (
 }
 export const generateRepurposePrompt = (
   type: ContentType,
-  original: Pick<Content, "text" | "title">,
+  original: Pick<Content, "text" | "title" | "type">,
   examples: Pick<Content, "text" | "title">[],
   user: Pick<User, "extraInfo">
 ) => {
   const formattedContentType = formatContentType(type)
+  const formattedOriginalTextFormat = formatContentType(
+    original.type,
+    false,
+    true
+  )
 
   return `
-You are assisting a user who wants to repurpose a YouTube video transcription into a ${formattedContentType} ${
+You are assisting a user who wants to repurpose a ${formattedOriginalTextFormat} into a ${formattedContentType} ${
     !!user.extraInfo ? "for " + user.extraInfo : ""
-  }. Your task is to help the user create the ${formattedContentType} by transforming the provided video transcription, making the content suitable for the chosen format.
+  }. Your task is to help the user create the ${formattedContentType} by transforming the provided ${formattedOriginalTextFormat}, making the content suitable for the chosen format.
 
 You will be given the following inputs:
 
-The transcription of the YouTube video that needs to be repurposed:
+The ${formattedOriginalTextFormat} that needs to be repurposed:
 ${original.text}
 
 Examples of existing user-created ${formattedContentType}. Use them as a reference for style and tone:

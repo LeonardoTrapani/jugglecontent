@@ -52,15 +52,30 @@ export async function POST(req: Request) {
     const json = await req.json()
     const body = originalCreateSchema.parse(json)
 
-    const { captions, thumbnail, title } = await youtubeParser(body.url)
+    const {
+      text,
+      image,
+      title,
+    }: {
+      text: string
+      image?: string
+      title: string
+    } =
+      body.type === ContentType.youtubeVideo
+        ? await youtubeParser(body.url as string)
+        : {
+            text: body.text as string,
+            image: undefined,
+            title: body.title as string,
+          }
 
     const post = await db.content.create({
       data: {
         title: title,
         url: body.url,
-        type: ContentType.youtubeVideo,
-        text: captions,
-        imageUrl: thumbnail,
+        type: body.type,
+        text,
+        imageUrl: image,
         original: {
           create: {
             userId: user.id,
