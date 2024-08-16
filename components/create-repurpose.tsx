@@ -51,7 +51,10 @@ export function CreateRepurpose({
     defaultValues: {
       title: title,
       text: text,
-      type: "linkedinPost",
+      type:
+        originalType !== ContentType.tweet
+          ? ContentType.tweet
+          : ContentType.linkedinPost,
       originalType,
     },
   })
