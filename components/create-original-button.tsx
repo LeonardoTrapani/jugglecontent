@@ -189,21 +189,43 @@ export function OriginalCreateButton({
                 )}
               />
             ) : (
-              <FormField
-                control={form.control}
-                name="text"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Content</FormLabel>
-                    <Textarea id="text" {...field} />
-                    <FormMessage />
-                    <FormDescription>
-                      Paste here the content of the{" "}
-                      {formatContentType(selectValue)} you want to repurpose
-                    </FormDescription>
-                  </FormItem>
-                )}
-              />
+              <>
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Title</FormLabel>
+                      <Input
+                        id="title"
+                        placeholder={formatContentType(selectValue) + " title"}
+                        size={32}
+                        {...field}
+                      />
+                      <FormDescription>
+                        The title of the {formatContentType(selectValue)} you
+                        want to repurpose.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="text"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Content</FormLabel>
+                      <Textarea id="text" {...field} />
+                      <FormMessage />
+                      <FormDescription>
+                        Paste here the content of the{" "}
+                        {formatContentType(selectValue)} you want to repurpose
+                      </FormDescription>
+                    </FormItem>
+                  )}
+                />
+              </>
             )}
             <DialogFooter>
               <Button type="submit" className="mt-2">

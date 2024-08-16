@@ -6,6 +6,7 @@ export const originalCreateSchema = z
     url: z.string().optional(),
     text: z.string().optional(),
     type: z.nativeEnum(ContentType),
+    title: z.string().optional(),
   })
   .superRefine((data, ctx) => {
     if (
@@ -39,15 +40,28 @@ export const originalCreateSchema = z
     ) {
       const textValidation = z
         .string()
-        .min(1, "Text is required for tweets")
+        .min(1, "Text is required")
         .safeParse(data.text)
 
-      // For tweet type, text must be present and not empty
+      // For tweet and blogs type, text must be present and not empty
       if (!textValidation.success) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Thread text is required for tweets",
           path: ["text"],
+        })
+      }
+
+      const titleValidation = z
+        .string()
+        .min(1, "Title is required")
+        .safeParse(data.title)
+
+      if (!titleValidation.success) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Title is required",
+          path: ["title"],
         })
       }
     }
