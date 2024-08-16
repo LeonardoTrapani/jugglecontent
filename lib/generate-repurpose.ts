@@ -5,7 +5,7 @@ import { generateRepurposePrompt } from "@/lib/prompt/repurpose"
 
 export const generateRepurpose = async (
   type: ContentType,
-  original: Pick<Content, "text" | "title">,
+  original: Pick<Content, "text" | "title" | "type">,
   examples: Pick<Content, "text" | "title">[],
   user: Pick<User, "extraInfo">
 ) => {

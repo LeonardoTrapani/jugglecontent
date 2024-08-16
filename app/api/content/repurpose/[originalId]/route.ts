@@ -118,7 +118,7 @@ export async function POST(
 
     const { stream, getFullResponse } = await generateRepurpose(
       body.type,
-      { text: body.text, title: body.title },
+      { text: body.text, title: body.title, type: body.type },
       examples.map((example) => example.content),
       dbUser
     )
