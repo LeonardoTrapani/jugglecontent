@@ -113,25 +113,6 @@ export function ExampleCreateButton({
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Title</FormLabel>
-                  <Input
-                    id="title"
-                    placeholder="Example Content Title"
-                    size={32}
-                    {...field}
-                  />
-                  <FormDescription>
-                    The title of the content you want to as example.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
               name="type"
               render={({ field }) => (
                 <FormItem>
@@ -161,35 +142,30 @@ export function ExampleCreateButton({
             />
             <FormField
               control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <Input
+                    id="title"
+                    placeholder="Example Content Title"
+                    size={32}
+                    {...field}
+                  />
+                  <FormDescription>
+                    The title of the content you want to as example.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="text"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Content</FormLabel>
-                  <Textarea
-                    id="content"
-                    {...field}
-                    placeholder={`---
-title: "The ultimate stack every full-stack engineer should use"
-description: "A presentation of the different technologies that form one of the most modern and efficient tech stacks today."
-date: "Aug 1, 2024"
-edited: "Aug 3, 2024"
----
-
-## Introduction
-
-We are not in 2010 anymore, with PHP, JQuery and plain SQL... some things changed.
-
-That's why I will give an overview on one of the most popular and modern technologies to create a web application.
-
-**Disclamer**: this is one of the milions of ways to build an application. Use this as a blueprint to build modern applications, and as a presentation of modern technologies to implement in your own ways. Copying a full stack entirely is almost always useless, as each app is different and requires different technologies.
-
-If you speak Italian, I posted a video on Datapizza's youtube channel that you can use as an overview of what I am going to talk about in this blog post, as it can be more entertaining, but less technical and in-depth. Watch it [here](https://www.youtube.com/watch?v=VYwCtJ40H_U)!
-
-## The Goal of the Stack
-The Goal of this tech stack is to make the entire infrastructure **type-safe**: from database to front-end, I want to be able to know how the data I have is structured, to make development easier and safer.
-
-![Linting of the structure of the user object, thanks to a type-safe infrastructure](/images/ultimatestack/type-safe.png)`}
-                  />
+                  <Textarea id="content" {...field} />
                   <FormMessage />
                   <FormDescription>
                     Paste here the content you want to use as example.

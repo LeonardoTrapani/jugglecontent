@@ -7,6 +7,8 @@ export const formatContentType = (
 ) => {
   if (forRepurpose) {
     switch (type) {
+      case ContentType.youtubeVideo:
+        return "Youtube Video Repurpose"
       case ContentType.blog:
         return "Blog Repurpose"
       case ContentType.tweet:
@@ -20,6 +22,8 @@ export const formatContentType = (
     }
   }
   switch (type) {
+    case ContentType.youtubeVideo:
+      return "Youtube Video"
     case ContentType.blog:
       return "Blog Post"
     case ContentType.tweet:
