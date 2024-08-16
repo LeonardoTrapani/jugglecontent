@@ -142,10 +142,10 @@ export function OriginalCreateButton({
                           Youtube Video
                         </SelectItem>
                         <SelectItem value={ContentType.blog}>Blog</SelectItem>
-                        <SelectItem value={ContentType.tweet}>
+                        <SelectItem value={ContentType.tweet} disabled>
                           Twitter Thread
                         </SelectItem>
-                        <SelectItem value={ContentType.linkedinPost}>
+                        <SelectItem value={ContentType.linkedinPost} disabled>
                           LinkedIn Post
                         </SelectItem>
                         <SelectItem value={ContentType.newsletter}>
