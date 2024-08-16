@@ -33,7 +33,7 @@ async function deleteOriginal(originalId: string) {
   if (!response?.ok) {
     toast({
       title: "Something went wrong.",
-      description: "The interview was not deleted. Please try again.",
+      description: "The content was not deleted. Please try again.",
       variant: "destructive",
     })
   }
@@ -45,7 +45,7 @@ interface OriginalOperationsProps {
   contentId: Original["contentId"]
 }
 
-export function OriginalOperations({
+export function ContentOperations({
   originalId,
   contentId,
 }: OriginalOperationsProps) {

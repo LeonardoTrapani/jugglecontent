@@ -4,10 +4,10 @@ import { redirect } from "next/navigation"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
-import { ExampleCreateButton } from "@/components/create-examples-button"
+import { ContentItem } from "@/components/content-item"
+import { CreateContentButton } from "@/components/create-content-button"
 import { DashboardShell } from "@/components/dashboard-shell"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
-import { ExampleItem } from "@/components/example-content-item"
 import { Header } from "@/components/header"
 
 export const metadata: Metadata = {
@@ -33,6 +33,7 @@ export default async function ExamplePage() {
             select: {
               updatedAt: true,
               id: true,
+              imageUrl: true,
               title: true,
               type: true,
               text: true,
@@ -53,13 +54,17 @@ export default async function ExamplePage() {
         heading="Examples"
         text="Provide examples of your content to show your style and improve the repurposing performance."
       >
-        <ExampleCreateButton />
+        <CreateContentButton isExample />
       </Header>
       <div>
         {data?.examples?.length ? (
           <div className="divide-y divide-border rounded-md border">
             {data.examples.map((example) => (
-              <ExampleItem key={example.id} example={example} />
+              <ContentItem
+                key={example.id}
+                externalContent={example}
+                isExample
+              />
             ))}
           </div>
         ) : (
@@ -69,7 +74,7 @@ export default async function ExamplePage() {
             <EmptyPlaceholder.Description>
               You don&apos;t have any examples yet. Start adding examples.
             </EmptyPlaceholder.Description>
-            <ExampleCreateButton variant="outline" />
+            <CreateContentButton variant="outline" isExample />
           </EmptyPlaceholder>
         )}
       </div>

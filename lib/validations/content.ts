@@ -1,15 +1,23 @@
 import { ContentType } from "@prisma/client"
 import * as z from "zod"
 
-export const originalCreateSchema = z
+export const contentSchema = z
   .object({
     url: z.string().optional(),
     text: z.string().optional(),
     type: z.nativeEnum(ContentType),
     title: z.string().optional(),
+    isExample: z.boolean().optional(),
+    extraInfo: z.string().optional(),
   })
   .superRefine((data, ctx) => {
     if (data.type === ContentType.youtubeVideo) {
+      if (data.isExample) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "YouTube videos cannot be used as examples",
+        })
+      }
       // For youtubeVideo type, url must be present and not empty
       const urlValidation =
         data.type === ContentType.youtubeVideo
@@ -64,9 +72,3 @@ export const originalCreateSchema = z
       }
     }
   })
-
-export const originalPatchSchema = z.object({
-  title: z.string().min(3).max(128).optional(),
-  extraInfo: z.string().optional(),
-  text: z.string().optional(),
-})
