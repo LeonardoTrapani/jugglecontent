@@ -61,6 +61,7 @@ export function OriginalCreateButton({
     defaultValues: {
       url: "",
       text: "",
+      title: "",
       type: "youtubeVideo",
     },
   })

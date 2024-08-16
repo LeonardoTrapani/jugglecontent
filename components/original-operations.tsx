@@ -56,7 +56,7 @@ export function OriginalOperations({
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex !aspect-square h-8 !w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted">
+        <DropdownMenuTrigger className="flex !aspect-square h-8 !min-w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted">
           <Icons.ellipsis className="size-4" />
           <span className="sr-only">Open</span>
         </DropdownMenuTrigger>

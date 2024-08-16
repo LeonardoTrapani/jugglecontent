@@ -79,6 +79,8 @@ export default async function ExamplePage({ params }: ExamplePageProps) {
     return notFound()
   }
 
+  const Icon = Icons[original.content.type]
+
   return (
     <DashboardShell className="gap-4">
       <div className="flex justify-end">
@@ -92,26 +94,34 @@ export default async function ExamplePage({ params }: ExamplePageProps) {
       </div>
       <div className="flex flex-col lg:flex-col items-start gap-4 lg:items-center">
         <div className="flex flex-col items-center gap-4 sm:flex-row w-full">
-          <Link
-            href={original.content.url || ""}
-            target="_blank"
-            className="sm:w-1/2 lg:w-1/3 xl:w-80 md:max-w-96 md:self-center"
-          >
-            <Image
-              src={original.content.imageUrl || "/placeholder.jpg"}
-              alt={original.content.title}
-              width={1920}
-              height={1080}
-              className="rounded-md w-full"
-            />
-          </Link>
+          {!!original.content.imageUrl ? (
+            <Link
+              href={original.content.url || ""}
+              target="_blank"
+              aria-disabled={!original.content.url}
+              className="sm:w-1/2 lg:w-1/3 xl:w-80 md:max-w-96 md:self-center"
+            >
+              <Image
+                src={original.content.imageUrl}
+                alt={original.content.title}
+                width={1920}
+                height={1080}
+                className="rounded-md w-full"
+              />
+            </Link>
+          ) : (
+            <></>
+          )}
           <div className="flex sm:w-2/3 flex-col lg:p-4 gap-2 items-start">
             <h1 className={cn("font-heading text-xl lg:text-2xl xl:text-3xl")}>
               {original.content.title}
             </h1>
-            <p className="text-gray-500">
-              {formatDate(original.content.updatedAt.toDateString())}
-            </p>
+            <div className="flex gap-1 items-center">
+              <Icon className="size-4 mr-1" />
+              <p className="text-gray-500">
+                {formatDate(original.content.updatedAt.toDateString())}
+              </p>
+            </div>
           </div>
         </div>
         <Repurposes

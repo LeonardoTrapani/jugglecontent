@@ -35,6 +35,7 @@ export default async function DashboardPage() {
           content: {
             select: {
               updatedAt: true,
+              type: true,
               id: true,
               title: true,
               imageUrl: true,

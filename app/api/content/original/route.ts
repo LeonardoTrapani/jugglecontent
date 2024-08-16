@@ -79,7 +79,7 @@ export async function POST(req: Request) {
       data: {
         title: title,
         url: body.url,
-        type: ContentType.youtubeVideo,
+        type: body.type,
         text,
         imageUrl: image,
         original: {
