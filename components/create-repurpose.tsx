@@ -25,6 +25,7 @@ import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
 type CreateRepurposeProps = {
+  originalType: ContentType
   originalId: string
   text: Content["text"]
   title: Content["title"]
@@ -35,6 +36,7 @@ type CreateRepurposeProps = {
 
 export function CreateRepurpose({
   originalId,
+  originalType,
   text,
   title,
   setStreamedText,
@@ -50,6 +52,7 @@ export function CreateRepurpose({
       title: title,
       text: text,
       type: "linkedinPost",
+      originalType,
     },
   })
 
@@ -140,18 +143,26 @@ export function CreateRepurpose({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value={ContentType.linkedinPost}>
-                        LinkedIn Post
-                      </SelectItem>
-                      <SelectItem value={ContentType.blog}>
-                        Blog Post
-                      </SelectItem>
-                      <SelectItem value={ContentType.tweet}>
-                        Twitter Thread
-                      </SelectItem>
-                      <SelectItem value={ContentType.newsletter}>
-                        Newsletter Email
-                      </SelectItem>
+                      {originalType !== ContentType.linkedinPost && (
+                        <SelectItem value={ContentType.linkedinPost}>
+                          LinkedIn Post
+                        </SelectItem>
+                      )}
+                      {originalType !== ContentType.blog && (
+                        <SelectItem value={ContentType.blog}>
+                          Blog Post
+                        </SelectItem>
+                      )}
+                      {originalType !== ContentType.tweet && (
+                        <SelectItem value={ContentType.tweet}>
+                          Twitter Thread
+                        </SelectItem>
+                      )}
+                      {originalType !== ContentType.newsletter && (
+                        <SelectItem value={ContentType.newsletter}>
+                          Newsletter Email
+                        </SelectItem>
+                      )}
                     </SelectContent>
                   </Select>
                   <FormMessage />

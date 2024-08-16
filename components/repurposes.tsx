@@ -28,6 +28,7 @@ import { toast } from "./ui/use-toast"
 
 type RepurposesProps = {
   originalId: string
+  originalType: ContentType
   text: Content["text"]
   title: Content["title"]
   repurposes: CustomRepurpose[]
@@ -130,6 +131,7 @@ export const Repurposes = (props: RepurposesProps) => {
         <CreateRepurpose
           originalId={props.originalId}
           text={props.text}
+          originalType={props.originalType}
           title={props.title}
           onRepurposeClick={handleRepurposeClick}
           setStreamedText={setStreamedText}

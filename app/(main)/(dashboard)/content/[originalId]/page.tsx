@@ -128,6 +128,7 @@ export default async function ExamplePage({ params }: ExamplePageProps) {
           originalId={params.originalId}
           text={original.content.text}
           title={original.content.title}
+          originalType={original.content.type}
           repurposes={original.repurposes}
         />
       </div>
