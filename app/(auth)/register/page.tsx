@@ -4,8 +4,8 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import PrivacyButton from "@/components/iubenda/privacy"
-import TermsButton from "@/components/iubenda/terms"
+import PrivacyButton from "@/components/policies/privacy"
+import TermsButton from "@/components/policies/terms"
 import { UserAuthForm } from "@/components/user/user-auth-form"
 
 export const metadata: Metadata = {
@@ -30,15 +30,12 @@ export default function RegisterPage() {
           <h1 className="text-2xl font-semibold tracking-tight">
             Create an account
           </h1>
-          <p className="text-sm text-muted-foreground">
-            Enter your email below to create your account
-          </p>
         </div>
         <Suspense>
           <UserAuthForm />
         </Suspense>
         <p className="px-8 text-center text-sm text-muted-foreground">
-          By clicking continue, you agree to our <TermsButton />
+          By creating an account, you agree to our <TermsButton />
           &nbsp; and <PrivacyButton />.
         </p>
       </div>

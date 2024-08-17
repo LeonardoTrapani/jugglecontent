@@ -3,10 +3,13 @@ import { Pick } from "@prisma/client/runtime/library"
 
 export const formatContentType = (
   type: ContentType,
-  forRepurpose?: boolean
+  forRepurpose?: boolean,
+  forFormattedText?: boolean
 ) => {
   if (forRepurpose) {
     switch (type) {
+      case ContentType.youtubeVideo:
+        return "Youtube Video Repurpose"
       case ContentType.blog:
         return "Blog Repurpose"
       case ContentType.tweet:
@@ -19,7 +22,25 @@ export const formatContentType = (
         return "Generic Repurpose"
     }
   }
+  if (forFormattedText) {
+    switch (type) {
+      case ContentType.youtubeVideo:
+        return "Youtube Video transcription"
+      case ContentType.blog:
+        return "blog post"
+      case ContentType.tweet:
+        return "twitter thread"
+      case ContentType.newsletter:
+        return "newsletter email"
+      case ContentType.linkedinPost:
+        return "Linkedin post"
+      default:
+        return "generic content"
+    }
+  }
   switch (type) {
+    case ContentType.youtubeVideo:
+      return "Youtube Video"
     case ContentType.blog:
       return "Blog Post"
     case ContentType.tweet:
@@ -34,23 +55,28 @@ export const formatContentType = (
 }
 export const generateRepurposePrompt = (
   type: ContentType,
-  original: Pick<Content, "text" | "title">,
+  original: Pick<Content, "text" | "title" | "type">,
   examples: Pick<Content, "text" | "title">[],
   user: Pick<User, "extraInfo">
 ) => {
   const formattedContentType = formatContentType(type)
+  const formattedOriginalTextFormat = formatContentType(
+    original.type,
+    false,
+    true
+  )
 
   return `
-You are assisting a user who wants to repurpose a YouTube video transcription into a ${formattedContentType} ${
+You are assisting a user who wants to repurpose a ${formattedOriginalTextFormat} into a ${formattedContentType} ${
     !!user.extraInfo ? "for " + user.extraInfo : ""
-  }. Your task is to help the user create the ${formattedContentType} by transforming the provided video transcription, making the content suitable for the chosen format.
+  }. Your task is to help the user create the ${formattedContentType} by transforming the provided ${formattedOriginalTextFormat}, making the content suitable for the chosen format.
 
 You will be given the following inputs:
 
-The transcription of the YouTube video that needs to be repurposed:
+The ${formattedOriginalTextFormat} that needs to be repurposed:
 ${original.text}
 
-Examples of existing user-created ${formattedContentType}. Use them as a reference for style, tone and format:
+Examples of existing user-created ${formattedContentType}. Use them as a reference for style and tone:
 ${
   examples.length === 0
     ? "No examples provided."
@@ -71,15 +97,13 @@ Reframe the video transcription to fit the structure and tone of the ${formatted
 Ensure the content is educational, engaging, and suitable for consumption in the chosen format.
 Use simple, clear language that can be easily understood by a general audience.
 Include relevant statistics, examples, or analogies to illustrate complex concepts if applicable.
-Write your draft:
-
-<draft>
-</draft>
 
 Remember, this is a draft to speed up the ${formattedContentType} creation process.
 
 Take inspiration from the tone of voice used in the examples provided previously. If examples were not provided, maintain a personal tone of voice, as if the user were writing, including colloquial (but not incorrect) idioms and a friendly "conversation among friends" tone.
 
-As an output, you should only provide the content inside the <draft> tags. Do not include the draft tags themselves, only the content inside it. Do not include any other information or comments in your response. The user will review your draft and make any necessary adjustments before finalizing the ${formattedContentType}.
+Do not include any other information or comments in your response. The user will review your draft and make any necessary adjustments before finalizing the ${formattedContentType}.
+
+Write the draft in markdown format below:
 `
 }

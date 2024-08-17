@@ -1,51 +1,34 @@
 "use client"
 
-import React, { ReactElement, useEffect, useMemo, useState } from "react"
-import { AnimatePresence, motion } from "framer-motion"
+import React, { ReactElement } from "react"
+import { motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
-export const AnimatedList = React.memo(
+export const List = React.memo(
   ({
     className,
     children,
-    delay = 1000,
   }: {
     className?: string
     children: React.ReactNode
     delay?: number
   }) => {
-    const [index, setIndex] = useState(0)
     const childrenArray = React.Children.toArray(children)
-
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setIndex((prevIndex) => (prevIndex + 1) % childrenArray.length)
-      }, delay)
-
-      return () => clearInterval(interval)
-    }, [childrenArray.length, delay])
-
-    const itemsToShow = useMemo(
-      () => childrenArray.slice(0, index + 1).reverse(),
-      [index, childrenArray]
-    )
 
     return (
       <div className={`flex flex-col items-center gap-4 ${className}`}>
-        <AnimatePresence>
-          {itemsToShow.map((item) => (
-            <AnimatedListItem key={(item as ReactElement).key}>
-              {item}
-            </AnimatedListItem>
-          ))}
-        </AnimatePresence>
+        {childrenArray.map((item) => (
+          <AnimatedListItem key={(item as ReactElement).key}>
+            {item}
+          </AnimatedListItem>
+        ))}
       </div>
     )
   }
 )
 
-AnimatedList.displayName = "AnimatedList"
+List.displayName = "AnimatedList"
 
 export function AnimatedListItem({ children }: { children: React.ReactNode }) {
   const animations = {
@@ -86,13 +69,6 @@ let notifications = [
     color: "#0077B5",
   },
   {
-    name: "Blog Post Created",
-    description: "Your webinar content is now a blog post.",
-    time: "5m ago",
-    icon: "📝",
-    color: "#FF5722",
-  },
-  {
     name: "Podcast Episode Released",
     description: "Your video has been turned into a podcast episode.",
     time: "1m ago",
@@ -100,25 +76,11 @@ let notifications = [
     color: "#4A90E2",
   },
   {
-    name: "Twitter Thread Created",
+    name: "X Thread Created",
     description: "A Twitter thread summarizing your video is ready.",
     time: "30s ago",
     icon: "🐦",
     color: "#1DA1F2",
-  },
-  {
-    name: "Facebook Post Shared",
-    description: "Your video has been shared as a Facebook post.",
-    time: "45s ago",
-    icon: "📘",
-    color: "#4267B2",
-  },
-  {
-    name: "Email Newsletter Update",
-    description: "Insights from your webinar are in the latest newsletter.",
-    time: "1m ago",
-    icon: "📧",
-    color: "#FF7F50",
   },
 ]
 
@@ -165,11 +127,11 @@ export function DraftContentFeature() {
   return (
     <div className="relative flex h-[500px] w-full max-w-[32rem] transform-gpu flex-col justify-between overflow-hidden rounded-lg border bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] dark:bg-black dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]">
       <div className="absolute inset-0 flex items-center justify-center">
-        <AnimatedList className="py-4">
+        <List className="py-4">
           {notifications.map((item, idx) => (
             <Notification {...item} key={idx} />
           ))}
-        </AnimatedList>
+        </List>
       </div>
     </div>
   )

@@ -82,7 +82,7 @@ export const youtubeParser = async (videoUrl: string, accessToken: string) => {
   const title = "title"
   const thumbnail = "thumbnail"
 
-  return { captions, title: title, thumbnail }
+  return { text: captions, title: title, image: thumbnail }
 }
 
 const extractCaptions = async (xmlCaptions: string) => {

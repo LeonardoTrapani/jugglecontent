@@ -12,7 +12,12 @@ export default withAuth(
       req.nextUrl.pathname.startsWith("/images") ||
       req.nextUrl.pathname.startsWith("/favicon") ||
       req.nextUrl.pathname.startsWith("/og")
-    if (isMarketingPage) {
+
+    const isPrivacyPage =
+      req.nextUrl.pathname.startsWith("/privacy") ||
+      req.nextUrl.pathname.startsWith("/terms")
+
+    if (isMarketingPage || isPrivacyPage) {
       return null
     }
 

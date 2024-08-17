@@ -3,7 +3,7 @@ import * as z from "zod"
 
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { originalPatchSchema } from "@/lib/validations/original"
+import { contentSchema } from "@/lib/validations/content"
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -64,7 +64,7 @@ export async function PATCH(
 
     // Get the request body and validate it.
     const json = await req.json()
-    const body = originalPatchSchema.parse(json)
+    const body = contentSchema.parse(json)
 
     await db.content.update({
       where: {
@@ -92,7 +92,7 @@ async function verifyCurrentUserHasAccessToRepurpose(contentId: string) {
   const session = await getServerSession(authOptions)
   const count = await db.repurpose.count({
     where: {
-      id: contentId,
+      contentId,
       original: {
         userId: session?.user.id,
       },

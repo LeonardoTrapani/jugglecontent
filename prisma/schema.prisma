@@ -19,7 +19,7 @@ model User {
   examples Example[]
   originals Original[]
 
-  originalsCreated Int @default(0)
+  credits Int @default(5)
 
   accounts Account[]
   sessions Session[]

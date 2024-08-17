@@ -27,7 +27,9 @@ export default function ExampleLoading() {
             <Skeleton className="h-12 w-full" />
           </div>
         </div>
-        <Card className="w-full"></Card>
+        <Card className="w-full">
+          <Skeleton className="w-full h-screen" />
+        </Card>
       </div>
     </DashboardShell>
   )

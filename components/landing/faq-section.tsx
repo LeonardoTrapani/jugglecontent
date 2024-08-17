@@ -1,5 +1,6 @@
 "use client"
 
+import { siteConfig } from "@/config/site"
 import {
   Accordion,
   AccordionContent,
@@ -117,8 +118,8 @@ export function FAQSection() {
           </div>
           <h4 className="mb-12 text-center text-sm font-medium tracking-tight text-foreground/80">
             Still have questions? Email us at&nbsp;
-            <a href="mailto:info@jugglecontent.com" className="underline">
-              info@jugglecontent.com
+            <a href={`mailto:${siteConfig.email}`} className="underline">
+              {siteConfig.email}
             </a>
           </h4>
         </div>

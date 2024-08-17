@@ -1,9 +1,11 @@
+import { ContentType } from "@prisma/client"
 import { getServerSession } from "next-auth"
 import * as z from "zod"
 
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { examplePatchSchema } from "@/lib/validations/example"
+import { contentSchema } from "@/lib/validations/content"
+import { youtubeParser } from "@/lib/youtube-transcription"
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -61,19 +63,42 @@ export async function PATCH(
       return new Response(null, { status: 403 })
     }
 
+    const session = await getServerSession(authOptions)
+    if (!session || !session.accessToken) {
+      return new Response("Unauthorized", { status: 403 })
+    }
+
     // Get the request body and validate it.
     const json = await req.json()
-    const body = examplePatchSchema.parse(json)
+    const body = contentSchema.parse(json)
+
+    const {
+      text,
+      image,
+      title,
+    }: {
+      text: string
+      image?: string
+      title: string
+    } =
+      body.type === ContentType.youtubeVideo
+        ? await youtubeParser(body.url as string, session.accessToken)
+        : {
+            text: body.text as string,
+            image: undefined,
+            title: body.title as string,
+          }
 
     await db.content.update({
       where: {
         id: params.contentId,
       },
       data: {
-        title: body.title,
+        title: title,
         url: body.url,
+        imageUrl: image,
+        text,
         extraInfo: body.extraInfo,
-        text: body.text,
       },
     })
 

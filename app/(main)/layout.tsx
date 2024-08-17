@@ -1,7 +1,9 @@
+import { Suspense } from "react"
 import { notFound } from "next/navigation"
 
 import { mainNavConfig } from "@/config/main-nav"
 import { getCurrentUser } from "@/lib/session"
+import { Credits } from "@/components/credits"
 import { MainNav } from "@/components/main-nav"
 import { DashboardNav } from "@/components/nav"
 import { SiteFooter } from "@/components/site-footer"
@@ -26,14 +28,19 @@ export default async function DashboardLayout({
         <div className="container flex h-16 items-center justify-between py-4">
           <MainNav items={mainNavConfig.mainNav} />
 
-          <UserAccountNav
-            user={{
-              name: user.name,
-              image: user.image,
-              email: user.email,
-            }}
-            sidebarNavItems={mainNavConfig.sidebarNav}
-          />
+          <div className="flex items-center gap-6">
+            <Suspense>
+              <Credits />
+            </Suspense>
+            <UserAccountNav
+              user={{
+                name: user.name,
+                image: user.image,
+                email: user.email,
+              }}
+              sidebarNavItems={mainNavConfig.sidebarNav}
+            />
+          </div>
         </div>
       </header>
       <div className="container grid flex-1 gap-12 md:grid-cols-[200px_1fr]">

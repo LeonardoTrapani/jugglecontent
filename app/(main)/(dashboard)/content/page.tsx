@@ -4,11 +4,11 @@ import { redirect } from "next/navigation"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
-import { OriginalCreateButton } from "@/components/create-original-button"
+import { ContentItem } from "@/components/content-item"
+import { CreateContentButton } from "@/components/create-content-button"
 import { DashboardShell } from "@/components/dashboard-shell"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { Header } from "@/components/header"
-import { OriginalItem } from "@/components/original-content-item"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -35,9 +35,12 @@ export default async function DashboardPage() {
           content: {
             select: {
               updatedAt: true,
+              type: true,
               id: true,
+              text: true,
               title: true,
               imageUrl: true,
+              url: true,
             },
           },
         },
@@ -48,13 +51,13 @@ export default async function DashboardPage() {
   return (
     <DashboardShell>
       <Header heading="Content" text="Create and manage your content.">
-        <OriginalCreateButton />
+        <CreateContentButton />
       </Header>
       <div>
         {data?.originals?.length ? (
           <div className="divide-y divide-border rounded-md border">
             {data.originals.map((original) => (
-              <OriginalItem key={original.id} original={original} />
+              <ContentItem key={original.id} externalContent={original} />
             ))}
           </div>
         ) : (
@@ -64,7 +67,7 @@ export default async function DashboardPage() {
             <EmptyPlaceholder.Description>
               You don&apos;t have any content yet. Start creating content.
             </EmptyPlaceholder.Description>
-            <OriginalCreateButton variant="outline" />
+            <CreateContentButton variant="outline" />
           </EmptyPlaceholder>
         )}
       </div>

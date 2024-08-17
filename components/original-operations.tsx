@@ -33,7 +33,7 @@ async function deleteOriginal(originalId: string) {
   if (!response?.ok) {
     toast({
       title: "Something went wrong.",
-      description: "The interview was not deleted. Please try again.",
+      description: "The content was not deleted. Please try again.",
       variant: "destructive",
     })
   }
@@ -45,7 +45,7 @@ interface OriginalOperationsProps {
   contentId: Original["contentId"]
 }
 
-export function OriginalOperations({
+export function ContentOperations({
   originalId,
   contentId,
 }: OriginalOperationsProps) {
@@ -56,7 +56,7 @@ export function OriginalOperations({
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex !aspect-square h-8 !w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted">
+        <DropdownMenuTrigger className="flex !aspect-square h-8 !min-w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted">
           <Icons.ellipsis className="size-4" />
           <span className="sr-only">Open</span>
         </DropdownMenuTrigger>

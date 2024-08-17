@@ -5,6 +5,7 @@ import { ArrowRightIcon } from "@radix-ui/react-icons"
 import { motion, useInView } from "framer-motion"
 import { ChevronRight } from "lucide-react"
 
+import { env } from "@/env.mjs"
 import { cn } from "@/lib/utils"
 import { BorderBeam } from "@/components/magicui/border-beam"
 import RetroGrid from "@/components/magicui/retro-grid"
@@ -36,12 +37,16 @@ export function HeroSection() {
         <div className="container z-10 flex flex-col">
           <div className="mt-20 grid grid-cols-1">
             <div className="flex flex-col items-center pb-8 text-center">
-              <div className="backdrop-filter-[12px] inline-flex h-7 items-center justify-between rounded-full border border-white/5 bg-white/10 px-3 text-xs text-white dark:text-black transition-all ease-in hover:cursor-pointer hover:bg-white/20 group gap-1 translate-y-[-1rem] animate-fade-in opacity-0">
-                <TextShimmer className="inline-flex items-center justify-center">
-                  <span>🚀 Just launched on Product Hunt</span>{" "}
-                  <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
-                </TextShimmer>
-              </div>
+              {!env.NEXT_PUBLIC_IS_WAITLIST ? (
+                <div className="backdrop-filter-[12px] inline-flex h-7 items-center justify-between rounded-full border border-white/5 bg-white/10 px-3 text-xs text-white dark:text-black transition-all ease-in hover:cursor-pointer hover:bg-white/20 group gap-1 -translate-y-4 animate-fade-in opacity-0">
+                  <TextShimmer className="inline-flex items-center justify-center">
+                    <span>🚀 Just launched on Product Hunt</span>
+                    <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+                  </TextShimmer>
+                </div>
+              ) : (
+                <></>
+              )}
               <motion.h1
                 ref={fadeInRef}
                 className="text-balance bg-gradient-to-br from-black from-30% to-black/60 bg-clip-text py-6 text-5xl font-medium leading-none tracking-tighter text-transparent dark:from-white dark:to-white/40 sm:text-4xl md:text-7xl lg:text-7xl"
@@ -86,8 +91,13 @@ export function HeroSection() {
                   type: "spring",
                 }}
               >
+                {/*TODO: switch to /register on fully launch */}
                 <a
-                  href="/register"
+                  href={
+                    env.NEXT_PUBLIC_IS_WAITLIST
+                      ? "https://tally.so/r/w4LLGd"
+                      : "/register"
+                  }
                   className={cn(
                     // colors
                     "bg-primary text-white shadow hover:bg-green-500/90 dark:bg-white dark:text-black dark:hover:bg-white/90",
@@ -116,7 +126,7 @@ export function HeroSection() {
               ease: [0.21, 0.47, 0.32, 0.98],
               type: "spring",
             }}
-            className="relative mx-auto mt-12 h-full w-full max-w-[768px] rounded-xl border shadow-2xl"
+            className="relative mx-auto mt-12 h-full w-full max-w-screen-md rounded-xl border shadow-2xl"
           >
             <div
               className={cn(

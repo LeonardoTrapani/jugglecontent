@@ -5,8 +5,7 @@ import * as z from "zod"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { RequiresProPlanError } from "@/lib/exceptions"
-import { getUserSubscriptionPlan } from "@/lib/subscription"
-import { originalCreateSchema } from "@/lib/validations/original"
+import { contentSchema } from "@/lib/validations/content"
 import { youtubeParser } from "@/lib/youtube-transcription"
 
 export async function GET() {
@@ -49,44 +48,34 @@ export async function POST(req: Request) {
     }
 
     const { user } = session
-    const subscriptionPlan = await getUserSubscriptionPlan(user.id)
-
-    const dbUser = await db.user.findUnique({
-      where: {
-        id: user.id,
-      },
-      select: {
-        originalsCreated: true,
-      },
-    })
-
-    if (!dbUser) {
-      return new Response("Unauthorized", { status: 403 })
-    }
-
-    // If user is on a free plan.
-    // Check if user has reached limit of 3 posts.
-    if (!subscriptionPlan?.isPro) {
-      if (dbUser.originalsCreated >= 3) {
-        throw new RequiresProPlanError()
-      }
-    }
 
     const json = await req.json()
-    const body = originalCreateSchema.parse(json)
+    const body = contentSchema.parse(json)
 
-    const { captions, thumbnail, title } = await youtubeParser(
-      body.url,
-      session.accessToken
-    )
+    const {
+      text,
+      image,
+      title,
+    }: {
+      text: string
+      image?: string
+      title: string
+    } =
+      body.type === ContentType.youtubeVideo
+        ? await youtubeParser(body.url as string, session.accessToken)
+        : {
+            text: body.text as string,
+            image: undefined,
+            title: body.title as string,
+          }
 
     const post = await db.content.create({
       data: {
         title: title,
         url: body.url,
-        type: ContentType.youtubeVideo,
-        text: captions,
-        imageUrl: thumbnail,
+        type: body.type,
+        text,
+        imageUrl: image,
         original: {
           create: {
             userId: user.id,
@@ -99,17 +88,6 @@ export async function POST(req: Request) {
           select: {
             id: true,
           },
-        },
-      },
-    })
-
-    await db.user.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        originalsCreated: {
-          increment: 1,
         },
       },
     })

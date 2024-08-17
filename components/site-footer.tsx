@@ -1,14 +1,12 @@
 import * as React from "react"
 import { User } from "@prisma/client"
 
-import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 import { ModeToggle } from "@/components/mode-toggle"
+import PrivacyButton from "@/components/policies/privacy"
+import TermsButton from "@/components/policies/terms"
 import { UserDropdown } from "@/components/user-dropdown"
-
-import PrivacyButton from "./iubenda/privacy"
-import TermsButton from "./iubenda/terms"
 
 interface SiteFooterProps extends React.HTMLAttributes<HTMLElement> {
   user?: Pick<User, "image" | "name" | "email">

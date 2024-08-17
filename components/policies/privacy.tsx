@@ -1,13 +1,13 @@
 import Link from "next/link"
 
-export default function TermsButton() {
+export default function PrivacyButton() {
   return (
     <>
       <Link
-        href="https://www.iubenda.com/terms-and-conditions/TODO-INIT:setidhere"
+        href="/privacy"
         className="hover:text-brand underline underline-offset-4"
       >
-        Terms of Service
+        Privacy Policy
       </Link>
     </>
   )

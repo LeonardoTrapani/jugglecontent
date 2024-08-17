@@ -1,9 +1,11 @@
+import { ContentType } from "@prisma/client"
 import { getServerSession } from "next-auth/next"
 import * as z from "zod"
 
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { exampleCreateSchema } from "@/lib/validations/example"
+import { contentSchema } from "@/lib/validations/content"
+import { youtubeParser } from "@/lib/youtube-transcription"
 
 export async function GET() {
   try {
@@ -40,21 +42,39 @@ export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions)
 
-    if (!session) {
+    if (!session || !session.accessToken) {
       return new Response("Unauthorized", { status: 403 })
     }
 
     const { user } = session
 
     const json = await req.json()
-    const body = exampleCreateSchema.parse(json)
+    const body = contentSchema.parse(json)
+
+    const {
+      text,
+      image,
+      title,
+    }: {
+      text: string
+      image?: string
+      title: string
+    } =
+      body.type === ContentType.youtubeVideo
+        ? await youtubeParser(body.url as string, session.accessToken)
+        : {
+            text: body.text as string,
+            image: undefined,
+            title: body.title as string,
+          }
 
     const post = await db.content.create({
       data: {
-        title: body.title,
+        title: title,
         url: body.url,
         type: body.type,
-        text: body.text,
+        imageUrl: image,
+        text,
         example: {
           create: {
             userId: user.id,
