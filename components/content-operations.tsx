@@ -113,12 +113,23 @@ export function ContentOperations({
     )
 
     if (!res.ok) {
+      if (res.status === 403) {
+        return toast({
+          title: "Authorization error",
+          description:
+            "You do not have access to edit this content. Please contact support.",
+          variant: "destructive",
+        })
+      }
+
       return toast({
         title: "An error has occurred",
         description: "Please try again later.",
         variant: "destructive",
       })
     }
+
+    form.reset()
 
     router.refresh()
 

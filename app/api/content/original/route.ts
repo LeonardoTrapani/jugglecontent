@@ -96,9 +96,12 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error(error)
     if (error.status === 403) {
-      return new Response("You do not have access to this video", {
-        status: 403,
-      })
+      return new Response(
+        "You do not have access to create this content. Please contact support",
+        {
+          status: 403,
+        }
+      )
     }
 
     if (error instanceof z.ZodError) {

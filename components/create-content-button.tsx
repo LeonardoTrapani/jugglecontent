@@ -89,9 +89,9 @@ export function CreateContentButton({
     if (!response?.ok) {
       if (response.status === 403) {
         return toast({
-          title: "You do not have access to this youtube video.",
+          title: "Authorization error",
           description:
-            "Make sure the video is on the same google account you logged in to Juggle Content with.",
+            "You do not have access to create this content. Please contact support.",
           variant: "destructive",
         })
       }
@@ -112,6 +112,8 @@ export function CreateContentButton({
     }
 
     const content = await response.json()
+
+    form.reset()
 
     if (isExample) {
       // This forces a cache invalidation.
