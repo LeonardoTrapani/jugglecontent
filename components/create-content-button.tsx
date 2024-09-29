@@ -91,7 +91,7 @@ export function CreateContentButton({
         return toast({
           title: "Authorization error",
           description:
-            "You do not have access to create this content. Please contact support.",
+            "Is this your video? You do not have access to create this content. Please contact support.",
           variant: "destructive",
         })
       }

@@ -27,7 +27,28 @@ export const youtubeParser = async (videoUrl: string, accessToken: string) => {
   authClient.setCredentials({ access_token: accessToken })
 
   // Fetch the video info
-  console.log("fetching video info")
+  const videoInfoResponse = await youtube.videos.list({
+    part: ["snippet"],
+    auth: authClient,
+    id: [videoId],
+  })
+
+  if (
+    !videoInfoResponse.data.items ||
+    videoInfoResponse.data.items.length === 0 ||
+    !videoInfoResponse.data.items[0].snippet
+  ) {
+    throw new Error("No video found with the provided ID")
+  }
+
+  const videoInfo = videoInfoResponse.data.items[0].snippet
+
+  const title = videoInfo.title
+  const thumbnail = videoInfo.thumbnails?.maxres?.url
+
+  if (!title || !thumbnail) {
+    throw new Error("No video found with the provided ID")
+  }
 
   // List the captions for the video
   const captionListResponse = await youtube.captions.list({
@@ -35,8 +56,6 @@ export const youtubeParser = async (videoUrl: string, accessToken: string) => {
     videoId: videoId,
     auth: authClient,
   })
-
-  console.log("captionListResponse", captionListResponse)
 
   const captionList = captionListResponse.data.items
 
@@ -75,12 +94,7 @@ export const youtubeParser = async (videoUrl: string, accessToken: string) => {
     contentStream.on("error", reject)
   })
 
-  console.log("captionContent", captionContent)
-
   const captions = await extractCaptions(captionContent)
-
-  const title = "title"
-  const thumbnail = "thumbnail"
 
   return { text: captions, title: title, image: thumbnail }
 }
