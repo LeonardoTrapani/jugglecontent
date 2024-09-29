@@ -52,7 +52,7 @@ export default async function ExamplePage() {
     <DashboardShell>
       <Header
         heading="Examples"
-        text="Provide examples of your content to show your style and improve the repurposing performance."
+        text="Provide examples of content to show your style and improve the repurposing performance."
       >
         <CreateContentButton isExample />
       </Header>

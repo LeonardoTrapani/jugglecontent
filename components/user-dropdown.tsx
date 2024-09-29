@@ -11,9 +11,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { UserAvatar } from "@/components/user/user-avatar"
 
 import { Skeleton } from "./ui/skeleton"
+import { UserAvatar } from "./user-avatar"
 
 interface UserDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, "name" | "image" | "email">

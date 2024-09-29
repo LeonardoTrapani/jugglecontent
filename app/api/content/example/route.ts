@@ -42,7 +42,7 @@ export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions)
 
-    if (!session) {
+    if (!session || !session.accessToken) {
       return new Response("Unauthorized", { status: 403 })
     }
 
@@ -61,7 +61,7 @@ export async function POST(req: Request) {
       title: string
     } =
       body.type === ContentType.youtubeVideo
-        ? await youtubeParser(body.url as string)
+        ? await youtubeParser(body.url as string, session.accessToken)
         : {
             text: body.text as string,
             image: undefined,

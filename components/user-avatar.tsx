@@ -9,8 +9,9 @@ interface UserAvatarProps extends AvatarProps {
 }
 
 export function UserAvatar({ user, ...props }: UserAvatarProps) {
+  console.log("USER", user.image)
   return (
-    <Avatar {...props}>
+    <Avatar {...props} className="border">
       {user.image ? (
         <AvatarImage alt="Picture" src={user.image} />
       ) : (

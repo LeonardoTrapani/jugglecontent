@@ -1,34 +1,100 @@
-import ytdl from "@distube/ytdl-core"
-import axios from "axios"
+import stream from "stream"
+import { google } from "googleapis"
 
-export const youtubeParser = async (videoUrl: string) => {
+import { youtube } from "@/lib/google"
+
+function extractVideoId(videoUrl: string): string | null {
+  const videoIdMatch = videoUrl.match(
+    /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+  )
+
+  return videoIdMatch ? videoIdMatch[1] : null
+}
+
+export const youtubeParser = async (videoUrl: string, accessToken: string) => {
+  console.log("using access token ", accessToken)
   // Extract video ID from the URL
-  const videoId = ytdl.getURLVideoID(videoUrl)
-  // Fetch the video info
-  const info = await ytdl.getInfo(videoId)
+  const videoId = extractVideoId(videoUrl)
 
-  const title = info.videoDetails.title
-
-  const thumbnail =
-    info.videoDetails.thumbnails[info.videoDetails.thumbnails.length - 1].url
-
-  // Find the captions URL in the video details
-  const tracks =
-    info.player_response.captions?.playerCaptionsTracklistRenderer.captionTracks
-
-  if (!tracks || tracks.length === 0) {
-    throw new Error("No captions found")
+  if (!videoId) {
+    throw new Error("Invalid YouTube video URL.")
   }
 
-  // Assuming the first track is the desired one
-  const captionUrl = tracks[0].baseUrl
+  console.log("videoId", videoId)
 
-  // Fetch the caption file content
-  const { data } = await axios.get(captionUrl, {
-    responseType: "text",
+  const authClient = new google.auth.OAuth2()
+
+  authClient.setCredentials({ access_token: accessToken })
+
+  // Fetch the video info
+  const videoInfoResponse = await youtube.videos.list({
+    part: ["snippet"],
+    auth: authClient,
+    id: [videoId],
   })
 
-  const captions = await extractCaptions(data)
+  if (
+    !videoInfoResponse.data.items ||
+    videoInfoResponse.data.items.length === 0 ||
+    !videoInfoResponse.data.items[0].snippet
+  ) {
+    throw new Error("No video found with the provided ID")
+  }
+
+  const videoInfo = videoInfoResponse.data.items[0].snippet
+
+  const title = videoInfo.title
+  const thumbnail = videoInfo.thumbnails?.maxres?.url
+
+  if (!title || !thumbnail) {
+    throw new Error("No video found with the provided ID")
+  }
+
+  // List the captions for the video
+  const captionListResponse = await youtube.captions.list({
+    part: ["snippet"],
+    videoId: videoId,
+    auth: authClient,
+  })
+
+  const captionList = captionListResponse.data.items
+
+  if (!captionList || captionList?.length === 0) {
+    throw new Error("No captions found for this video.")
+  }
+
+  const captionId = captionList[0].id
+
+  if (!captionId) {
+    throw new Error("No captions found for this video.")
+  }
+  // Download the caption content
+  const captionDownloadResponse = await youtube.captions.download(
+    {
+      id: captionId,
+      tfmt: "srt", // 'srt' format
+      alt: "media",
+      auth: authClient,
+    },
+    {
+      responseType: "stream",
+    }
+  )
+
+  // Read the stream content into a string
+  const contentStream = captionDownloadResponse.data as stream.Readable
+  let captionContent = ""
+
+  contentStream.on("data", (chunk) => {
+    captionContent += chunk.toString()
+  })
+
+  await new Promise<void>((resolve, reject) => {
+    contentStream.on("end", resolve)
+    contentStream.on("error", reject)
+  })
+
+  const captions = await extractCaptions(captionContent)
 
   return { text: captions, title: title, image: thumbnail }
 }

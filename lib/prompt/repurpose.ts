@@ -93,9 +93,9 @@ ${example.text}
 Your task is to create a draft of the ${formattedContentType} based on these inputs. Follow these guidelines:
 
 Maintain the style and tone of the user's existing content, referring to the examples provided.
-Reframe the video transcription to fit the structure and tone of the ${formattedContentType}.
+Reframe the ${formattedOriginalTextFormat} to fit the structure and tone of the ${formattedContentType}.
 Ensure the content is educational, engaging, and suitable for consumption in the chosen format.
-Use simple, clear language that can be easily understood by a general audience.
+Use simple, clear language that can be easily understood by a general audience. Talk in the language that was used in the ${formattedOriginalTextFormat}.
 Include relevant statistics, examples, or analogies to illustrate complex concepts if applicable.
 
 Remember, this is a draft to speed up the ${formattedContentType} creation process.

@@ -63,6 +63,11 @@ export async function PATCH(
       return new Response(null, { status: 403 })
     }
 
+    const session = await getServerSession(authOptions)
+    if (!session || !session.accessToken) {
+      return new Response("Unauthorized", { status: 403 })
+    }
+
     // Get the request body and validate it.
     const json = await req.json()
     const body = contentSchema.parse(json)
@@ -77,7 +82,7 @@ export async function PATCH(
       title: string
     } =
       body.type === ContentType.youtubeVideo
-        ? await youtubeParser(body.url as string)
+        ? await youtubeParser(body.url as string, session.accessToken)
         : {
             text: body.text as string,
             image: undefined,

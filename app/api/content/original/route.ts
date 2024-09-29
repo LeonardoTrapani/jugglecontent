@@ -43,7 +43,7 @@ export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions)
 
-    if (!session) {
+    if (!session || !session.accessToken) {
       return new Response("Unauthorized", { status: 403 })
     }
 
@@ -62,7 +62,7 @@ export async function POST(req: Request) {
       title: string
     } =
       body.type === ContentType.youtubeVideo
-        ? await youtubeParser(body.url as string)
+        ? await youtubeParser(body.url as string, session.accessToken)
         : {
             text: body.text as string,
             image: undefined,
@@ -95,6 +95,15 @@ export async function POST(req: Request) {
     return new Response(JSON.stringify(post))
   } catch (error) {
     console.error(error)
+    if (error.status === 403) {
+      return new Response(
+        "You do not have access to create this content. Please contact support",
+        {
+          status: 403,
+        }
+      )
+    }
+
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }

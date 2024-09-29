@@ -87,6 +87,15 @@ export function CreateContentButton({
     setLoading(false)
 
     if (!response?.ok) {
+      if (response.status === 403) {
+        return toast({
+          title: "Authorization error",
+          description:
+            "Is this your video? You do not have access to create this content. Please contact support.",
+          variant: "destructive",
+        })
+      }
+
       if (response.status === 402) {
         return toast({
           title: "Limit of one content reached.",
@@ -103,6 +112,8 @@ export function CreateContentButton({
     }
 
     const content = await response.json()
+
+    form.reset()
 
     if (isExample) {
       // This forces a cache invalidation.

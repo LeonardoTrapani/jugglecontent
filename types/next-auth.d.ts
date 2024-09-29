@@ -6,6 +6,7 @@ type UserId = string
 declare module "next-auth/jwt" {
   interface JWT {
     id: UserId
+    accessToken?: string
   }
 }
 
@@ -14,5 +15,6 @@ declare module "next-auth" {
     user: User & {
       id: UserId
     }
+    accessToken?: string
   }
 }
