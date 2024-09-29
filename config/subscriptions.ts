@@ -22,7 +22,7 @@ export const proPlan: SubscriptionPlan = {
   stripePriceId: env.NEXT_PUBLIC_STRIPE_PRO_MONTHLY_PLAN_ID,
   type: SubscriptionPlanType.Pro,
   isMostPopular: true,
-  cost: 0,
+  cost: 64.99,
   features: [
     "Unlimited Content Repurposing Credits",
     "Unlimited Priority support",
