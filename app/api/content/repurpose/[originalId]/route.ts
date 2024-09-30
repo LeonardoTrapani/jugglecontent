@@ -133,15 +133,18 @@ export async function POST(
 
       let fullResponse = ""
 
-      await writer.write(encoder.encode("ENDED"))
-
       while (true) {
         const { done, value } = await reader.read()
 
-        if (!!value) {
-          const formattedValue = JSON.parse((value as string).slice(6)).delta
-            .text
-          fullResponse += formattedValue
+        if (!!value && value.startsWith("data: ")) {
+          try {
+            const data = JSON.parse(value.slice(5))
+            if (data.type === "content_block_delta" && "text" in data.delta) {
+              fullResponse += data.delta.text
+            }
+          } catch (error) {
+            console.error("Error parsing SSE data:", error)
+          }
         }
 
         if (done) break
@@ -150,6 +153,11 @@ export async function POST(
       }
 
       console.info("Streaming completed")
+
+      const interval = setInterval(async () => {
+        console.log("heartbeat")
+        await writer.write(encoder.encode("heartbeat\n"))
+      }, 1000)
 
       await db.content.create({
         data: {
@@ -177,9 +185,9 @@ export async function POST(
         })
       }
 
-      await writer.write(encoder.encode("FINISHED"))
-
       console.info("Content created successfully")
+
+      clearInterval(interval)
 
       writer.close()
 

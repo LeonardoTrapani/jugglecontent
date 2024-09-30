@@ -100,7 +100,6 @@ export function CreateRepurpose({
       if (done) break
 
       const chunk = decoder.decode(value)
-      console.log("A", chunk)
       const lines = chunk.split("\n")
 
       for (const line of lines) {
