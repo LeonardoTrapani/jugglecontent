@@ -170,7 +170,7 @@ export async function POST(
     })
 
     // Wait for both streaming and saving to complete
-    await Promise.all([streamPromise, saveContentPromise])
+    Promise.all([streamPromise, saveContentPromise])
       .then(() => {
         console.info("Streaming and saving completed successfully")
       })
