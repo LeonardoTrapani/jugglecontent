@@ -114,6 +114,8 @@ export function CreateRepurpose({
       }
     }
 
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+
     setLoading(false)
 
     onRepurposeDone()
