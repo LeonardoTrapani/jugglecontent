@@ -116,7 +116,7 @@ export async function POST(
       },
     })
 
-    const { stream, getFullResponse } = await generateRepurpose(
+    const { stream } = await generateRepurpose(
       body.type,
       { text: body.text, title: body.title, type: body.type },
       examples.map((example) => example.content),
@@ -126,7 +126,27 @@ export async function POST(
     let responseStream = new TransformStream()
     let encoder = new TextEncoder()
 
-    const saveContentPromise = getFullResponse().then(async (fullResponse) => {
+    // Stream the response to the client
+    const streamPromise = new Promise<void>(async (resolve) => {
+      const writer = responseStream.writable.getWriter()
+      const reader = stream.getReader()
+
+      let fullResponse = ""
+
+      while (true) {
+        const { done, value } = await reader.read()
+
+        if (!!value) {
+          const formattedValue = JSON.parse((value as string).slice(6)).delta
+            .text
+          fullResponse += formattedValue
+        }
+
+        if (done) break
+
+        await writer.write(encoder.encode(value))
+      }
+
       await db.content.create({
         data: {
           title:
@@ -141,28 +161,16 @@ export async function POST(
           },
         },
       })
-    })
 
-    if (dbUser.credits > 0) {
-      await db.user.update({
-        where: { id: user.id },
-        data: {
-          credits: {
-            decrement: 1,
+      if (dbUser.credits > 0) {
+        await db.user.update({
+          where: { id: user.id },
+          data: {
+            credits: {
+              decrement: 1,
+            },
           },
-        },
-      })
-    }
-
-    // Stream the response to the client
-    const streamPromise = new Promise<void>(async (resolve) => {
-      const writer = responseStream.writable.getWriter()
-      const reader = stream.getReader()
-
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-        await writer.write(encoder.encode(value))
+        })
       }
 
       writer.close()
@@ -170,7 +178,7 @@ export async function POST(
     })
 
     // Wait for both streaming and saving to complete
-    Promise.all([streamPromise, saveContentPromise])
+    Promise.all([streamPromise])
       .then(() => {
         console.info("Streaming and saving completed successfully")
       })

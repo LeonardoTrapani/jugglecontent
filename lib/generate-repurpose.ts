@@ -19,11 +19,6 @@ export const generateRepurpose = async (
   })
 
   let fullResponse = ""
-  let resolveFullResponse: (value: string) => void
-
-  const fullResponsePromise = new Promise<string>((resolve) => {
-    resolveFullResponse = resolve
-  })
 
   const customStream = new ReadableStream({
     async start(controller) {
@@ -35,10 +30,9 @@ export const generateRepurpose = async (
           }
         }
       }
-      resolveFullResponse(fullResponse)
       controller.close()
     },
   })
 
-  return { stream: customStream, getFullResponse: () => fullResponsePromise }
+  return { stream: customStream }
 }
