@@ -154,11 +154,6 @@ export async function POST(
 
       console.info("Streaming completed")
 
-      const interval = setInterval(async () => {
-        console.log("heartbeat")
-        await writer.write(encoder.encode("heartbeat\n"))
-      }, 1000)
-
       await db.content.create({
         data: {
           title:
@@ -187,9 +182,7 @@ export async function POST(
 
       console.info("Content created successfully")
 
-      clearInterval(interval)
-
-      writer.close()
+      await writer.close()
 
       console.info("Writer closed")
 
