@@ -89,6 +89,7 @@ enum ContentType {
   blog
   tweet
   newsletter
+  script
 }
 
 model Repurpose {

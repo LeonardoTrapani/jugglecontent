@@ -77,6 +77,7 @@ export const Icons = {
   settings: Settings,
   linkedinPost: Linkedin,
   youtubeVideo: Youtube,
+  script: Lightbulb,
   blog: Pencil,
   tweet: Twitter,
   newsletter: Mail,

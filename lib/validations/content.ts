@@ -42,7 +42,8 @@ export const contentSchema = z
       data.type === ContentType.blog ||
       data.type === ContentType.newsletter ||
       data.type === ContentType.tweet ||
-      data.type === ContentType.linkedinPost
+      data.type === ContentType.linkedinPost ||
+      data.type === ContentType.script
     ) {
       const textValidation = z
         .string()

@@ -18,6 +18,8 @@ export const formatContentType = (
         return "Newsletter Repurpose"
       case ContentType.linkedinPost:
         return "Linkedin Repurpose"
+      case ContentType.script:
+        return "Script Repurpose"
       default:
         return "Generic Repurpose"
     }
@@ -34,6 +36,8 @@ export const formatContentType = (
         return "newsletter email"
       case ContentType.linkedinPost:
         return "Linkedin post"
+      case ContentType.script:
+        return "script"
       default:
         return "generic content"
     }
@@ -49,6 +53,8 @@ export const formatContentType = (
       return "Newsletter"
     case ContentType.linkedinPost:
       return "Linkedin Post"
+    case ContentType.script:
+      return "Script"
     default:
       return "Generic Content"
   }

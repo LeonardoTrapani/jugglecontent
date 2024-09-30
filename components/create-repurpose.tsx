@@ -166,6 +166,11 @@ export function CreateRepurpose({
                           Newsletter Email
                         </SelectItem>
                       )}
+                      {originalType !== ContentType.script && (
+                        <SelectItem value={ContentType.script}>
+                          Script
+                        </SelectItem>
+                      )}
                     </SelectContent>
                   </Select>
                   <FormMessage />

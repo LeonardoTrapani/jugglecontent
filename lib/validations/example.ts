@@ -8,6 +8,7 @@ export const exampleCreateSchema = z.object({
     ContentType.tweet,
     ContentType.linkedinPost,
     ContentType.newsletter,
+    ContentType.script,
   ]),
   url: z.string().url().or(z.literal("")),
   text: z.string(),

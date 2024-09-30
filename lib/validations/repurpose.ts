@@ -12,6 +12,7 @@ export const repurposeCreateSchema = z
       ContentType.newsletter,
       ContentType.tweet,
       ContentType.linkedinPost,
+      ContentType.script,
     ]),
   })
   .refine((data) => data.type !== data.originalType, {

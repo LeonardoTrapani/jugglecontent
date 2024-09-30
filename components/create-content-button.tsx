@@ -166,6 +166,9 @@ export function CreateContentButton({
                             Youtube Video
                           </SelectItem>
                         )}
+                        <SelectItem value={ContentType.script}>
+                          Script
+                        </SelectItem>
                         <SelectItem value={ContentType.blog}>Blog</SelectItem>
                         <SelectItem value={ContentType.tweet}>
                           Twitter Thread
