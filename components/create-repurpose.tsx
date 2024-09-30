@@ -100,6 +100,7 @@ export function CreateRepurpose({
       if (done) break
 
       const chunk = decoder.decode(value)
+      console.log("A", chunk)
       const lines = chunk.split("\n")
 
       for (const line of lines) {
@@ -117,10 +118,6 @@ export function CreateRepurpose({
     }
 
     console.log("Streaming completed")
-
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-
-    console.log("Waiting for 2 seconds before refreshing")
 
     setLoading(false)
 

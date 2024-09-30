@@ -133,6 +133,8 @@ export async function POST(
 
       let fullResponse = ""
 
+      await writer.write(encoder.encode("ENDED"))
+
       while (true) {
         const { done, value } = await reader.read()
 
@@ -146,6 +148,8 @@ export async function POST(
 
         await writer.write(encoder.encode(value))
       }
+
+      console.info("Streaming completed")
 
       await db.content.create({
         data: {
@@ -173,7 +177,14 @@ export async function POST(
         })
       }
 
+      await writer.write(encoder.encode("FINISHED"))
+
+      console.info("Content created successfully")
+
       writer.close()
+
+      console.info("Writer closed")
+
       resolve()
     })
 
@@ -185,6 +196,8 @@ export async function POST(
       .catch((error) => {
         console.error("Error occurred:", error)
       })
+
+    console.info("Sending response stream to client")
 
     return new NextResponse(responseStream.readable, {
       headers: {
