@@ -93,6 +93,8 @@ export function CreateRepurpose({
     const reader = response.body.getReader()
     const decoder = new TextDecoder()
 
+    console.log("Streaming started")
+
     while (true) {
       const { done, value } = await reader.read()
       if (done) break
@@ -114,7 +116,11 @@ export function CreateRepurpose({
       }
     }
 
+    console.log("Streaming completed")
+
     await new Promise((resolve) => setTimeout(resolve, 2000))
+
+    console.log("Waiting for 2 seconds before refreshing")
 
     setLoading(false)
 
