@@ -16,6 +16,8 @@ const routeContextSchema = z.object({
   }),
 })
 
+export const maxDuration = 300
+
 export async function GET(
   _req: Request,
   context: z.infer<typeof routeContextSchema>
