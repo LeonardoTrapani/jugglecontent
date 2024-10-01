@@ -120,9 +120,9 @@ export function CreateRepurpose({
 
     setLoading(false)
 
-    onRepurposeDone()
+    //onRepurposeDone()
 
-    router.refresh()
+    //router.refresh()
   }
 
   return (
