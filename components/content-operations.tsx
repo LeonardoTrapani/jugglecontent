@@ -238,7 +238,7 @@ export function ContentOperations({
                       />
                       <FormDescription>
                         The URL of the {formatContentType(content.type)} you
-                        want to repurpose.
+                        want to repurpose (has to be YOUR video).
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
