@@ -15,7 +15,20 @@ export default function PrivacyPage() {
       </p>
 
       <h2>Types of Data collected</h2>
-      <p>The Owner does not provide a list of Personal Data types collected.</p>
+      <p>
+        The Owner collects Google user data through the Google API, including:
+      </p>
+      <ul>
+        <li>
+          <strong>Profile information:</strong> Such as your name and email
+          address via the scopes <code>userinfo.profile</code> and{" "}
+          <code>userinfo.email</code>.
+        </li>
+        <li>
+          <strong>YouTube account data:</strong> Including your videos via the
+          scopes <code>youtubepartner</code> and <code>youtube.readonly</code>.
+        </li>
+      </ul>
       <p>
         Complete details on each type of Personal Data collected are provided in
         the dedicated sections of this privacy policy or by specific explanation
@@ -43,9 +56,10 @@ export default function PrivacyPage() {
       </p>
       <p>
         In addition to the Owner, certain parties such as technical service
-        providers, mail carriers, hosting providers, and communications agencies
-        may have access to Data under strict contractual obligations, and these
-        parties will not sell or use this data for any other purpose.
+        providers, mail carriers, hosting providers (such as Vercel), and
+        communications agencies may have access to Data under strict contractual
+        obligations, and these parties will not sell or use this data for any
+        other purpose.
       </p>
 
       <h3>Place</h3>
@@ -53,6 +67,20 @@ export default function PrivacyPage() {
         The Data is processed at the Owner's operating offices and in other
         places where the parties involved in the processing are located.
       </p>
+
+      <h2>How Your Google User Data Is Used</h2>
+      <ul>
+        <li>
+          <strong>Authentication:</strong> We use your Google account
+          information (name, email) to authenticate and allow you to log in to
+          the application.
+        </li>
+        <li>
+          <strong>Content Creation:</strong> We use your YouTube data to create
+          content or features based on the YouTube videos associated with your
+          account.
+        </li>
+      </ul>
 
       <h2>Cookie Policy</h2>
       <p>
@@ -83,7 +111,7 @@ export default function PrivacyPage() {
       </p>
 
       <p>
-        <strong>Latest update:</strong> October 6, 2024
+        <strong>Latest update:</strong> October 7, 2024
       </p>
     </div>
   )
