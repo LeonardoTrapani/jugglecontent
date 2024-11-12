@@ -101,7 +101,11 @@ Your task is to create a draft of the ${formattedContentType} based on these inp
 Maintain the style and tone of the user's existing content, referring to the examples provided.
 Reframe the ${formattedOriginalTextFormat} to fit the structure and tone of the ${formattedContentType}.
 Ensure the content is educational, engaging, and suitable for consumption in the chosen format.
-Use simple, clear language that can be easily understood by a general audience. Talk in the language that was used in the ${formattedOriginalTextFormat}.
+Use simple, clear language that can be easily understood by a general audience. Talk in the language that was used in the ${formattedOriginalTextFormat}. Be friendly, but ${
+    type === ContentType.linkedinPost
+      ? "do no not make it a cringe linkedin post. For example, do not start by saying Hey everyone! 👋 etc."
+      : "."
+  }
 Include relevant statistics, examples, or analogies to illustrate complex concepts if applicable.
 
 Remember, this is a draft to speed up the ${formattedContentType} creation process.
