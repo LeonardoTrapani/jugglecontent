@@ -14,7 +14,7 @@ export const generateRepurpose = async (
   const stream = await anthropic.messages.create({
     max_tokens: 1000,
     messages: [{ role: "user", content: prompt }],
-    model: "claude-3-5-sonnet-20240620",
+    model: "claude-3-5-sonnet-20241022",
     stream: true,
   })
 
